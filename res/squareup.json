@@ -1,0 +1,6730 @@
+{
+	"nested": {
+		"squareup": {
+			"nested": {
+				"sake": {
+					"nested": {
+						"Error": {
+							"fields": {
+								"code": {
+									"type": "squareup.protobuf.rpc.ResponseCode",
+									"id": 1,
+									"options": {
+										"default": "REQUEST_COMPLETED"
+									}
+								},
+								"appCode": {
+									"type": "int32",
+									"id": 3
+								},
+								"debugText": {
+									"type": "string",
+									"id": 2
+								}
+							}
+						}
+					}
+				},
+				"protobuf": {
+					"nested": {
+						"rpc": {
+							"nested": {
+								"ResponseCode": {
+									"values": {
+										"REQUEST_TIMEOUT": -1,
+										"REQUEST_COMPLETED": 0,
+										"INVALID_REQUEST": 400,
+										"UNAUTHORIZED": 401,
+										"FORBIDDEN": 403,
+										"NOT_FOUND": 404,
+										"CONFLICT": 409,
+										"UNPROCESSABLE_ENTITY": 422,
+										"TOO_MANY_REQUESTS": 429,
+										"CANCELED": 499,
+										"INTERNAL_ERROR": 500,
+										"NOT_IMPLEMENTED": 501,
+										"BAD_GATEWAY": 502,
+										"SERVICE_UNAVAILABLE": 503,
+										"GATEWAY_TIMEOUT": 504
+									}
+								}
+							}
+						}
+					}
+				},
+				"estimate": {
+					"nested": {
+						"frontend": {
+							"nested": {
+								"Estimate": {
+									"fields": {
+										"token": {
+											"type": "string",
+											"id": 1
+										},
+										"lockVersion": {
+											"type": "int32",
+											"id": 2
+										},
+										"displayState": {
+											"type": "squareup.invoice.v2.EstimateDisplayDetails.DisplayState",
+											"id": 3
+										},
+										"name": {
+											"type": "string",
+											"id": 4
+										},
+										"number": {
+											"type": "string",
+											"id": 5
+										},
+										"description": {
+											"type": "string",
+											"id": 6
+										},
+										"deliveredAt": {
+											"type": "squareup.common.time.DateTime",
+											"id": 7
+										},
+										"expiresOn": {
+											"type": "squareup.common.time.YearMonthDay",
+											"id": 8
+										},
+										"customer": {
+											"type": "squareup.invoice.frontend.Invoice.Customer",
+											"id": 9
+										},
+										"additionalRecipientEmail": {
+											"rule": "repeated",
+											"type": "string",
+											"id": 10
+										},
+										"cart": {
+											"type": "squareup.bills.Cart",
+											"id": 11
+										},
+										"acceptedAt": {
+											"type": "squareup.common.time.DateTime",
+											"id": 12
+										},
+										"attachment": {
+											"rule": "repeated",
+											"type": "squareup.invoice.frontend.FileAttachmentMetadata",
+											"id": 13
+										},
+										"invoicedAt": {
+											"type": "squareup.common.time.DateTime",
+											"id": 14
+										},
+										"packages": {
+											"rule": "repeated",
+											"type": "squareup.estimate.frontend.EstimatePackage",
+											"id": 15
+										},
+										"selectedPackageToken": {
+											"type": "string",
+											"id": 16
+										}
+									}
+								},
+								"EstimatePackage": {
+									"fields": {
+										"token": {
+											"type": "string",
+											"id": 1
+										},
+										"title": {
+											"type": "string",
+											"id": 2
+										},
+										"description": {
+											"type": "string",
+											"id": 3
+										},
+										"attachments": {
+											"rule": "repeated",
+											"type": "squareup.invoice.frontend.FileAttachmentMetadata",
+											"id": 4
+										},
+										"cart": {
+											"type": "squareup.bills.Cart",
+											"id": 5
+										}
+									}
+								},
+								"Status": {
+									"fields": {
+										"statusCode": {
+											"type": "squareup.estimate.frontend.Status.StatusCode",
+											"id": 1
+										},
+										"localizedError": {
+											"type": "string",
+											"id": 2
+										}
+									},
+									"nested": {
+										"StatusCode": {
+											"values": {
+												"STATUS_DO_NOT_USE": 0,
+												"SUCCESS": 1,
+												"STALE": 2,
+												"NOT_FOUND": 3,
+												"SERVER_ERROR": 4
+											}
+										}
+									}
+								},
+								"GetEstimateRequest": {
+									"fields": {
+										"estimateToken": {
+											"type": "string",
+											"id": 1
+										},
+										"languageCode": {
+											"type": "string",
+											"id": 2
+										}
+									}
+								},
+								"GetEstimateResponse": {
+									"fields": {
+										"status": {
+											"type": "squareup.estimate.frontend.Status",
+											"id": 1
+										},
+										"unit": {
+											"type": "squareup.invoice.frontend.Unit",
+											"id": 2
+										},
+										"estimate": {
+											"type": "squareup.estimate.frontend.Estimate",
+											"id": 3
+										},
+										"invoiceUnitSettings": {
+											"type": "squareup.invoice.frontend.InvoiceUnitSettings",
+											"id": 4
+										},
+										"enabledFeatures": {
+											"rule": "repeated",
+											"type": "string",
+											"id": 5
+										}
+									}
+								},
+								"AcceptEstimateRequest": {
+									"fields": {
+										"estimateToken": {
+											"type": "string",
+											"id": 1
+										},
+										"unitToken": {
+											"type": "string",
+											"id": 2
+										},
+										"version": {
+											"type": "int32",
+											"id": 3
+										},
+										"languageCode": {
+											"type": "string",
+											"id": 4
+										},
+										"packageToken": {
+											"type": "string",
+											"id": 5
+										}
+									}
+								},
+								"AcceptEstimateResponse": {
+									"fields": {
+										"status": {
+											"type": "squareup.estimate.frontend.Status",
+											"id": 1
+										},
+										"estimate": {
+											"type": "squareup.estimate.frontend.Estimate",
+											"id": 2
+										},
+										"invoiceToken": {
+											"type": "string",
+											"id": 3
+										}
+									}
+								},
+								"EstimateFrontendService": {
+									"methods": {
+										"GetEstimate": {
+											"requestType": "squareup.estimate.frontend.GetEstimateRequest",
+											"responseType": "squareup.estimate.frontend.GetEstimateResponse"
+										},
+										"AcceptEstimate": {
+											"requestType": "squareup.estimate.frontend.AcceptEstimateRequest",
+											"responseType": "squareup.estimate.frontend.AcceptEstimateResponse"
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"items": {
+					"nested": {
+						"merchant": {
+							"nested": {
+								"CatalogObjectType": {
+									"values": {
+										"DO_NOT_USE": 0,
+										"ITEM": 1,
+										"ITEM_IMAGE": 2,
+										"PAGE_TILE": 3,
+										"CATEGORY": 4,
+										"ITEM_VARIATION": 5,
+										"FEE": 6,
+										"PLACEHOLDER": 7,
+										"DISCOUNT": 8,
+										"ITEM_FEE_MEMBERSHIP": 9,
+										"ITEM_MODIFIER_LIST": 10,
+										"ITEM_ITEM_MODIFIER_LIST_MEMBERSHIP": 11,
+										"ITEM_MODIFIER_OPTION": 12,
+										"MARKET_ITEM_SETTINGS": 13,
+										"ADDITIONAL_ITEM_IMAGE": 14,
+										"PROMO": 15,
+										"INVENTORY_INFO": 16,
+										"OBSOLETE_TENDER_FEE": 17,
+										"DINING_OPTION": 18,
+										"TAX_RULE": 19,
+										"CONFIGURATION": 20,
+										"PAGE": 21,
+										"TICKET_GROUP": 22,
+										"TICKET_TEMPLATE": 23,
+										"VOID_REASON": 24,
+										"ITEM_VARIATION_VENDOR_INFO": 25,
+										"MENU": 26,
+										"TAG": 27,
+										"FLOOR_PLAN": 28,
+										"FLOOR_PLAN_TILE": 29,
+										"FAVORITES_LIST_POSITION": 30,
+										"MENU_GROUP_MEMBERSHIP": 31,
+										"SURCHARGE": 32,
+										"PRICING_RULE": 33,
+										"PRODUCT_SET": 34,
+										"TIME_PERIOD": 35,
+										"SURCHARGE_FEE_MEMBERSHIP": 36,
+										"MEASUREMENT_UNIT": 37,
+										"SUBSCRIPTION_PLAN": 38,
+										"ITEM_OPTION": 39,
+										"ITEM_OPTION_VAL": 40,
+										"CUSTOM_ATTRIBUTE_DEFINITION": 41,
+										"CUSTOM_ATTRIBUTE_SELECTION": 42,
+										"QUICK_AMOUNTS_SETTINGS": 45,
+										"QUICK_AMOUNT": 46,
+										"COMPONENT": 47,
+										"COMPOSITION": 48,
+										"RESOURCE": 49,
+										"SUBSCRIPTION_PHASE": 50,
+										"PRODUCT": 5,
+										"PRODUCT_FAMILY": 1,
+										"CATALOG": 100,
+										"CONSTRAINT": 101,
+										"ATTRIBUTE_DEFINITION_METADATA": 200
+									}
+								},
+								"CatalogObject": {
+									"fields": {
+										"token": {
+											"type": "string",
+											"id": 1
+										},
+										"type": {
+											"type": "squareup.items.merchant.CatalogObjectType",
+											"id": 4
+										},
+										"attribute": {
+											"rule": "repeated",
+											"type": "squareup.items.merchant.Attribute",
+											"id": 3
+										},
+										"version": {
+											"type": "int64",
+											"id": 5
+										},
+										"cogsId": {
+											"type": "string",
+											"id": 6
+										},
+										"deleted": {
+											"type": "bool",
+											"id": 7
+										}
+									}
+								},
+								"Attribute": {
+									"fields": {
+										"definitionToken": {
+											"type": "string",
+											"id": 2
+										},
+										"unitToken": {
+											"type": "string",
+											"id": 3
+										},
+										"intValue": {
+											"type": "int64",
+											"id": 4
+										},
+										"stringValue": {
+											"type": "string",
+											"id": 5
+										}
+									},
+									"nested": {
+										"value": {}
+									}
+								}
+							}
+						}
+					}
+				},
+				"billing": {
+					"nested": {
+						"data": {
+							"nested": {
+								"ProductLabel": {
+									"fields": {
+										"name": {
+											"type": "string",
+											"id": 1
+										},
+										"cost": {
+											"type": "squareup.common.Money",
+											"id": 2
+										},
+										"discountAmount": {
+											"type": "squareup.common.Money",
+											"id": 3
+										}
+									}
+								},
+								"BillingItemizationData": {
+									"fields": {
+										"productLabel": {
+											"rule": "repeated",
+											"type": "squareup.billing.data.ProductLabel",
+											"id": 1
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"omg": {
+					"nested": {
+						"model": {
+							"nested": {
+								"Order": {
+									"nested": {
+										"QuantityUnit": {
+											"fields": {
+												"measurementUnit": {
+													"type": "squareup.connect.v2.common.MeasurementUnit",
+													"id": 1
+												},
+												"precision": {
+													"type": "int32",
+													"id": 2
+												},
+												"catalogObjectId": {
+													"type": "string",
+													"id": 3
+												},
+												"catalogObjectVersion": {
+													"type": "int64",
+													"id": 4
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"connect": {
+					"nested": {
+						"v2": {
+							"nested": {
+								"common": {
+									"nested": {
+										"MeasurementUnit": {
+											"fields": {
+												"customUnit": {
+													"type": "squareup.connect.v2.common.MeasurementUnit.Custom",
+													"id": 1
+												},
+												"areaUnit": {
+													"type": "squareup.connect.v2.common.MeasurementUnit.Area",
+													"id": 2
+												},
+												"lengthUnit": {
+													"type": "squareup.connect.v2.common.MeasurementUnit.Length",
+													"id": 3
+												},
+												"volumeUnit": {
+													"type": "squareup.connect.v2.common.MeasurementUnit.Volume",
+													"id": 4
+												},
+												"weightUnit": {
+													"type": "squareup.connect.v2.common.MeasurementUnit.Weight",
+													"id": 5
+												},
+												"genericUnit": {
+													"type": "squareup.connect.v2.common.MeasurementUnit.Generic",
+													"id": 6
+												},
+												"timeUnit": {
+													"type": "squareup.connect.v2.common.MeasurementUnit.Time",
+													"id": 7
+												},
+												"type": {
+													"type": "squareup.connect.v2.common.MeasurementUnit.UnitType",
+													"id": 8
+												}
+											},
+											"nested": {
+												"Custom": {
+													"fields": {
+														"name": {
+															"type": "string",
+															"id": 1
+														},
+														"abbreviation": {
+															"type": "string",
+															"id": 2
+														}
+													}
+												},
+												"Area": {
+													"values": {
+														"INVALID_AREA": 0,
+														"IMPERIAL_ACRE": 4,
+														"IMPERIAL_SQUARE_INCH": 1,
+														"IMPERIAL_SQUARE_FOOT": 5,
+														"IMPERIAL_SQUARE_YARD": 6,
+														"IMPERIAL_SQUARE_MILE": 7,
+														"METRIC_SQUARE_CENTIMETER": 2,
+														"METRIC_SQUARE_METER": 3,
+														"METRIC_SQUARE_KILOMETER": 8
+													}
+												},
+												"Length": {
+													"values": {
+														"INVALID_LENGTH": 0,
+														"IMPERIAL_INCH": 1,
+														"IMPERIAL_FOOT": 4,
+														"IMPERIAL_YARD": 5,
+														"IMPERIAL_MILE": 6,
+														"METRIC_MILLIMETER": 2,
+														"METRIC_CENTIMETER": 7,
+														"METRIC_METER": 3,
+														"METRIC_KILOMETER": 8
+													}
+												},
+												"Volume": {
+													"values": {
+														"INVALID_VOLUME": 0,
+														"GENERIC_FLUID_OUNCE": 1,
+														"GENERIC_SHOT": 4,
+														"GENERIC_CUP": 5,
+														"GENERIC_PINT": 6,
+														"GENERIC_QUART": 7,
+														"GENERIC_GALLON": 8,
+														"IMPERIAL_CUBIC_INCH": 9,
+														"IMPERIAL_CUBIC_FOOT": 10,
+														"IMPERIAL_CUBIC_YARD": 11,
+														"METRIC_MILLILITER": 2,
+														"METRIC_LITER": 3
+													}
+												},
+												"Weight": {
+													"values": {
+														"INVALID_WEIGHT": 0,
+														"IMPERIAL_WEIGHT_OUNCE": 1,
+														"IMPERIAL_POUND": 5,
+														"IMPERIAL_STONE": 6,
+														"METRIC_MILLIGRAM": 2,
+														"METRIC_GRAM": 3,
+														"METRIC_KILOGRAM": 4
+													}
+												},
+												"Generic": {
+													"values": {
+														"INVALID_GENERIC_UNIT": 0,
+														"UNIT": 1
+													}
+												},
+												"Time": {
+													"values": {
+														"INVALID_TIME": 0,
+														"GENERIC_MILLISECOND": 1,
+														"GENERIC_SECOND": 2,
+														"GENERIC_MINUTE": 3,
+														"GENERIC_HOUR": 4,
+														"GENERIC_DAY": 5
+													}
+												},
+												"UnitType": {
+													"values": {
+														"INVALID_TYPE": 0,
+														"TYPE_CUSTOM": 1,
+														"TYPE_AREA": 2,
+														"TYPE_LENGTH": 3,
+														"TYPE_VOLUME": 4,
+														"TYPE_WEIGHT": 5,
+														"TYPE_TIME": 7,
+														"TYPE_GENERIC": 6
+													}
+												}
+											}
+										}
+									}
+								},
+								"merchant_catalog": {
+									"nested": {
+										"resources": {
+											"nested": {
+												"CatalogCustomAttributeValue": {
+													"fields": {
+														"name": {
+															"type": "string",
+															"id": 1
+														},
+														"stringValue": {
+															"type": "string",
+															"id": 2
+														},
+														"intValue": {
+															"type": "int64",
+															"id": 3
+														},
+														"customAttributeDefinitionId": {
+															"type": "string",
+															"id": 4
+														},
+														"type": {
+															"type": "squareup.connect.v2.merchant_catalog.resources.CatalogCustomAttributeDefinition.Type",
+															"id": 5
+														},
+														"numberValue": {
+															"type": "string",
+															"id": 6
+														},
+														"booleanValue": {
+															"type": "bool",
+															"id": 7
+														},
+														"selectionUidValues": {
+															"rule": "repeated",
+															"type": "string",
+															"id": 8
+														},
+														"key": {
+															"type": "string",
+															"id": 9
+														}
+													}
+												},
+												"CatalogCustomAttributeDefinition": {
+													"nested": {
+														"Type": {
+															"values": {
+																"ATTRIBUTE_TYPE_DO_NOT_USE": 0,
+																"STRING": 1,
+																"INTEGER": 2,
+																"BOOLEAN": 3,
+																"NUMBER": 9,
+																"SELECTION": 10
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"api": {
+					"nested": {
+						"sync": {
+							"nested": {
+								"ObjectType": {
+									"fields": {
+										"type": {
+											"type": "squareup.api.items.Type",
+											"id": 101
+										}
+									}
+								},
+								"ObjectId": {
+									"fields": {
+										"id": {
+											"type": "string",
+											"id": 1
+										},
+										"type": {
+											"type": "squareup.api.sync.ObjectType",
+											"id": 2
+										},
+										"merchantToken": {
+											"type": "string",
+											"id": 3
+										},
+										"customerToken": {
+											"type": "string",
+											"id": 4
+										},
+										"refType": {
+											"type": "squareup.api.items.Type",
+											"id": 101
+										}
+									}
+								},
+								"ObjectWrapper": {
+									"fields": {
+										"id": {
+											"type": "string",
+											"id": 1
+										},
+										"objectId": {
+											"type": "squareup.api.sync.ObjectId",
+											"id": 2
+										},
+										"timestamp": {
+											"type": "int64",
+											"id": 3
+										},
+										"deleted": {
+											"type": "bool",
+											"id": 4,
+											"options": {
+												"default": false
+											}
+										},
+										"objectType": {
+											"type": "squareup.api.items.Type",
+											"id": 101
+										},
+										"item": {
+											"type": "squareup.api.items.Item",
+											"id": 1001
+										},
+										"itemImage": {
+											"type": "squareup.api.items.ItemImage",
+											"id": 1002
+										},
+										"menuCategory": {
+											"type": "squareup.api.items.MenuCategory",
+											"id": 1005
+										},
+										"itemVariation": {
+											"type": "squareup.api.items.ItemVariation",
+											"id": 1007
+										},
+										"fee": {
+											"type": "squareup.api.items.Fee",
+											"id": 1008
+										},
+										"discount": {
+											"type": "squareup.api.items.Discount",
+											"id": 1010
+										},
+										"itemModifierList": {
+											"type": "squareup.api.items.ItemModifierList",
+											"id": 1012
+										},
+										"itemModifierOption": {
+											"type": "squareup.api.items.ItemModifierOption",
+											"id": 1014
+										},
+										"diningOption": {
+											"type": "squareup.api.items.DiningOption",
+											"id": 1020
+										},
+										"ticketGroup": {
+											"type": "squareup.api.items.TicketGroup",
+											"id": 1023
+										},
+										"ticketTemplate": {
+											"type": "squareup.api.items.TicketTemplate",
+											"id": 1024
+										},
+										"menu": {
+											"type": "squareup.api.items.Menu",
+											"id": 1026
+										},
+										"surcharge": {
+											"type": "squareup.api.items.Surcharge",
+											"id": 1032
+										}
+									}
+								},
+								"ReferenceDescriptor": {
+									"fields": {
+										"type": {
+											"rule": "repeated",
+											"type": "squareup.api.sync.ObjectType",
+											"id": 1
+										},
+										"onDelete": {
+											"type": "squareup.api.sync.ReferenceDescriptor.OnDeleteType",
+											"id": 7,
+											"options": {
+												"default": "BLOCK"
+											}
+										},
+										"external": {
+											"type": "bool",
+											"id": 8,
+											"options": {
+												"default": false
+											}
+										}
+									},
+									"nested": {
+										"OnDeleteType": {
+											"values": {
+												"CASCADE": 1,
+												"SET_NULL": 2,
+												"BLOCK": 3,
+												"EXTERNAL": 4
+											}
+										}
+									}
+								}
+							}
+						},
+						"items": {
+							"nested": {
+								"Type": {
+									"values": {
+										"ITEM": 0,
+										"PAGE": 1,
+										"ITEM_IMAGE": 2,
+										"ITEM_PAGE_MEMBERSHIP": 3,
+										"MENU_CATEGORY": 4,
+										"ITEM_VARIATION": 5,
+										"FEE": 6,
+										"PLACEHOLDER": 7,
+										"DISCOUNT": 8,
+										"ITEM_FEE_MEMBERSHIP": 9,
+										"ITEM_MODIFIER_LIST": 10,
+										"ITEM_ITEM_MODIFIER_LIST_MEMBERSHIP": 11,
+										"ITEM_MODIFIER_OPTION": 12,
+										"MARKET_ITEM_SETTINGS": 13,
+										"ADDITIONAL_ITEM_IMAGE": 14,
+										"PROMO": 15,
+										"INVENTORY_INFO": 16,
+										"OBSOLETE_TENDER_FEE": 17,
+										"DINING_OPTION": 18,
+										"TAX_RULE": 19,
+										"CONFIGURATION": 20,
+										"TICKET_GROUP": 21,
+										"TICKET_TEMPLATE": 22,
+										"VOID_REASON": 23,
+										"MENU": 24,
+										"TAG": 25,
+										"FLOOR_PLAN": 26,
+										"FLOOR_PLAN_TILE": 27,
+										"FAVORITES_LIST_POSITION": 28,
+										"MENU_GROUP_MEMBERSHIP": 29,
+										"SURCHARGE": 30,
+										"PRICING_RULE": 31,
+										"PRODUCT_SET": 32,
+										"TIME_PERIOD": 33,
+										"SURCHARGE_FEE_MEMBERSHIP": 34
+									}
+								},
+								"CalculationPhase": {
+									"values": {
+										"DISCOUNT_PERCENTAGE_PHASE": 0,
+										"DISCOUNT_AMOUNT_PHASE": 1,
+										"FEE_SUBTOTAL_PHASE": 2,
+										"FEE_TOTAL_PHASE": 3,
+										"TIP_PHASE": 4,
+										"SWEDISH_ROUNDING_PHASE": 5,
+										"SURCHARGE_PHASE": 6,
+										"SURCHARGE_TOTAL_PHASE": 7
+									}
+								},
+								"OBSOLETE_CurrencyCode": {
+									"values": {
+										"USD": 0
+									}
+								},
+								"Visibility": {
+									"values": {
+										"PUBLIC": 0,
+										"PUBLIC_ONLY": 2,
+										"PRIVATE": 1
+									}
+								},
+								"PricingType": {
+									"values": {
+										"FIXED_PRICING": 0,
+										"VARIABLE_PRICING": 1
+									}
+								},
+								"StraightFireType": {
+									"values": {
+										"UNKNOWN_STRAIGHT_FIRE": 0,
+										"NEVER": 1,
+										"ALWAYS": 2
+									}
+								},
+								"MerchantCatalogObjectReference": {
+									"fields": {
+										"catalogObjectToken": {
+											"type": "string",
+											"id": 1
+										},
+										"version": {
+											"type": "int64",
+											"id": 2
+										}
+									}
+								},
+								"ItemOptionForItem": {
+									"fields": {
+										"itemOptionId": {
+											"type": "string",
+											"id": 1
+										}
+									}
+								},
+								"Item": {
+									"fields": {
+										"id": {
+											"type": "string",
+											"id": 13
+										},
+										"color": {
+											"type": "string",
+											"id": 1
+										},
+										"description": {
+											"type": "string",
+											"id": 2
+										},
+										"name": {
+											"type": "string",
+											"id": 3
+										},
+										"buyerFacingName": {
+											"type": "string",
+											"id": 17
+										},
+										"taxable": {
+											"type": "bool",
+											"id": 4
+										},
+										"abbreviation": {
+											"type": "string",
+											"id": 5
+										},
+										"visibility": {
+											"type": "squareup.api.items.Visibility",
+											"id": 9,
+											"options": {
+												"default": "PUBLIC"
+											}
+										},
+										"menuCategory": {
+											"type": "squareup.api.sync.ObjectId",
+											"id": 7
+										},
+										"image": {
+											"type": "squareup.api.sync.ObjectId",
+											"id": 8
+										},
+										"pricingType": {
+											"type": "squareup.api.items.PricingType",
+											"id": 10,
+											"options": {
+												"default": "FIXED_PRICING"
+											}
+										},
+										"archetype": {
+											"type": "squareup.api.sync.ObjectId",
+											"id": 11
+										},
+										"availableOnline": {
+											"type": "bool",
+											"id": 12,
+											"options": {
+												"default": false
+											}
+										},
+										"availableForPickup": {
+											"type": "bool",
+											"id": 14,
+											"options": {
+												"default": false
+											}
+										},
+										"availableElectronically": {
+											"type": "bool",
+											"id": 18,
+											"options": {
+												"default": false
+											}
+										},
+										"ordinal": {
+											"type": "int32",
+											"id": 15
+										},
+										"type": {
+											"type": "squareup.api.items.Item.Type",
+											"id": 16,
+											"options": {
+												"default": "REGULAR"
+											}
+										},
+										"onlineStoreItemData": {
+											"type": "squareup.api.items.OnlineStoreItemData",
+											"id": 19
+										},
+										"skipsModifierScreen": {
+											"type": "bool",
+											"id": 20,
+											"options": {
+												"default": false
+											}
+										},
+										"catalogObjectReference": {
+											"type": "squareup.api.items.MerchantCatalogObjectReference",
+											"id": 21
+										},
+										"tagMembership": {
+											"rule": "repeated",
+											"type": "squareup.api.sync.ObjectId",
+											"id": 22
+										},
+										"straightFireOverride": {
+											"type": "squareup.api.items.StraightFireType",
+											"id": 23
+										},
+										"v2Id": {
+											"type": "string",
+											"id": 24
+										},
+										"ecomUri": {
+											"type": "string",
+											"id": 25
+										},
+										"ecomImageUris": {
+											"type": "string",
+											"id": 26
+										},
+										"ecomAvailable": {
+											"type": "bool",
+											"id": 27
+										},
+										"itemOptions": {
+											"rule": "repeated",
+											"type": "squareup.api.items.ItemOptionForItem",
+											"id": 28
+										},
+										"customAttributeValues": {
+											"rule": "repeated",
+											"type": "squareup.connect.v2.merchant_catalog.resources.CatalogCustomAttributeValue",
+											"id": 30
+										},
+										"ecomBuyButtonText": {
+											"type": "string",
+											"id": 31
+										},
+										"ecomVisibility": {
+											"type": "squareup.api.items.Item.EcomVisibility",
+											"id": 32,
+											"options": {
+												"default": "UNINDEXED"
+											}
+										}
+									},
+									"nested": {
+										"Type": {
+											"values": {
+												"REGULAR": 0,
+												"GIFT_CARD": 1,
+												"APPOINTMENTS_SERVICE": 2
+											}
+										},
+										"EcomVisibility": {
+											"values": {
+												"UNINDEXED": 1,
+												"UNAVAILABLE": 2,
+												"HIDDEN": 3,
+												"VISIBLE": 4
+											}
+										}
+									}
+								},
+								"ItemModifierList": {
+									"fields": {
+										"id": {
+											"type": "string",
+											"id": 4
+										},
+										"name": {
+											"type": "string",
+											"id": 1
+										},
+										"ordinal": {
+											"type": "int32",
+											"id": 2
+										},
+										"selectionType": {
+											"type": "squareup.api.items.ItemModifierList.SelectionType",
+											"id": 3,
+											"options": {
+												"default": "SINGLE"
+											}
+										},
+										"catalogObjectReference": {
+											"type": "squareup.api.items.MerchantCatalogObjectReference",
+											"id": 5
+										},
+										"isConversational": {
+											"type": "bool",
+											"id": 6,
+											"options": {
+												"default": false
+											}
+										},
+										"v2Id": {
+											"type": "string",
+											"id": 7
+										}
+									},
+									"nested": {
+										"SelectionType": {
+											"values": {
+												"SINGLE": 0,
+												"MULTIPLE": 1
+											}
+										}
+									}
+								},
+								"ItemModifierOption": {
+									"fields": {
+										"id": {
+											"type": "string",
+											"id": 6
+										},
+										"price": {
+											"type": "squareup.common.dinero.Money",
+											"id": 1
+										},
+										"onByDefault": {
+											"type": "bool",
+											"id": 2,
+											"options": {
+												"default": false
+											}
+										},
+										"name": {
+											"type": "string",
+											"id": 3
+										},
+										"ordinal": {
+											"type": "int32",
+											"id": 4
+										},
+										"modifierList": {
+											"type": "squareup.api.sync.ObjectId",
+											"id": 5
+										},
+										"catalogObjectReference": {
+											"type": "squareup.api.items.MerchantCatalogObjectReference",
+											"id": 7
+										},
+										"v2Id": {
+											"type": "string",
+											"id": 8
+										}
+									}
+								},
+								"ItemOptionValueForItemVariation": {
+									"fields": {
+										"itemOptionId": {
+											"type": "string",
+											"id": 1
+										},
+										"itemOptionValueId": {
+											"type": "string",
+											"id": 2
+										}
+									}
+								},
+								"Intermission": {
+									"fields": {
+										"startOffset": {
+											"type": "uint32",
+											"id": 1
+										},
+										"endOffset": {
+											"type": "uint32",
+											"id": 2
+										}
+									}
+								},
+								"ItemVariation": {
+									"fields": {
+										"id": {
+											"type": "string",
+											"id": 11
+										},
+										"name": {
+											"type": "string",
+											"id": 1
+										},
+										"buyerFacingName": {
+											"type": "string",
+											"id": 17
+										},
+										"sku": {
+											"type": "string",
+											"id": 2
+										},
+										"gtin": {
+											"type": "string",
+											"id": 7
+										},
+										"price": {
+											"type": "squareup.common.dinero.Money",
+											"id": 3
+										},
+										"pricingType": {
+											"type": "squareup.api.items.PricingType",
+											"id": 10,
+											"options": {
+												"default": "FIXED_PRICING"
+											}
+										},
+										"ordinal": {
+											"type": "int32",
+											"id": 5
+										},
+										"item": {
+											"type": "squareup.api.sync.ObjectId",
+											"id": 6
+										},
+										"inventoryAlertType": {
+											"type": "squareup.api.items.ItemVariation.InventoryAlertType",
+											"id": 13,
+											"options": {
+												"default": "NONE"
+											}
+										},
+										"inventoryAlertThreshold": {
+											"type": "int64",
+											"id": 14
+										},
+										"trackInventory": {
+											"type": "bool",
+											"id": 15,
+											"options": {
+												"default": false
+											}
+										},
+										"userData": {
+											"type": "string",
+											"id": 16
+										},
+										"serviceDuration": {
+											"type": "int64",
+											"id": 18
+										},
+										"priceDescription": {
+											"type": "string",
+											"id": 20
+										},
+										"transitionTime": {
+											"type": "int64",
+											"id": 21
+										},
+										"noShowFeeMoney": {
+											"type": "squareup.common.dinero.Money",
+											"id": 22
+										},
+										"availableOnOnlineBookingSite": {
+											"type": "bool",
+											"id": 23
+										},
+										"employeeTokens": {
+											"rule": "repeated",
+											"type": "string",
+											"id": 24
+										},
+										"catalogObjectReference": {
+											"type": "squareup.api.items.MerchantCatalogObjectReference",
+											"id": 19
+										},
+										"measurementUnitToken": {
+											"type": "string",
+											"id": 25
+										},
+										"v2Id": {
+											"type": "string",
+											"id": 26
+										},
+										"itemOptionValues": {
+											"rule": "repeated",
+											"type": "squareup.api.items.ItemOptionValueForItemVariation",
+											"id": 27
+										},
+										"intermissions": {
+											"rule": "repeated",
+											"type": "squareup.api.items.Intermission",
+											"id": 28
+										},
+										"customAttributeValues": {
+											"rule": "repeated",
+											"type": "squareup.connect.v2.merchant_catalog.resources.CatalogCustomAttributeValue",
+											"id": 30
+										},
+										"resourceTokens": {
+											"rule": "repeated",
+											"type": "string",
+											"id": 31
+										}
+									},
+									"nested": {
+										"InventoryAlertType": {
+											"values": {
+												"NONE": 1,
+												"LOW_QUANTITY": 2
+											}
+										}
+									}
+								},
+								"ItemImage": {
+									"fields": {
+										"id": {
+											"type": "string",
+											"id": 2
+										},
+										"url": {
+											"type": "string",
+											"id": 1
+										},
+										"catalogObjectReference": {
+											"type": "squareup.api.items.MerchantCatalogObjectReference",
+											"id": 3
+										}
+									}
+								},
+								"MenuCategory": {
+									"fields": {
+										"id": {
+											"type": "string",
+											"id": 2
+										},
+										"name": {
+											"type": "string",
+											"id": 1
+										},
+										"ordinal": {
+											"type": "int32",
+											"id": 3
+										},
+										"catalogObjectReference": {
+											"type": "squareup.api.items.MerchantCatalogObjectReference",
+											"id": 4
+										},
+										"straightFire": {
+											"type": "squareup.api.items.StraightFireType",
+											"id": 5
+										},
+										"color": {
+											"type": "string",
+											"id": 6
+										},
+										"abbreviation": {
+											"type": "string",
+											"id": 7
+										},
+										"v2Id": {
+											"type": "string",
+											"id": 8
+										}
+									}
+								},
+								"Fee": {
+									"fields": {
+										"id": {
+											"type": "string",
+											"id": 15
+										},
+										"name": {
+											"type": "string",
+											"id": 3
+										},
+										"percentage": {
+											"type": "string",
+											"id": 4
+										},
+										"amount": {
+											"type": "squareup.common.dinero.Money",
+											"id": 5
+										},
+										"calculationPhase": {
+											"type": "squareup.api.items.CalculationPhase",
+											"id": 6,
+											"options": {
+												"default": "FEE_SUBTOTAL_PHASE"
+											}
+										},
+										"feeTypeId": {
+											"type": "string",
+											"id": 9
+										},
+										"feeTypeName": {
+											"type": "string",
+											"id": 10
+										},
+										"adjustmentType": {
+											"type": "squareup.api.items.Fee.AdjustmentType",
+											"id": 11,
+											"options": {
+												"default": "TAX"
+											}
+										},
+										"appliesToCustomAmounts": {
+											"type": "bool",
+											"id": 12,
+											"options": {
+												"default": true
+											}
+										},
+										"enabled": {
+											"type": "bool",
+											"id": 13,
+											"options": {
+												"default": true
+											}
+										},
+										"inclusionType": {
+											"type": "squareup.api.items.Fee.InclusionType",
+											"id": 14,
+											"options": {
+												"default": "ADDITIVE"
+											}
+										},
+										"catalogObjectReference": {
+											"type": "squareup.api.items.MerchantCatalogObjectReference",
+											"id": 16
+										},
+										"v2Id": {
+											"type": "string",
+											"id": 17
+										},
+										"appliesToProductSet": {
+											"type": "squareup.api.sync.ObjectId",
+											"id": 18
+										}
+									},
+									"nested": {
+										"AdjustmentType": {
+											"values": {
+												"TAX": 0,
+												"OBSOLETE_SURCHARGE": 1
+											}
+										},
+										"InclusionType": {
+											"values": {
+												"ADDITIVE": 0,
+												"INCLUSIVE": 1
+											}
+										}
+									}
+								},
+								"Discount": {
+									"fields": {
+										"id": {
+											"type": "string",
+											"id": 7
+										},
+										"color": {
+											"type": "string",
+											"id": 1
+										},
+										"name": {
+											"type": "string",
+											"id": 3
+										},
+										"percentage": {
+											"type": "string",
+											"id": 4
+										},
+										"amount": {
+											"type": "squareup.common.dinero.Money",
+											"id": 5
+										},
+										"pinRequired": {
+											"type": "bool",
+											"id": 6,
+											"options": {
+												"default": false
+											}
+										},
+										"discountType": {
+											"type": "squareup.api.items.Discount.DiscountType",
+											"id": 8,
+											"options": {
+												"default": "FIXED"
+											}
+										},
+										"applicationMethod": {
+											"type": "squareup.api.items.Discount.ApplicationMethod",
+											"id": 9,
+											"options": {
+												"default": "MANUALLY_APPLIED"
+											}
+										},
+										"compOrdinal": {
+											"type": "int32",
+											"id": 10
+										},
+										"catalogObjectReference": {
+											"type": "squareup.api.items.MerchantCatalogObjectReference",
+											"id": 11
+										},
+										"v2Id": {
+											"type": "string",
+											"id": 13
+										},
+										"modifyTaxBasis": {
+											"type": "squareup.api.items.Discount.ModifyTaxBasis",
+											"id": 14,
+											"options": {
+												"default": "MODIFY_TAX_BASIS"
+											}
+										},
+										"maximumAmount": {
+											"type": "squareup.common.dinero.Money",
+											"id": 15
+										}
+									},
+									"nested": {
+										"DiscountType": {
+											"values": {
+												"FIXED": 0,
+												"VARIABLE_PERCENTAGE": 1,
+												"VARIABLE_AMOUNT": 2
+											}
+										},
+										"ApplicationMethod": {
+											"values": {
+												"MANUALLY_APPLIED": 0,
+												"COMP": 1
+											}
+										},
+										"ModifyTaxBasis": {
+											"values": {
+												"MODIFY_TAX_BASIS": 0,
+												"DO_NOT_MODIFY_TAX_BASIS": 1
+											}
+										}
+									}
+								},
+								"DiningOption": {
+									"fields": {
+										"id": {
+											"type": "string",
+											"id": 1
+										},
+										"name": {
+											"type": "string",
+											"id": 2
+										},
+										"ordinal": {
+											"type": "int32",
+											"id": 3
+										},
+										"catalogObjectReference": {
+											"type": "squareup.api.items.MerchantCatalogObjectReference",
+											"id": 4
+										}
+									}
+								},
+								"TicketTemplate": {
+									"fields": {
+										"id": {
+											"type": "string",
+											"id": 1
+										},
+										"name": {
+											"type": "string",
+											"id": 2
+										},
+										"ordinal": {
+											"type": "int32",
+											"id": 3
+										},
+										"ticketGroup": {
+											"type": "squareup.api.sync.ObjectId",
+											"id": 4
+										}
+									}
+								},
+								"TicketGroup": {
+									"fields": {
+										"id": {
+											"type": "string",
+											"id": 1
+										},
+										"name": {
+											"type": "string",
+											"id": 2
+										},
+										"ordinal": {
+											"type": "int32",
+											"id": 3
+										},
+										"namingMethod": {
+											"type": "squareup.api.items.TicketGroup.NamingMethod",
+											"id": 4,
+											"options": {
+												"default": "AUTOMATIC_NUMBERING"
+											}
+										},
+										"label": {
+											"type": "string",
+											"id": 5
+										}
+									},
+									"nested": {
+										"NamingMethod": {
+											"values": {
+												"AUTOMATIC_NUMBERING": 0,
+												"MANUAL": 1
+											}
+										}
+									}
+								},
+								"Menu": {
+									"fields": {
+										"id": {
+											"type": "string",
+											"id": 1
+										},
+										"name": {
+											"type": "string",
+											"id": 2
+										},
+										"rootTag": {
+											"type": "squareup.api.sync.ObjectId",
+											"id": 3
+										},
+										"catalogObjectReference": {
+											"type": "squareup.api.items.MerchantCatalogObjectReference",
+											"id": 4
+										}
+									}
+								},
+								"Surcharge": {
+									"fields": {
+										"id": {
+											"type": "string",
+											"id": 1
+										},
+										"name": {
+											"type": "string",
+											"id": 2
+										},
+										"percentage": {
+											"type": "string",
+											"id": 3
+										},
+										"amount": {
+											"type": "squareup.common.dinero.Money",
+											"id": 8
+										},
+										"type": {
+											"type": "squareup.api.items.Surcharge.Type",
+											"id": 4
+										},
+										"taxable": {
+											"type": "bool",
+											"id": 5,
+											"options": {
+												"default": true
+											}
+										},
+										"calculationPhase": {
+											"type": "squareup.api.items.CalculationPhase",
+											"id": 6,
+											"options": {
+												"default": "SURCHARGE_PHASE"
+											}
+										},
+										"autoGratuity": {
+											"type": "squareup.api.items.Surcharge.AutoGratuitySettings",
+											"id": 7
+										},
+										"catalogObjectReference": {
+											"type": "squareup.api.items.MerchantCatalogObjectReference",
+											"id": 9
+										}
+									},
+									"nested": {
+										"Type": {
+											"values": {
+												"UNKNOWN": 0,
+												"AUTO_GRATUITY": 1,
+												"CUSTOM": 2
+											}
+										},
+										"AutoGratuitySettings": {
+											"fields": {
+												"minimumSeatCount": {
+													"type": "int32",
+													"id": 1
+												},
+												"autoEnableType": {
+													"type": "squareup.api.items.Surcharge.AutoGratuitySettings.AutoEnableType",
+													"id": 2
+												}
+											},
+											"nested": {
+												"AutoEnableType": {
+													"values": {
+														"UNKNOWN": 0,
+														"MINIMUM_SEAT_COUNT": 1,
+														"ALWAYS": 2
+													}
+												}
+											}
+										}
+									}
+								},
+								"OnlineStoreItemData": {
+									"fields": {
+										"version": {
+											"type": "int32",
+											"id": 1
+										},
+										"type": {
+											"type": "squareup.api.items.OnlineStoreItemData.OnlineStoreItemType",
+											"id": 2
+										},
+										"eventData": {
+											"type": "squareup.api.items.OnlineStoreEventData",
+											"id": 3
+										},
+										"donationData": {
+											"type": "squareup.api.items.OnlineStoreDonationData",
+											"id": 4
+										},
+										"pickupData": {
+											"type": "squareup.api.items.OnlineStorePickupData",
+											"id": 5
+										},
+										"optedOutForAutoSharing": {
+											"type": "bool",
+											"id": 6
+										}
+									},
+									"nested": {
+										"OnlineStoreItemType": {
+											"values": {
+												"UNKNOWN_DO_NOT_SET": 0,
+												"GENERIC": 1,
+												"EVENT": 2,
+												"SERVICE": 3,
+												"DONATION": 4,
+												"GIFT_CARD": 5
+											}
+										}
+									}
+								},
+								"OnlineStoreEventData": {
+									"fields": {
+										"startTime": {
+											"type": "squareup.common.time.DateTime",
+											"id": 1
+										},
+										"endTime": {
+											"type": "squareup.common.time.DateTime",
+											"id": 2
+										},
+										"location": {
+											"type": "string",
+											"id": 3
+										},
+										"admissionTime": {
+											"type": "squareup.common.time.DateTime",
+											"id": 4
+										},
+										"venue": {
+											"type": "string",
+											"id": 5
+										}
+									}
+								},
+								"OnlineStoreDonationData": {
+									"fields": {
+										"targetAmountCents": {
+											"type": "int32",
+											"id": 1
+										}
+									}
+								},
+								"OnlineStorePickupData": {
+									"fields": {
+										"pickupAddress": {
+											"type": "string",
+											"id": 1
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"bills": {
+					"nested": {
+						"MobileStaff": {
+							"fields": {
+								"userToken": {
+									"type": "string",
+									"id": 1
+								},
+								"readOnlyRosterUser": {
+									"type": "squareup.roster.service.UserLookupResponse",
+									"id": 2
+								},
+								"readOnlyName": {
+									"type": "string",
+									"id": 3
+								},
+								"readOnlyProfilePhotoUrl": {
+									"type": "string",
+									"id": 4
+								},
+								"readOnlyMobileStaffId": {
+									"type": "string",
+									"id": 5
+								}
+							}
+						},
+						"Employee": {
+							"fields": {
+								"employeeToken": {
+									"type": "string",
+									"id": 1
+								},
+								"readOnlyRosterEmployee": {
+									"type": "squareup.roster.service.EmployeeLookupResponse",
+									"id": 2
+								},
+								"readOnlyFullName": {
+									"type": "string",
+									"id": 3
+								},
+								"readOnlyProfilePhotoUrl": {
+									"type": "string",
+									"id": 4
+								},
+								"firstName": {
+									"type": "string",
+									"id": 5
+								},
+								"lastName": {
+									"type": "string",
+									"id": 6
+								},
+								"readOnlyEmployeeNumber": {
+									"type": "string",
+									"id": 7
+								}
+							}
+						},
+						"CreatorDetails": {
+							"fields": {
+								"mobileStaff": {
+									"type": "squareup.bills.MobileStaff",
+									"id": 1
+								},
+								"employee": {
+									"type": "squareup.bills.Employee",
+									"id": 2
+								},
+								"deviceCredential": {
+									"type": "squareup.bills.DeviceCredential",
+									"id": 3
+								}
+							}
+						},
+						"DeviceCredential": {
+							"fields": {
+								"token": {
+									"type": "string",
+									"id": 1
+								},
+								"name": {
+									"type": "string",
+									"id": 2
+								}
+							}
+						},
+						"ISO8601Date": {
+							"fields": {
+								"dateString": {
+									"type": "string",
+									"id": 1
+								}
+							}
+						},
+						"DatePair": {
+							"fields": {
+								"clientDate": {
+									"type": "squareup.bills.ISO8601Date",
+									"id": 1
+								},
+								"serverDate": {
+									"type": "squareup.bills.ISO8601Date",
+									"id": 2
+								}
+							}
+						},
+						"Tender": {
+							"nested": {
+								"Type": {
+									"values": {
+										"UNKNOWN": 0,
+										"CARD": 1,
+										"CASH": 2,
+										"NO_SALE": 3,
+										"OTHER": 4,
+										"WALLET": 5,
+										"GENERIC": 6,
+										"BANK_TRANSFER": 7,
+										"ZERO_AMOUNT": 9,
+										"SQUARE_CAPITAL": 12,
+										"EXTERNAL": 13
+									}
+								}
+							}
+						},
+						"CardTender": {
+							"nested": {
+								"Card": {
+									"nested": {
+										"Brand": {
+											"values": {
+												"UNKNOWN_BRAND": 1,
+												"VISA": 2,
+												"MASTERCARD": 3,
+												"AMERICAN_EXPRESS": 4,
+												"DISCOVER": 5,
+												"DISCOVER_DINERS": 6,
+												"JCB": 7,
+												"CHINA_UNIONPAY": 8,
+												"SQUARE_GIFT_CARD_V2": 9,
+												"INTERAC": 10,
+												"SQUARE_CAPITAL_CARD": 11,
+												"EFTPOS": 12,
+												"FELICA": 13,
+												"ALIPAY": 14,
+												"CASH_APP": 15,
+												"EBT": 16
+											}
+										}
+									}
+								}
+							}
+						},
+						"CardData": {
+							"nested": {
+								"KeyedCard": {
+									"nested": {
+										"Expiry": {
+											"fields": {
+												"month": {
+													"type": "string",
+													"id": 1
+												},
+												"year": {
+													"type": "string",
+													"id": 2
+												}
+											}
+										}
+									}
+								}
+							}
+						},
+						"TranslatedName": {
+							"fields": {
+								"localizedName": {
+									"type": "string",
+									"id": 1
+								},
+								"translationType": {
+									"type": "squareup.bills.TranslatedName.TranslationType",
+									"id": 2,
+									"options": {
+										"default": "UNKNOWN"
+									}
+								}
+							},
+							"nested": {
+								"TranslationType": {
+									"values": {
+										"UNKNOWN": 1,
+										"CUSTOM_AMOUNT_ITEM": 2,
+										"UNITEMIZED_TAX": 3,
+										"DEFAULT_DISCOUNT": 4,
+										"DEFAULT_ITEM": 5,
+										"DEFAULT_SALES_TAX": 6,
+										"DEFAULT_TIP": 7,
+										"CHANGE": 8,
+										"REFUND": 9,
+										"CASH_REFUND": 10,
+										"INCLUSIVE_TAX": 11,
+										"DEFAULT_ITEM_MODIFIER": 12,
+										"CREDIT": 13
+									}
+								}
+							}
+						},
+						"Cart": {
+							"fields": {
+								"catalogVersion": {
+									"type": "squareup.bills.Cart.CatalogVersion",
+									"id": 6
+								},
+								"lineItems": {
+									"type": "squareup.bills.Cart.LineItems",
+									"id": 1
+								},
+								"amounts": {
+									"type": "squareup.bills.Cart.Amounts",
+									"id": 2
+								},
+								"returnLineItems": {
+									"rule": "repeated",
+									"type": "squareup.bills.Cart.ReturnLineItems",
+									"id": 7
+								},
+								"amountDetails": {
+									"type": "squareup.bills.Cart.AmountDetails",
+									"id": 8
+								},
+								"featureDetails": {
+									"type": "squareup.bills.Cart.FeatureDetails",
+									"id": 3
+								},
+								"readOnlyCustomNote": {
+									"type": "string",
+									"id": 4
+								},
+								"groupToken": {
+									"type": "string",
+									"id": 9
+								},
+								"createdByUnitToken": {
+									"type": "string",
+									"id": 10
+								}
+							},
+							"nested": {
+								"CatalogVersion": {
+									"values": {
+										"UNKNOWN": 0,
+										"COGS_CATALOG": 1,
+										"MERCHANT_CATALOG": 2
+									}
+								},
+								"LineItems": {
+									"fields": {
+										"itemization": {
+											"rule": "repeated",
+											"type": "squareup.bills.Itemization",
+											"id": 1
+										},
+										"fee": {
+											"rule": "repeated",
+											"type": "squareup.bills.FeeLineItem",
+											"id": 2
+										},
+										"discount": {
+											"rule": "repeated",
+											"type": "squareup.bills.DiscountLineItem",
+											"id": 3
+										},
+										"roundingAdjustment": {
+											"type": "squareup.bills.RoundingAdjustmentLineItem",
+											"id": 4
+										},
+										"defaultDiningOption": {
+											"type": "squareup.bills.DiningOptionLineItem",
+											"id": 5
+										},
+										"compItemization": {
+											"rule": "repeated",
+											"type": "squareup.bills.Itemization",
+											"id": 6
+										},
+										"voidItemization": {
+											"rule": "repeated",
+											"type": "squareup.bills.Itemization",
+											"id": 7
+										},
+										"surcharge": {
+											"rule": "repeated",
+											"type": "squareup.bills.SurchargeLineItem",
+											"id": 8
+										}
+									}
+								},
+								"Amounts": {
+									"fields": {
+										"totalMoney": {
+											"type": "squareup.common.Money",
+											"id": 1
+										},
+										"taxMoney": {
+											"type": "squareup.common.Money",
+											"id": 2
+										},
+										"discountMoney": {
+											"type": "squareup.common.Money",
+											"id": 4
+										},
+										"tipMoney": {
+											"type": "squareup.common.Money",
+											"id": 5
+										},
+										"surchargeMoney": {
+											"type": "squareup.common.Money",
+											"id": 6
+										}
+									}
+								},
+								"ReturnLineItems": {
+									"fields": {
+										"sourceBillTokenPair": {
+											"type": "squareup.common.token.TokenPair",
+											"id": 1
+										},
+										"returnItemization": {
+											"rule": "repeated",
+											"type": "squareup.bills.Cart.ReturnLineItems.ReturnItemization",
+											"id": 2
+										},
+										"discountLineItem": {
+											"rule": "repeated",
+											"type": "squareup.bills.DiscountLineItem",
+											"id": 3
+										},
+										"feeLineItem": {
+											"rule": "repeated",
+											"type": "squareup.bills.FeeLineItem",
+											"id": 4
+										},
+										"roundingAdjustment": {
+											"type": "squareup.bills.RoundingAdjustmentLineItem",
+											"id": 5
+										},
+										"returnTipLineItem": {
+											"rule": "repeated",
+											"type": "squareup.bills.ReturnTipLineItem",
+											"id": 6
+										},
+										"returnSurchargeLineItem": {
+											"rule": "repeated",
+											"type": "squareup.bills.ReturnSurchargeLineItem",
+											"id": 7
+										}
+									},
+									"nested": {
+										"ReturnItemization": {
+											"fields": {
+												"sourceItemizationTokenPair": {
+													"type": "squareup.common.token.TokenPair",
+													"id": 1
+												},
+												"itemization": {
+													"type": "squareup.bills.Itemization",
+													"id": 2
+												}
+											}
+										}
+									}
+								},
+								"AmountDetails": {
+									"fields": {
+										"return": {
+											"type": "squareup.bills.Cart.Amounts",
+											"id": 1
+										},
+										"net": {
+											"type": "squareup.bills.Cart.Amounts",
+											"id": 2
+										}
+									}
+								},
+								"FeatureDetails": {
+									"fields": {
+										"pickupOrder": {
+											"type": "squareup.bills.Cart.FeatureDetails.PickupOrder",
+											"id": 1
+										},
+										"openTicket": {
+											"type": "squareup.bills.Cart.FeatureDetails.OpenTicket",
+											"id": 2
+										},
+										"invoice": {
+											"type": "squareup.bills.Cart.FeatureDetails.Invoice",
+											"id": 3
+										},
+										"kitchenPrinting": {
+											"type": "squareup.bills.Cart.FeatureDetails.KitchenPrinting",
+											"id": 4
+										},
+										"buyerInfo": {
+											"type": "squareup.bills.Cart.FeatureDetails.BuyerInfo",
+											"id": 5
+										},
+										"appointmentsDetails": {
+											"type": "squareup.bills.Cart.FeatureDetails.AppointmentsDetails",
+											"id": 6
+										},
+										"availableInstrumentDetails": {
+											"rule": "repeated",
+											"type": "squareup.bills.Cart.FeatureDetails.InstrumentDetails",
+											"id": 7
+										},
+										"order": {
+											"type": "squareup.bills.Cart.FeatureDetails.Order",
+											"id": 8
+										},
+										"coursingOptions": {
+											"type": "squareup.bills.Cart.FeatureDetails.CoursingOptions",
+											"id": 9
+										},
+										"seating": {
+											"type": "squareup.bills.Cart.FeatureDetails.Seating",
+											"id": 10
+										},
+										"billPrintState": {
+											"type": "squareup.bills.Cart.FeatureDetails.BillPrintState",
+											"id": 11
+										},
+										"reopenDetails": {
+											"type": "squareup.bills.Cart.FeatureDetails.ReopenDetails",
+											"id": 12
+										},
+										"coverCountChangeLog": {
+											"rule": "repeated",
+											"type": "squareup.bills.Cart.FeatureDetails.CoverCountEvent",
+											"id": 13
+										},
+										"authAndDelayedCapture": {
+											"type": "squareup.bills.Cart.FeatureDetails.AuthAndDelayedCapture",
+											"id": 14
+										},
+										"lifecycleEvent": {
+											"rule": "repeated",
+											"type": "squareup.bills.Cart.FeatureDetails.LifecycleEvent",
+											"id": 15
+										},
+										"pricingEngineState": {
+											"type": "squareup.bills.Cart.FeatureDetails.PricingEngineState",
+											"id": 16
+										},
+										"waiterFeatureDetailsExtension": {
+											"type": "squareup.waiter.data.WaiterFeatureDetailsExtension",
+											"id": 28250
+										}
+									},
+									"nested": {
+										"PickupOrder": {
+											"fields": {
+												"note": {
+													"type": "string",
+													"id": 2
+												}
+											}
+										},
+										"OpenTicket": {
+											"fields": {
+												"name": {
+													"type": "string",
+													"id": 1
+												},
+												"note": {
+													"type": "string",
+													"id": 2
+												},
+												"ticketTokenPair": {
+													"type": "squareup.common.token.TokenPair",
+													"id": 3
+												},
+												"ticketOwner": {
+													"type": "squareup.bills.CreatorDetails",
+													"id": 4
+												},
+												"predefinedTicket": {
+													"type": "squareup.bills.Cart.FeatureDetails.OpenTicket.PredefinedTicket",
+													"id": 5
+												},
+												"unitToken": {
+													"type": "string",
+													"id": 6
+												},
+												"createdAt": {
+													"type": "squareup.bills.ISO8601Date",
+													"id": 7
+												},
+												"productsOpenedOn": {
+													"rule": "repeated",
+													"type": "squareup.bills.Cart.FeatureDetails.OpenTicket.OpenTicketProductAssociation",
+													"id": 8
+												}
+											},
+											"nested": {
+												"PredefinedTicket": {
+													"fields": {
+														"ticketGroup": {
+															"type": "squareup.api.items.TicketGroup",
+															"id": 1
+														},
+														"ticketTemplate": {
+															"type": "squareup.api.items.TicketTemplate",
+															"id": 2
+														}
+													}
+												},
+												"OpenTicketProductAssociation": {
+													"values": {
+														"DO_NOT_SET": 0,
+														"RESTAURANT_POS": 1
+													}
+												}
+											}
+										},
+										"Invoice": {
+											"fields": {
+												"invoiceTokenPair": {
+													"type": "squareup.common.token.TokenPair",
+													"id": 1
+												},
+												"version": {
+													"type": "string",
+													"id": 2
+												},
+												"isFinalPayment": {
+													"type": "bool",
+													"id": 3,
+													"options": {
+														"default": true
+													}
+												}
+											}
+										},
+										"KitchenPrinting": {
+											"fields": {
+												"name": {
+													"type": "string",
+													"id": 1
+												}
+											}
+										},
+										"InstrumentDetails": {
+											"fields": {
+												"instrumentToken": {
+													"type": "string",
+													"id": 1
+												},
+												"displayDetails": {
+													"type": "squareup.bills.Cart.FeatureDetails.InstrumentDetails.DisplayDetails",
+													"id": 2
+												}
+											},
+											"nested": {
+												"DisplayDetails": {
+													"fields": {
+														"cardholderName": {
+															"type": "string",
+															"id": 1
+														},
+														"lastFour": {
+															"type": "string",
+															"id": 2
+														},
+														"brand": {
+															"type": "squareup.bills.CardTender.Card.Brand",
+															"id": 3
+														},
+														"expiry": {
+															"type": "squareup.bills.CardData.KeyedCard.Expiry",
+															"id": 4
+														}
+													}
+												}
+											}
+										},
+										"BuyerInfo": {
+											"fields": {
+												"customerToken": {
+													"type": "string",
+													"id": 1
+												},
+												"displayDetails": {
+													"type": "squareup.bills.Cart.FeatureDetails.BuyerInfo.DisplayDetails",
+													"id": 2
+												},
+												"availableInstrumentDetails": {
+													"rule": "repeated",
+													"type": "squareup.bills.Cart.FeatureDetails.InstrumentDetails",
+													"id": 3
+												}
+											},
+											"nested": {
+												"DisplayDetails": {
+													"fields": {
+														"displayName": {
+															"type": "string",
+															"id": 1
+														},
+														"lastVisit": {
+															"type": "squareup.bills.ISO8601Date",
+															"id": 2
+														},
+														"email": {
+															"type": "string",
+															"id": 3
+														},
+														"phoneNumber": {
+															"type": "string",
+															"id": 4
+														},
+														"phoneToken": {
+															"type": "string",
+															"id": 5
+														},
+														"loyaltyAccountPhoneToken": {
+															"type": "string",
+															"id": 6
+														}
+													}
+												}
+											}
+										},
+										"AppointmentsDetails": {
+											"fields": {
+												"appointmentId": {
+													"type": "string",
+													"id": 1
+												},
+												"appointmentStaff": {
+													"type": "squareup.bills.CreatorDetails",
+													"id": 2
+												}
+											}
+										},
+										"Order": {
+											"fields": {
+												"orderTokenPair": {
+													"type": "squareup.common.token.TokenPair",
+													"id": 1
+												},
+												"referenceId": {
+													"type": "string",
+													"id": 2
+												}
+											}
+										},
+										"SourceTicketInformation": {
+											"fields": {
+												"clientId": {
+													"type": "string",
+													"id": 1
+												},
+												"name": {
+													"type": "string",
+													"id": 2
+												}
+											}
+										},
+										"CoursingOptions": {
+											"fields": {
+												"course": {
+													"rule": "repeated",
+													"type": "squareup.bills.Cart.FeatureDetails.CoursingOptions.Course",
+													"id": 1
+												}
+											},
+											"nested": {
+												"Course": {
+													"fields": {
+														"courseTokenPair": {
+															"type": "squareup.common.token.TokenPair",
+															"id": 1
+														},
+														"ordinal": {
+															"type": "uint32",
+															"id": 2
+														},
+														"straightFire": {
+															"type": "bool",
+															"id": 3
+														},
+														"event": {
+															"rule": "repeated",
+															"type": "squareup.bills.Cart.FeatureDetails.CoursingOptions.Course.Event",
+															"id": 4
+														},
+														"sourceTicketInformation": {
+															"type": "squareup.bills.Cart.FeatureDetails.SourceTicketInformation",
+															"id": 5
+														}
+													},
+													"nested": {
+														"Event": {
+															"fields": {
+																"eventTokenPair": {
+																	"type": "squareup.common.token.TokenPair",
+																	"id": 1
+																},
+																"eventType": {
+																	"type": "squareup.bills.Cart.FeatureDetails.CoursingOptions.Course.Event.EventType",
+																	"id": 2
+																},
+																"createdAt": {
+																	"type": "squareup.bills.ISO8601Date",
+																	"id": 3
+																},
+																"creatorDetails": {
+																	"type": "squareup.bills.CreatorDetails",
+																	"id": 4
+																}
+															},
+															"nested": {
+																"EventType": {
+																	"values": {
+																		"UNKNOWN": 0,
+																		"CREATION": 1,
+																		"SEND": 2,
+																		"ADDITION": 3,
+																		"FIRE": 4
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										},
+										"Seating": {
+											"fields": {
+												"seat": {
+													"rule": "repeated",
+													"type": "squareup.bills.Cart.FeatureDetails.Seating.Seat",
+													"id": 1
+												},
+												"coverCountChangeLog": {
+													"rule": "repeated",
+													"type": "squareup.bills.Cart.FeatureDetails.CoverCountEvent",
+													"id": 2
+												},
+												"readOnlyCoverCount": {
+													"type": "uint32",
+													"id": 3
+												}
+											},
+											"nested": {
+												"Seat": {
+													"fields": {
+														"seatTokenPair": {
+															"type": "squareup.common.token.TokenPair",
+															"id": 1
+														},
+														"ordinal": {
+															"type": "uint32",
+															"id": 2
+														},
+														"enabled": {
+															"type": "bool",
+															"id": 3,
+															"options": {
+																"default": true
+															}
+														},
+														"createdAt": {
+															"type": "squareup.bills.ISO8601Date",
+															"id": 4
+														},
+														"sourceOpenTicketClientToken": {
+															"type": "string",
+															"id": 5
+														},
+														"sourceOpenTicketName": {
+															"type": "string",
+															"id": 6
+														},
+														"sourceTicketInformation": {
+															"type": "squareup.bills.Cart.FeatureDetails.SourceTicketInformation",
+															"id": 7
+														}
+													}
+												}
+											}
+										},
+										"BillPrintState": {
+											"fields": {
+												"billPrintedAt": {
+													"type": "squareup.bills.ISO8601Date",
+													"id": 1
+												},
+												"latestBillPrinted": {
+													"type": "bool",
+													"id": 2
+												}
+											}
+										},
+										"ReopenDetails": {
+											"fields": {
+												"reopenedAt": {
+													"type": "squareup.bills.ISO8601Date",
+													"id": 1
+												},
+												"tenderDisplayDetails": {
+													"rule": "repeated",
+													"type": "squareup.bills.Cart.FeatureDetails.ReopenDetails.TenderDisplayDetails",
+													"id": 2
+												}
+											},
+											"nested": {
+												"TenderDisplayDetails": {
+													"fields": {
+														"type": {
+															"type": "squareup.bills.Tender.Type",
+															"id": 1
+														},
+														"totalMoney": {
+															"type": "squareup.common.Money",
+															"id": 2
+														},
+														"instrumentDetails": {
+															"type": "squareup.bills.Cart.FeatureDetails.InstrumentDetails.DisplayDetails",
+															"id": 3
+														},
+														"tenderTokenPair": {
+															"type": "squareup.common.token.TokenPair",
+															"id": 4
+														}
+													}
+												}
+											}
+										},
+										"CoverCountEvent": {
+											"fields": {
+												"eventId": {
+													"type": "string",
+													"id": 1
+												},
+												"eventType": {
+													"type": "squareup.bills.Cart.FeatureDetails.CoverCountEvent.EventType",
+													"id": 2
+												},
+												"count": {
+													"type": "uint32",
+													"id": 3,
+													"options": {
+														"default": 0
+													}
+												},
+												"isConfirmed": {
+													"type": "bool",
+													"id": 4,
+													"options": {
+														"default": false
+													}
+												},
+												"creatorDetails": {
+													"type": "squareup.bills.CreatorDetails",
+													"id": 5
+												},
+												"createdAt": {
+													"type": "squareup.bills.ISO8601Date",
+													"id": 6
+												},
+												"ordinal": {
+													"type": "uint32",
+													"id": 7
+												}
+											},
+											"nested": {
+												"EventType": {
+													"values": {
+														"DO_NOT_USE": 0,
+														"USER_SELECTED": 1,
+														"SPLIT": 2,
+														"MERGE": 3,
+														"VOID": 4
+													}
+												}
+											}
+										},
+										"AuthAndDelayedCapture": {
+											"fields": {
+												"billServerId": {
+													"type": "string",
+													"id": 1
+												}
+											}
+										},
+										"LifecycleEvent": {
+											"fields": {
+												"eventIdPair": {
+													"type": "squareup.common.token.TokenPair",
+													"id": 1
+												},
+												"eventType": {
+													"type": "squareup.bills.Cart.FeatureDetails.LifecycleEvent.EventType",
+													"id": 2
+												},
+												"createdAt": {
+													"type": "squareup.bills.ISO8601Date",
+													"id": 3
+												},
+												"creatorDetails": {
+													"type": "squareup.bills.CreatorDetails",
+													"id": 4
+												},
+												"ownershipTransferDetails": {
+													"type": "squareup.bills.Cart.FeatureDetails.LifecycleEvent.OwnershipTransferDetails",
+													"id": 5
+												}
+											},
+											"nested": {
+												"EventType": {
+													"values": {
+														"UNKNOWN": 0,
+														"CLOSE": 1,
+														"REOPEN": 2,
+														"OWNERSHIP_TRANSFER": 3,
+														"OPEN": 4
+													}
+												},
+												"OwnershipTransferDetails": {
+													"fields": {
+														"transferFromEmployee": {
+															"type": "squareup.bills.Employee",
+															"id": 1
+														},
+														"transferToEmployee": {
+															"type": "squareup.bills.Employee",
+															"id": 2
+														}
+													}
+												}
+											}
+										},
+										"PricingEngineState": {
+											"fields": {
+												"blacklistedDiscountIds": {
+													"rule": "repeated",
+													"type": "string",
+													"id": 1
+												}
+											}
+										}
+									}
+								}
+							}
+						},
+						"Itemization": {
+							"fields": {
+								"quantity": {
+									"type": "string",
+									"id": 1
+								},
+								"measurementUnit": {
+									"type": "squareup.omg.model.Order.QuantityUnit",
+									"id": 13
+								},
+								"quantityEntryType": {
+									"type": "squareup.bills.Itemization.QuantityEntryType",
+									"id": 12,
+									"options": {
+										"default": "MANUALLY_ENTERED"
+									}
+								},
+								"customNote": {
+									"type": "string",
+									"id": 2
+								},
+								"configuration": {
+									"type": "squareup.bills.Itemization.Configuration",
+									"id": 4
+								},
+								"writeOnlyBackingDetails": {
+									"type": "squareup.bills.Itemization.BackingDetails",
+									"id": 5
+								},
+								"readOnlyDisplayDetails": {
+									"type": "squareup.bills.Itemization.DisplayDetails",
+									"id": 6
+								},
+								"amounts": {
+									"type": "squareup.bills.Itemization.Amounts",
+									"id": 7
+								},
+								"itemizationTokenPair": {
+									"type": "squareup.common.token.TokenPair",
+									"id": 8
+								},
+								"createdAt": {
+									"type": "squareup.bills.DatePair",
+									"id": 9
+								},
+								"event": {
+									"rule": "repeated",
+									"type": "squareup.bills.Itemization.Event",
+									"id": 10
+								},
+								"featureDetails": {
+									"type": "squareup.bills.Itemization.FeatureDetails",
+									"id": 11
+								},
+								"deleteReason": {
+									"type": "squareup.waiter.private.extensions.DeleteReason",
+									"id": 101
+								},
+								"deleted": {
+									"type": "bool",
+									"id": 100
+								},
+								"waiterExtension": {
+									"type": "squareup.waiter.data.WaiterExtension",
+									"id": 28250
+								},
+								"billingData": {
+									"type": "squareup.billing.data.BillingItemizationData",
+									"id": 100141
+								}
+							},
+							"nested": {
+								"QuantityEntryType": {
+									"values": {
+										"DO_NOT_USE": 0,
+										"MANUALLY_ENTERED": 1,
+										"READ_FROM_SCALE": 2,
+										"MANUAL_WITH_CONNECTED_SCALE": 3
+									}
+								},
+								"Configuration": {
+									"fields": {
+										"selectedOptions": {
+											"type": "squareup.bills.Itemization.Configuration.SelectedOptions",
+											"id": 1
+										},
+										"backingType": {
+											"type": "squareup.bills.Itemization.Configuration.BackingType",
+											"id": 2
+										},
+										"itemVariationPriceMoney": {
+											"type": "squareup.common.Money",
+											"id": 3
+										},
+										"category": {
+											"type": "squareup.api.items.MenuCategory",
+											"id": 4
+										}
+									},
+									"nested": {
+										"SelectedOptions": {
+											"fields": {
+												"itemVariationDeprecated": {
+													"type": "squareup.api.items.ItemVariation",
+													"id": 1
+												},
+												"modifierOption": {
+													"rule": "repeated",
+													"type": "squareup.bills.ModifierOptionLineItem",
+													"id": 2
+												},
+												"discount": {
+													"rule": "repeated",
+													"type": "squareup.bills.DiscountLineItem",
+													"id": 3
+												},
+												"fee": {
+													"rule": "repeated",
+													"type": "squareup.bills.FeeLineItem",
+													"id": 4
+												},
+												"itemVariationDetails": {
+													"type": "squareup.bills.Itemization.Configuration.SelectedOptions.ItemVariationDetails",
+													"id": 5
+												},
+												"diningOption": {
+													"type": "squareup.bills.DiningOptionLineItem",
+													"id": 6
+												}
+											},
+											"nested": {
+												"ItemVariationDetails": {
+													"fields": {
+														"readOnlyDisplayDetails": {
+															"type": "squareup.bills.Itemization.Configuration.SelectedOptions.ItemVariationDetails.DisplayDetails",
+															"id": 1
+														},
+														"writeOnlyBackingDetails": {
+															"type": "squareup.bills.Itemization.Configuration.SelectedOptions.ItemVariationDetails.BackingDetails",
+															"id": 2
+														},
+														"giftCardDetails": {
+															"type": "squareup.bills.Itemization.Configuration.SelectedOptions.ItemVariationDetails.GiftCardDetails",
+															"id": 3
+														},
+														"displayVariationName": {
+															"type": "bool",
+															"id": 4
+														}
+													},
+													"nested": {
+														"DisplayDetails": {
+															"fields": {
+																"name": {
+																	"type": "string",
+																	"id": 1
+																},
+																"priceMoney": {
+																	"type": "squareup.common.Money",
+																	"id": 2
+																},
+																"cogsObjectId": {
+																	"type": "string",
+																	"id": 3
+																},
+																"sku": {
+																	"type": "string",
+																	"id": 4
+																}
+															}
+														},
+														"BackingDetails": {
+															"fields": {
+																"itemVariation": {
+																	"type": "squareup.api.items.ItemVariation",
+																	"id": 1
+																},
+																"merchantCatalogObjects": {
+																	"type": "squareup.bills.Itemization.Configuration.SelectedOptions.ItemVariationDetails.BackingDetails.MerchantCatalogObjects",
+																	"id": 2
+																},
+																"measurementUnit": {
+																	"type": "squareup.omg.model.Order.QuantityUnit",
+																	"id": 3
+																}
+															},
+															"nested": {
+																"MerchantCatalogObjects": {
+																	"fields": {
+																		"itemVariation": {
+																			"type": "squareup.items.merchant.CatalogObject",
+																			"id": 1
+																		}
+																	}
+																}
+															}
+														},
+														"GiftCardDetails": {
+															"fields": {
+																"giftCardToken": {
+																	"type": "string",
+																	"id": 1
+																},
+																"activityType": {
+																	"type": "squareup.bills.Itemization.Configuration.SelectedOptions.ItemVariationDetails.GiftCardDetails.ActivityType",
+																	"id": 2
+																},
+																"writeOnlyFideliusToken": {
+																	"type": "string",
+																	"id": 3
+																},
+																"panSuffix": {
+																	"type": "string",
+																	"id": 4
+																},
+																"promotionTokens": {
+																	"rule": "repeated",
+																	"type": "string",
+																	"id": 5
+																}
+															},
+															"nested": {
+																"ActivityType": {
+																	"values": {
+																		"UNKNOWN": 0,
+																		"ACTIVATION": 1,
+																		"RELOAD": 2
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										},
+										"BackingType": {
+											"values": {
+												"UNKNOWN": 0,
+												"CUSTOM_AMOUNT": 1,
+												"ITEMS_SERVICE_ITEM_VARIATION": 2,
+												"CUSTOM_ITEM_VARIATION": 3
+											}
+										}
+									}
+								},
+								"BackingDetails": {
+									"fields": {
+										"item": {
+											"type": "squareup.api.items.Item",
+											"id": 1
+										},
+										"itemImage": {
+											"type": "squareup.api.items.ItemImage",
+											"id": 2
+										},
+										"category": {
+											"type": "squareup.api.items.MenuCategory",
+											"id": 3
+										},
+										"merchantCatalogObjects": {
+											"type": "squareup.bills.Itemization.BackingDetails.MerchantCatalogObjects",
+											"id": 5
+										},
+										"availableOptions": {
+											"type": "squareup.bills.Itemization.BackingDetails.AvailableOptions",
+											"id": 4
+										},
+										"menu": {
+											"type": "squareup.api.items.Menu",
+											"id": 6
+										}
+									},
+									"nested": {
+										"MerchantCatalogObjects": {
+											"fields": {
+												"item": {
+													"type": "squareup.items.merchant.CatalogObject",
+													"id": 1
+												},
+												"itemImage": {
+													"type": "squareup.items.merchant.CatalogObject",
+													"id": 2
+												},
+												"category": {
+													"type": "squareup.items.merchant.CatalogObject",
+													"id": 3
+												}
+											}
+										},
+										"AvailableOptions": {
+											"fields": {
+												"itemVariation": {
+													"rule": "repeated",
+													"type": "squareup.api.items.ItemVariation",
+													"id": 1
+												},
+												"modifierList": {
+													"rule": "repeated",
+													"type": "squareup.bills.Itemization.BackingDetails.AvailableOptions.ModifierList",
+													"id": 2
+												}
+											},
+											"nested": {
+												"ModifierList": {
+													"fields": {
+														"modifierList": {
+															"type": "squareup.api.items.ItemModifierList",
+															"id": 1
+														},
+														"modifierOption": {
+															"rule": "repeated",
+															"type": "squareup.api.items.ItemModifierOption",
+															"id": 2
+														}
+													}
+												}
+											}
+										}
+									}
+								},
+								"DisplayDetails": {
+									"fields": {
+										"item": {
+											"type": "squareup.bills.Itemization.DisplayDetails.Item",
+											"id": 2
+										}
+									},
+									"nested": {
+										"Item": {
+											"fields": {
+												"color": {
+													"type": "string",
+													"id": 1
+												},
+												"description": {
+													"type": "string",
+													"id": 2
+												},
+												"name": {
+													"type": "string",
+													"id": 3
+												},
+												"abbreviation": {
+													"type": "string",
+													"id": 4
+												},
+												"imageUrl": {
+													"type": "string",
+													"id": 5
+												},
+												"cogsObjectId": {
+													"type": "string",
+													"id": 6
+												},
+												"imageId": {
+													"type": "string",
+													"id": 7
+												},
+												"menuCategory": {
+													"type": "squareup.bills.Itemization.DisplayDetails.Item.MenuCategory",
+													"id": 8
+												},
+												"menu": {
+													"type": "squareup.bills.Itemization.DisplayDetails.Item.Menu",
+													"id": 9
+												}
+											},
+											"nested": {
+												"MenuCategory": {
+													"fields": {
+														"cogsObjectId": {
+															"type": "string",
+															"id": 1
+														},
+														"name": {
+															"type": "string",
+															"id": 2
+														}
+													}
+												},
+												"Menu": {
+													"fields": {
+														"cogsObjectId": {
+															"type": "string",
+															"id": 1
+														},
+														"name": {
+															"type": "string",
+															"id": 2
+														}
+													}
+												}
+											}
+										}
+									}
+								},
+								"Amounts": {
+									"fields": {
+										"itemVariationPriceMoney": {
+											"type": "squareup.common.Money",
+											"id": 1
+										},
+										"itemVariationPriceTimesQuantityMoney": {
+											"type": "squareup.common.Money",
+											"id": 2
+										},
+										"discountMoney": {
+											"type": "squareup.common.Money",
+											"id": 3
+										},
+										"taxMoney": {
+											"type": "squareup.common.Money",
+											"id": 4
+										},
+										"totalMoney": {
+											"type": "squareup.common.Money",
+											"id": 5
+										},
+										"grossSalesMoney": {
+											"type": "squareup.common.Money",
+											"id": 6
+										},
+										"readOnlyReportingAmounts": {
+											"type": "squareup.bills.Itemization.Amounts.ReportingAmounts",
+											"id": 7
+										},
+										"taxableAmount": {
+											"type": "squareup.common.Money",
+											"id": 8
+										}
+									},
+									"nested": {
+										"ReportingAmounts": {
+											"fields": {
+												"fifoCostOfGoodsSoldAmounts": {
+													"type": "squareup.bills.Itemization.Amounts.ReportingAmounts.CostOfGoodsAmounts",
+													"id": 1
+												},
+												"lifoCostOfGoodsSoldAmounts": {
+													"type": "squareup.bills.Itemization.Amounts.ReportingAmounts.CostOfGoodsAmounts",
+													"id": 2
+												},
+												"averageCostOfGoodsSoldAmounts": {
+													"type": "squareup.bills.Itemization.Amounts.ReportingAmounts.CostOfGoodsAmounts",
+													"id": 3
+												},
+												"fifoVendorCostOfGoodsSoldAmounts": {
+													"rule": "repeated",
+													"type": "squareup.bills.Itemization.Amounts.ReportingAmounts.VendorCostOfGoodsAmounts",
+													"id": 5
+												},
+												"lifoVendorCostOfGoodsSoldAmounts": {
+													"rule": "repeated",
+													"type": "squareup.bills.Itemization.Amounts.ReportingAmounts.VendorCostOfGoodsAmounts",
+													"id": 6
+												}
+											},
+											"nested": {
+												"CostOfGoodsAmounts": {
+													"fields": {
+														"itemVariationTotalCostMoney": {
+															"type": "squareup.common.Money",
+															"id": 1
+														},
+														"itemVariationCogsQuantity": {
+															"type": "string",
+															"id": 2
+														}
+													}
+												},
+												"VendorCostOfGoodsAmounts": {
+													"fields": {
+														"vendorToken": {
+															"type": "string",
+															"id": 1
+														},
+														"vendorQuantity": {
+															"type": "string",
+															"id": 2
+														},
+														"costOfGoodsSoldAmounts": {
+															"type": "squareup.bills.Itemization.Amounts.ReportingAmounts.CostOfGoodsAmounts",
+															"id": 3
+														}
+													}
+												}
+											}
+										}
+									}
+								},
+								"Event": {
+									"fields": {
+										"eventTokenPair": {
+											"type": "squareup.common.token.TokenPair",
+											"id": 1
+										},
+										"eventType": {
+											"type": "squareup.bills.Itemization.Event.EventType",
+											"id": 2
+										},
+										"createdAt": {
+											"type": "squareup.bills.ISO8601Date",
+											"id": 3
+										},
+										"creatorDetails": {
+											"type": "squareup.bills.CreatorDetails",
+											"id": 4
+										},
+										"reason": {
+											"type": "string",
+											"id": 5
+										},
+										"splitEventDetails": {
+											"type": "squareup.bills.Itemization.Event.SplitEventDetails",
+											"id": 6
+										}
+									},
+									"nested": {
+										"EventType": {
+											"values": {
+												"UNKNOWN": 0,
+												"CREATION": 1,
+												"COMP": 2,
+												"VOID": 3,
+												"UNCOMP": 4,
+												"DELETE": 5,
+												"SPLIT": 6,
+												"FIRE": 7,
+												"SEND": 8,
+												"DISCOUNT": 9,
+												"REMOVE_DISCOUNT": 10
+											}
+										},
+										"SplitEventDetails": {
+											"fields": {
+												"childItemization": {
+													"rule": "repeated",
+													"type": "squareup.bills.Itemization.Event.SplitEventDetails.ChildItemization",
+													"id": 1
+												}
+											},
+											"nested": {
+												"ChildItemization": {
+													"fields": {
+														"ticketTokenPair": {
+															"type": "squareup.common.token.TokenPair",
+															"id": 1
+														},
+														"childItemizationTokenPair": {
+															"type": "squareup.common.token.TokenPair",
+															"id": 2
+														}
+													}
+												}
+											}
+										}
+									}
+								},
+								"FeatureDetails": {
+									"fields": {
+										"courseTokenPair": {
+											"type": "squareup.common.token.TokenPair",
+											"id": 1
+										},
+										"seating": {
+											"type": "squareup.bills.Itemization.FeatureDetails.Seating",
+											"id": 2
+										},
+										"appointmentsServiceDetails": {
+											"type": "squareup.bills.Itemization.FeatureDetails.AppointmentsServiceDetails",
+											"id": 3
+										},
+										"inheritedItemizationDetails": {
+											"type": "squareup.bills.Itemization.FeatureDetails.InheritedItemizationDetails",
+											"id": 4
+										},
+										"pricingEngineState": {
+											"type": "squareup.bills.Itemization.FeatureDetails.PricingEngineState",
+											"id": 5
+										}
+									},
+									"nested": {
+										"Seating": {
+											"fields": {
+												"destination": {
+													"type": "squareup.bills.Itemization.FeatureDetails.Seating.Destination",
+													"id": 1
+												}
+											},
+											"nested": {
+												"Destination": {
+													"fields": {
+														"type": {
+															"type": "squareup.bills.Itemization.FeatureDetails.Seating.Destination.Type",
+															"id": 1
+														},
+														"seatTokenPair": {
+															"rule": "repeated",
+															"type": "squareup.common.token.TokenPair",
+															"id": 2
+														},
+														"createdAt": {
+															"type": "squareup.bills.ISO8601Date",
+															"id": 3
+														}
+													},
+													"nested": {
+														"Type": {
+															"values": {
+																"UNKNOWN": 0,
+																"TABLE_SHARE": 1,
+																"SEAT": 2
+															}
+														}
+													}
+												}
+											}
+										},
+										"AppointmentsServiceDetails": {
+											"fields": {
+												"serviceId": {
+													"type": "string",
+													"id": 1
+												},
+												"serviceDuration": {
+													"type": "int64",
+													"id": 2
+												},
+												"ordinal": {
+													"type": "int32",
+													"id": 3
+												},
+												"transitionTimeDuration": {
+													"type": "int64",
+													"id": 4
+												},
+												"pricingType": {
+													"type": "squareup.api.items.PricingType",
+													"id": 5
+												},
+												"noShowFeeMoney": {
+													"type": "squareup.common.Money",
+													"id": 6
+												},
+												"intermissions": {
+													"rule": "repeated",
+													"type": "squareup.api.items.Intermission",
+													"id": 7
+												},
+												"resourceTokens": {
+													"rule": "repeated",
+													"type": "string",
+													"id": 8
+												}
+											}
+										},
+										"InheritedItemizationDetails": {
+											"fields": {
+												"inheritedEventTokenPairs": {
+													"rule": "repeated",
+													"type": "squareup.common.token.TokenPair",
+													"id": 1
+												},
+												"createReason": {
+													"type": "squareup.bills.Itemization.FeatureDetails.InheritedItemizationDetails.CreateReason",
+													"id": 2
+												}
+											},
+											"nested": {
+												"CreateReason": {
+													"values": {
+														"DO_NOT_USE": 0,
+														"REOPEN": 1
+													}
+												}
+											}
+										},
+										"PricingEngineState": {
+											"fields": {
+												"blacklistedDiscountIds": {
+													"rule": "repeated",
+													"type": "string",
+													"id": 1
+												}
+											}
+										}
+									}
+								}
+							}
+						},
+						"DiscountLineItem": {
+							"fields": {
+								"configuration": {
+									"type": "squareup.bills.DiscountLineItem.Configuration",
+									"id": 5
+								},
+								"writeOnlyBackingDetails": {
+									"type": "squareup.bills.DiscountLineItem.BackingDetails",
+									"id": 1
+								},
+								"readOnlyDisplayDetails": {
+									"type": "squareup.bills.DiscountLineItem.DisplayDetails",
+									"id": 2
+								},
+								"amounts": {
+									"type": "squareup.bills.DiscountLineItem.Amounts",
+									"id": 3
+								},
+								"discountLineItemTokenPair": {
+									"type": "squareup.common.token.TokenPair",
+									"id": 4
+								},
+								"createdAt": {
+									"type": "squareup.bills.DatePair",
+									"id": 6
+								},
+								"applicationScope": {
+									"type": "squareup.bills.ApplicationScope",
+									"id": 7
+								},
+								"applicationMethod": {
+									"type": "squareup.bills.DiscountLineItem.ApplicationMethod",
+									"id": 8
+								},
+								"discountQuantity": {
+									"type": "string",
+									"id": 9
+								},
+								"deleteReason": {
+									"type": "squareup.waiter.private.extensions.DeleteReason",
+									"id": 101
+								},
+								"deleted": {
+									"type": "bool",
+									"id": 100
+								},
+								"waiterExtension": {
+									"type": "squareup.waiter.data.WaiterExtension",
+									"id": 28250
+								}
+							},
+							"nested": {
+								"Configuration": {
+									"fields": {
+										"variablePercentage": {
+											"type": "string",
+											"id": 1
+										},
+										"variableAmountMoney": {
+											"type": "squareup.common.Money",
+											"id": 2
+										}
+									}
+								},
+								"BackingDetails": {
+									"fields": {
+										"discount": {
+											"type": "squareup.api.items.Discount",
+											"id": 1
+										},
+										"merchantCatalogObjects": {
+											"type": "squareup.bills.DiscountLineItem.BackingDetails.MerchantCatalogObjects",
+											"id": 4
+										},
+										"couponToken": {
+											"type": "string",
+											"id": 2
+										},
+										"backingType": {
+											"type": "squareup.bills.DiscountLineItem.BackingDetails.BackingType",
+											"id": 3
+										},
+										"couponTokens": {
+											"rule": "repeated",
+											"type": "string",
+											"id": 5
+										}
+									},
+									"nested": {
+										"MerchantCatalogObjects": {
+											"fields": {
+												"discount": {
+													"type": "squareup.items.merchant.CatalogObject",
+													"id": 1
+												}
+											}
+										},
+										"BackingType": {
+											"values": {
+												"ITEMS_SERVICE_DISCOUNT": 0,
+												"CUSTOM_DISCOUNT": 1
+											}
+										}
+									}
+								},
+								"DisplayDetails": {
+									"fields": {
+										"name": {
+											"type": "string",
+											"id": 1
+										},
+										"percentage": {
+											"type": "string",
+											"id": 2
+										},
+										"cogsObjectId": {
+											"type": "string",
+											"id": 3
+										},
+										"couponToken": {
+											"type": "string",
+											"id": 4
+										},
+										"applicationMethod": {
+											"type": "squareup.api.items.Discount.ApplicationMethod",
+											"id": 5
+										},
+										"couponTokens": {
+											"rule": "repeated",
+											"type": "string",
+											"id": 6
+										}
+									}
+								},
+								"Amounts": {
+									"fields": {
+										"appliedMoney": {
+											"type": "squareup.common.Money",
+											"id": 1
+										}
+									}
+								},
+								"ApplicationMethod": {
+									"values": {
+										"UNKNOWN": 0,
+										"MANUAL": 1,
+										"PRICING_RULE": 2
+									}
+								}
+							}
+						},
+						"ApplicationScope": {
+							"values": {
+								"UNKNOWN": 0,
+								"ITEMIZATION_LEVEL": 1,
+								"CART_LEVEL": 2,
+								"CART_LEVEL_FIXED": 3,
+								"ITEMIZATION_LEVEL_PER_QUANTITY": 4
+							}
+						},
+						"FeeLineItem": {
+							"fields": {
+								"writeOnlyBackingDetails": {
+									"type": "squareup.bills.FeeLineItem.BackingDetails",
+									"id": 1
+								},
+								"readOnlyDisplayDetails": {
+									"type": "squareup.bills.FeeLineItem.DisplayDetails",
+									"id": 2
+								},
+								"amounts": {
+									"type": "squareup.bills.FeeLineItem.Amounts",
+									"id": 3
+								},
+								"readOnlyTranslatedName": {
+									"type": "squareup.bills.TranslatedName",
+									"id": 4
+								},
+								"feeLineItemTokenPair": {
+									"type": "squareup.common.token.TokenPair",
+									"id": 5
+								},
+								"createdAt": {
+									"type": "squareup.bills.DatePair",
+									"id": 6
+								},
+								"applicationScope": {
+									"type": "squareup.bills.ApplicationScope",
+									"id": 7
+								},
+								"deleteReason": {
+									"type": "squareup.waiter.private.extensions.DeleteReason",
+									"id": 101
+								},
+								"deleted": {
+									"type": "bool",
+									"id": 100
+								},
+								"waiterExtension": {
+									"type": "squareup.waiter.data.WaiterExtension",
+									"id": 28250
+								}
+							},
+							"nested": {
+								"BackingDetails": {
+									"fields": {
+										"fee": {
+											"type": "squareup.api.items.Fee",
+											"id": 1
+										},
+										"merchantCatalogObjects": {
+											"type": "squareup.bills.FeeLineItem.BackingDetails.MerchantCatalogObjects",
+											"id": 3
+										},
+										"backingType": {
+											"type": "squareup.bills.FeeLineItem.BackingDetails.BackingType",
+											"id": 2
+										}
+									},
+									"nested": {
+										"MerchantCatalogObjects": {
+											"fields": {
+												"fee": {
+													"type": "squareup.items.merchant.CatalogObject",
+													"id": 1
+												}
+											}
+										},
+										"BackingType": {
+											"values": {
+												"ITEMS_SERVICE_FEE": 0,
+												"CUSTOM_FEE": 1
+											}
+										}
+									}
+								},
+								"DisplayDetails": {
+									"fields": {
+										"name": {
+											"type": "string",
+											"id": 1
+										},
+										"percentage": {
+											"type": "string",
+											"id": 2
+										},
+										"calculationPhase": {
+											"type": "squareup.api.items.CalculationPhase",
+											"id": 3
+										},
+										"inclusionType": {
+											"type": "squareup.api.items.Fee.InclusionType",
+											"id": 4
+										},
+										"taxTypeName": {
+											"type": "string",
+											"id": 5
+										},
+										"taxTypeNumber": {
+											"type": "string",
+											"id": 6
+										},
+										"taxTypeId": {
+											"type": "string",
+											"id": 7
+										},
+										"cogsObjectId": {
+											"type": "string",
+											"id": 8
+										},
+										"taxLabelOrder": {
+											"type": "int32",
+											"id": 9
+										}
+									}
+								},
+								"Amounts": {
+									"fields": {
+										"appliedMoney": {
+											"type": "squareup.common.Money",
+											"id": 2
+										},
+										"appliedToMoney": {
+											"type": "squareup.common.Money",
+											"id": 3
+										},
+										"afterApplicationTotalMoney": {
+											"type": "squareup.common.Money",
+											"id": 4
+										}
+									}
+								}
+							}
+						},
+						"ModifierOptionLineItem": {
+							"fields": {
+								"amounts": {
+									"type": "squareup.bills.ModifierOptionLineItem.Amounts",
+									"id": 1
+								},
+								"readOnlyDisplayDetails": {
+									"type": "squareup.bills.ModifierOptionLineItem.DisplayDetails",
+									"id": 2
+								},
+								"writeOnlyBackingDetails": {
+									"type": "squareup.bills.ModifierOptionLineItem.BackingDetails",
+									"id": 3
+								},
+								"modifierOptionLineItemTokenPair": {
+									"type": "squareup.common.token.TokenPair",
+									"id": 4
+								},
+								"hideFromCustomer": {
+									"type": "bool",
+									"id": 5
+								},
+								"featureDetails": {
+									"type": "squareup.bills.ModifierOptionLineItem.FeatureDetails",
+									"id": 6
+								}
+							},
+							"nested": {
+								"Amounts": {
+									"fields": {
+										"modifierOptionMoney": {
+											"type": "squareup.common.Money",
+											"id": 1
+										},
+										"modifierOptionTimesQuantityMoney": {
+											"type": "squareup.common.Money",
+											"id": 2
+										}
+									}
+								},
+								"DisplayDetails": {
+									"fields": {
+										"name": {
+											"type": "string",
+											"id": 2
+										},
+										"sortOrder": {
+											"type": "uint32",
+											"id": 3
+										},
+										"cogsObjectId": {
+											"type": "string",
+											"id": 4
+										},
+										"modifierList": {
+											"type": "squareup.bills.ModifierOptionLineItem.DisplayDetails.ModifierList",
+											"id": 5
+										}
+									},
+									"nested": {
+										"ModifierList": {
+											"fields": {
+												"cogsObjectId": {
+													"type": "string",
+													"id": 1
+												},
+												"name": {
+													"type": "string",
+													"id": 2
+												},
+												"selectionType": {
+													"type": "squareup.api.items.ItemModifierList.SelectionType",
+													"id": 3
+												}
+											}
+										}
+									}
+								},
+								"BackingDetails": {
+									"fields": {
+										"backingModifierOption": {
+											"type": "squareup.api.items.ItemModifierOption",
+											"id": 1
+										},
+										"modifierList": {
+											"type": "squareup.api.items.ItemModifierList",
+											"id": 2
+										},
+										"merchantCatalogObjects": {
+											"type": "squareup.bills.ModifierOptionLineItem.BackingDetails.MerchantCatalogObjects",
+											"id": 4
+										},
+										"backingType": {
+											"type": "squareup.bills.ModifierOptionLineItem.BackingDetails.BackingType",
+											"id": 3
+										}
+									},
+									"nested": {
+										"MerchantCatalogObjects": {
+											"fields": {
+												"modifierOption": {
+													"type": "squareup.items.merchant.CatalogObject",
+													"id": 1
+												},
+												"modifierList": {
+													"type": "squareup.items.merchant.CatalogObject",
+													"id": 2
+												}
+											}
+										},
+										"BackingType": {
+											"values": {
+												"UNKNOWN": 0,
+												"ITEMS_SERVICE_MODIFIER_OPTION": 1,
+												"CUSTOM_MODIFIER_OPTION": 2
+											}
+										}
+									}
+								},
+								"FeatureDetails": {
+									"fields": {
+										"conversationalMode": {
+											"rule": "repeated",
+											"type": "squareup.bills.ModifierOptionLineItem.FeatureDetails.ConversationalMode",
+											"id": 1
+										},
+										"quantities": {
+											"type": "squareup.bills.ModifierOptionLineItem.FeatureDetails.Quantities",
+											"id": 2
+										}
+									},
+									"nested": {
+										"ConversationalMode": {
+											"fields": {
+												"type": {
+													"type": "squareup.bills.ModifierOptionLineItem.FeatureDetails.ConversationalMode.Type",
+													"id": 1
+												}
+											},
+											"nested": {
+												"Type": {
+													"values": {
+														"UNKNOWN": 0,
+														"ADD": 1,
+														"EXTRA": 2,
+														"SIDE": 3,
+														"SUB": 4,
+														"NO": 5,
+														"ALLERGY": 6
+													}
+												}
+											}
+										},
+										"Quantities": {
+											"fields": {
+												"modifierQuantity": {
+													"type": "string",
+													"id": 1
+												},
+												"modifierQuantityTimesItemizationQuantity": {
+													"type": "string",
+													"id": 2
+												}
+											}
+										}
+									}
+								}
+							}
+						},
+						"RoundingAdjustmentLineItem": {
+							"fields": {
+								"calculationPhase": {
+									"type": "squareup.api.items.CalculationPhase",
+									"id": 1
+								},
+								"amounts": {
+									"type": "squareup.bills.RoundingAdjustmentLineItem.Amounts",
+									"id": 2
+								},
+								"roundingAdjustmentLineItemTokenPair": {
+									"type": "squareup.common.token.TokenPair",
+									"id": 3
+								},
+								"localizedName": {
+									"type": "string",
+									"id": 4
+								}
+							},
+							"nested": {
+								"Amounts": {
+									"fields": {
+										"appliedMoney": {
+											"type": "squareup.common.Money",
+											"id": 1
+										}
+									}
+								}
+							}
+						},
+						"DiningOptionLineItem": {
+							"fields": {
+								"diningOptionLineItemTokenPair": {
+									"type": "squareup.common.token.TokenPair",
+									"id": 1
+								},
+								"backingDetails": {
+									"type": "squareup.bills.DiningOptionLineItem.BackingDetails",
+									"id": 2
+								},
+								"applicationScope": {
+									"type": "squareup.bills.ApplicationScope",
+									"id": 3
+								}
+							},
+							"nested": {
+								"BackingDetails": {
+									"fields": {
+										"diningOption": {
+											"type": "squareup.api.items.DiningOption",
+											"id": 1
+										},
+										"merchantCatalogObjects": {
+											"type": "squareup.bills.DiningOptionLineItem.BackingDetails.MerchantCatalogObjects",
+											"id": 2
+										}
+									},
+									"nested": {
+										"MerchantCatalogObjects": {
+											"fields": {
+												"diningOption": {
+													"type": "squareup.items.merchant.CatalogObject",
+													"id": 1
+												}
+											}
+										}
+									}
+								}
+							}
+						},
+						"TipLineItem": {
+							"fields": {
+								"tipLineItemTokenPair": {
+									"type": "squareup.common.token.TokenPair",
+									"id": 1
+								},
+								"amounts": {
+									"type": "squareup.bills.TipLineItem.Amounts",
+									"id": 2
+								},
+								"tenderServerToken": {
+									"type": "string",
+									"id": 3
+								}
+							},
+							"nested": {
+								"Amounts": {
+									"fields": {
+										"appliedMoney": {
+											"type": "squareup.common.Money",
+											"id": 1
+										}
+									}
+								}
+							}
+						},
+						"SurchargeLineItem": {
+							"fields": {
+								"surchargeLineItemIdPair": {
+									"type": "squareup.common.token.TokenPair",
+									"id": 1
+								},
+								"backingDetails": {
+									"type": "squareup.bills.SurchargeLineItem.BackingDetails",
+									"id": 2
+								},
+								"amounts": {
+									"type": "squareup.bills.SurchargeLineItem.Amounts",
+									"id": 3
+								},
+								"writeOnlyDeleted": {
+									"type": "bool",
+									"id": 4
+								},
+								"fee": {
+									"rule": "repeated",
+									"type": "squareup.bills.FeeLineItem",
+									"id": 5
+								}
+							},
+							"nested": {
+								"BackingDetails": {
+									"fields": {
+										"surcharge": {
+											"type": "squareup.api.items.Surcharge",
+											"id": 1
+										},
+										"backingType": {
+											"type": "squareup.bills.SurchargeLineItem.BackingDetails.BackingType",
+											"id": 2
+										}
+									},
+									"nested": {
+										"BackingType": {
+											"values": {
+												"ITEMS_SERVICE_SURCHARGE": 0,
+												"CUSTOM_SURCHARGE": 1
+											}
+										}
+									}
+								},
+								"Amounts": {
+									"fields": {
+										"appliedMoney": {
+											"type": "squareup.common.Money",
+											"id": 1
+										}
+									}
+								}
+							}
+						},
+						"ReturnTipLineItem": {
+							"fields": {
+								"sourceTipLineItemTokenPair": {
+									"type": "squareup.common.token.TokenPair",
+									"id": 1
+								},
+								"tipLineItem": {
+									"type": "squareup.bills.TipLineItem",
+									"id": 2
+								}
+							}
+						},
+						"ReturnSurchargeLineItem": {
+							"fields": {
+								"sourceSurchargeLineItemIdPair": {
+									"type": "squareup.common.token.TokenPair",
+									"id": 1
+								},
+								"surchargeLineItem": {
+									"type": "squareup.bills.SurchargeLineItem",
+									"id": 2
+								}
+							}
+						}
+					}
+				},
+				"roster": {
+					"nested": {
+						"common": {
+							"nested": {
+								"SubscriptionFeatureStatus": {
+									"fields": {
+										"feature": {
+											"type": "string",
+											"id": 1
+										},
+										"status": {
+											"type": "squareup.sub2.common.SubscriptionStatus",
+											"id": 2
+										},
+										"subscriptionToken": {
+											"type": "string",
+											"id": 3
+										}
+									}
+								},
+								"TippingPreference": {
+									"fields": {
+										"enabled": {
+											"type": "bool",
+											"id": 1
+										},
+										"useCustomPercentages": {
+											"type": "bool",
+											"id": 2
+										},
+										"customPercentages": {
+											"rule": "repeated",
+											"type": "double",
+											"id": 3
+										},
+										"useManualTipEntry": {
+											"type": "bool",
+											"id": 4
+										},
+										"calculationPhase": {
+											"type": "squareup.roster.common.TippingPreference.CalculationPhase",
+											"id": 5
+										}
+									},
+									"nested": {
+										"CalculationPhase": {
+											"values": {
+												"POST_TAX_TIP_CALCULATION": 0,
+												"PRE_TAX_TIP_CALCULATION": 1
+											}
+										}
+									}
+								}
+							}
+						},
+						"service": {
+							"nested": {
+								"Subscription": {
+									"fields": {
+										"productKey": {
+											"type": "string",
+											"id": 1
+										},
+										"status": {
+											"type": "squareup.roster.service.Subscription.Status",
+											"id": 2
+										}
+									},
+									"nested": {
+										"Status": {
+											"values": {
+												"PENDING": 0,
+												"FREE_TRIAL": 1,
+												"ACTIVE": 2,
+												"CANCELED": 3,
+												"IN_GRACE": 4,
+												"DELINQUENT": 5,
+												"TERMINATED": 6
+											}
+										}
+									}
+								},
+								"MerchantProfileLookupResponse": {
+									"nested": {
+										"CanadianMerchantProfile": {
+											"fields": {
+												"gstHstNumber": {
+													"type": "string",
+													"id": 1
+												},
+												"qstNumber": {
+													"type": "string",
+													"id": 2
+												}
+											}
+										}
+									}
+								},
+								"PrivateInformation": {
+									"fields": {
+										"type": {
+											"type": "string",
+											"id": 1
+										},
+										"tinFideliusToken": {
+											"type": "string",
+											"id": 2
+										},
+										"createdAt": {
+											"type": "int64",
+											"id": 3
+										}
+									}
+								},
+								"UnderwritingDecision": {
+									"fields": {
+										"state": {
+											"type": "string",
+											"id": 1
+										}
+									}
+								},
+								"UserLookupStatus": {
+									"values": {
+										"INVALID": 0,
+										"SUCCESS": 1,
+										"FAILURE": 2,
+										"ERROR": 3
+									}
+								},
+								"UserLookupResponse": {
+									"fields": {
+										"status": {
+											"type": "squareup.roster.service.UserLookupStatus",
+											"id": 1
+										},
+										"message": {
+											"type": "string",
+											"id": 2
+										},
+										"legacyUserId": {
+											"type": "string",
+											"id": 3
+										},
+										"token": {
+											"type": "string",
+											"id": 4
+										},
+										"userToken": {
+											"type": "string",
+											"id": 5
+										},
+										"name": {
+											"type": "string",
+											"id": 6
+										},
+										"secondaryName": {
+											"type": "string",
+											"id": 7
+										},
+										"tertiaryName": {
+											"type": "string",
+											"id": 8
+										},
+										"address": {
+											"type": "squareup.common.location.Address",
+											"id": 9
+										},
+										"userLocale": {
+											"type": "squareup.merchants.api.UserLocale",
+											"id": 10
+										},
+										"phone": {
+											"type": "squareup.common.location.Phone",
+											"id": 11
+										},
+										"categoryCode": {
+											"type": "string",
+											"id": 12
+										},
+										"permissions": {
+											"rule": "repeated",
+											"type": "string",
+											"id": 13
+										},
+										"userTokensCanTakePaymentsTo": {
+											"rule": "repeated",
+											"type": "string",
+											"id": 14
+										},
+										"transactionFund": {
+											"type": "squareup.merchants.api.TransactionFund",
+											"id": 15
+										},
+										"gatewayMerchantTokens": {
+											"rule": "repeated",
+											"type": "squareup.roster.service.UserLookupResponse.GatewayMerchantToken",
+											"id": 16
+										},
+										"fees": {
+											"type": "squareup.merchants.api.UserFees",
+											"id": 17
+										},
+										"supportsTabs": {
+											"type": "bool",
+											"id": 18
+										},
+										"businessType": {
+											"type": "string",
+											"id": 19
+										},
+										"tippingPreference": {
+											"type": "squareup.roster.common.TippingPreference",
+											"id": 20
+										},
+										"email": {
+											"type": "string",
+											"id": 21
+										},
+										"delegateCustomId": {
+											"type": "string",
+											"id": 22
+										},
+										"profileImageUrl": {
+											"type": "string",
+											"id": 23
+										},
+										"gatewayHints": {
+											"rule": "repeated",
+											"type": "squareup.common.gateways.GatewayName",
+											"id": 24
+										},
+										"shippingPhone": {
+											"type": "squareup.common.location.Phone",
+											"id": 25
+										},
+										"businessName": {
+											"type": "string",
+											"id": 26
+										},
+										"secondaryBusinessName": {
+											"type": "string",
+											"id": 27
+										},
+										"tertiaryBusinessName": {
+											"type": "string",
+											"id": 28
+										},
+										"userName": {
+											"type": "string",
+											"id": 29
+										},
+										"currencyCode": {
+											"type": "squareup.common.CurrencyCode",
+											"id": 30
+										},
+										"merchantType": {
+											"type": "squareup.common.MerchantType",
+											"id": 31
+										},
+										"tzName": {
+											"type": "string",
+											"id": 32
+										},
+										"shippingEnabled": {
+											"type": "bool",
+											"id": 33
+										},
+										"pickupEnabled": {
+											"type": "bool",
+											"id": 34
+										},
+										"businessSubtype": {
+											"type": "string",
+											"id": 35
+										},
+										"frozen": {
+											"type": "bool",
+											"id": 36
+										},
+										"subscription": {
+											"rule": "repeated",
+											"type": "squareup.roster.service.Subscription",
+											"id": 37
+										},
+										"subscriptionFeatureStatus": {
+											"rule": "repeated",
+											"type": "squareup.roster.common.SubscriptionFeatureStatus",
+											"id": 49
+										},
+										"shippingAddress": {
+											"type": "squareup.common.location.GlobalAddress",
+											"id": 38
+										},
+										"isMultiunit": {
+											"type": "bool",
+											"id": 39
+										},
+										"businessCategory": {
+											"type": "string",
+											"id": 40
+										},
+										"businessSubCategory": {
+											"type": "string",
+											"id": 41
+										},
+										"personalFirstName": {
+											"type": "string",
+											"id": 42
+										},
+										"personalLastName": {
+											"type": "string",
+											"id": 43
+										},
+										"parentMerchantToken": {
+											"type": "string",
+											"id": 44
+										},
+										"privateInformation": {
+											"rule": "repeated",
+											"type": "squareup.roster.service.PrivateInformation",
+											"id": 45
+										},
+										"underwritingDecision": {
+											"type": "squareup.roster.service.UnderwritingDecision",
+											"id": 46
+										},
+										"canadianMerchantProfile": {
+											"type": "squareup.roster.service.MerchantProfileLookupResponse.CanadianMerchantProfile",
+											"id": 47
+										},
+										"ukMerchantProfile": {
+											"type": "squareup.roster.service.UserLookupResponse.UkMerchantProfile",
+											"id": 48
+										},
+										"frMerchantProfile": {
+											"type": "squareup.roster.service.UserLookupResponse.FrMerchantProfile",
+											"id": 50
+										}
+									},
+									"nested": {
+										"GatewayMerchantToken": {
+											"fields": {
+												"gateway": {
+													"type": "string",
+													"id": 1
+												},
+												"merchantToken": {
+													"type": "string",
+													"id": 2
+												},
+												"disabledTimestamp": {
+													"type": "int64",
+													"id": 3
+												}
+											}
+										},
+										"UkMerchantProfile": {
+											"fields": {
+												"vatNumber": {
+													"type": "string",
+													"id": 1
+												},
+												"vatCustomerClass": {
+													"type": "squareup.roster.service.UserLookupResponse.UkMerchantProfile.VatCustomerClass",
+													"id": 2
+												}
+											},
+											"nested": {
+												"VatCustomerClass": {
+													"values": {
+														"b2b_null": 1,
+														"b2b": 2
+													}
+												}
+											}
+										},
+										"FrMerchantProfile": {
+											"fields": {
+												"siren": {
+													"type": "string",
+													"id": 1
+												},
+												"tva": {
+													"type": "string",
+													"id": 2
+												},
+												"nic": {
+													"type": "string",
+													"id": 3
+												}
+											}
+										},
+										"country_specific_merchant_profile": {}
+									}
+								},
+								"EmployeeLookupResponse": {
+									"fields": {
+										"status": {
+											"type": "squareup.roster.service.UserLookupStatus",
+											"id": 1
+										},
+										"merchantToken": {
+											"type": "string",
+											"id": 2
+										},
+										"firstName": {
+											"type": "string",
+											"id": 3
+										},
+										"lastName": {
+											"type": "string",
+											"id": 4
+										},
+										"employeeNumber": {
+											"type": "string",
+											"id": 5
+										},
+										"active": {
+											"type": "bool",
+											"id": 6
+										},
+										"token": {
+											"type": "string",
+											"id": 7
+										},
+										"personToken": {
+											"type": "string",
+											"id": 8
+										},
+										"merchantSuppliedEmail": {
+											"type": "string",
+											"id": 9
+										},
+										"phone": {
+											"type": "squareup.common.location.Phone",
+											"id": 10
+										},
+										"credentialEmail": {
+											"type": "string",
+											"id": 11
+										},
+										"hasPasscode": {
+											"type": "bool",
+											"id": 12
+										},
+										"canAccessPayroll": {
+											"type": "bool",
+											"id": 13
+										},
+										"isAccountOwner": {
+											"type": "bool",
+											"id": 14
+										},
+										"isOwner": {
+											"type": "bool",
+											"id": 15
+										},
+										"hourlyWageRate": {
+											"type": "squareup.common.Money",
+											"id": 16
+										},
+										"annualWageRate": {
+											"type": "squareup.common.Money",
+											"id": 17
+										},
+										"wageType": {
+											"type": "squareup.roster.service.EmployeeLookupResponse.WageType",
+											"id": 18
+										},
+										"hoursWorkedPerWeek": {
+											"type": "uint32",
+											"id": 19
+										},
+										"flsaExempt": {
+											"type": "bool",
+											"id": 20
+										}
+									},
+									"nested": {
+										"WageType": {
+											"values": {
+												"HOURLY": 0,
+												"ANNUAL": 1
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"sub2": {
+					"nested": {
+						"common": {
+							"nested": {
+								"SubscriptionStatus": {
+									"values": {
+										"INVALID": 0,
+										"PENDING": 1,
+										"FREE_TRIAL": 2,
+										"FREE_TRIAL_PENDING_CANCELLATION": 3,
+										"FREE_TRIAL_NO_OBLIGATION": 9,
+										"NO_OBLIGATION_FREE_TRIAL_EXPIRED": 10,
+										"ACTIVE": 4,
+										"ACTIVE_PENDING_CANCELLATION": 5,
+										"ACTIVE_PENDING_PAUSE": 11,
+										"PAUSED": 12,
+										"CANCELED": 6,
+										"IN_GRACE": 8,
+										"DELINQUENT": 7
+									}
+								}
+							}
+						}
+					}
+				},
+				"merchants": {
+					"nested": {
+						"api": {
+							"nested": {
+								"UserLocale": {
+									"fields": {
+										"countryCode": {
+											"type": "squareup.common.countries.Country",
+											"id": 1
+										},
+										"languageCode": {
+											"type": "string",
+											"id": 2
+										},
+										"currencyCode": {
+											"type": "squareup.common.CurrencyCode",
+											"id": 3
+										}
+									}
+								},
+								"TransactionFund": {
+									"fields": {
+										"name": {
+											"type": "string",
+											"id": 1
+										},
+										"merchantId": {
+											"type": "string",
+											"id": 2
+										},
+										"division": {
+											"type": "string",
+											"id": 3
+										}
+									}
+								},
+								"FeeStructure": {
+									"fields": {
+										"discountBasisPoints": {
+											"type": "int32",
+											"id": 1
+										},
+										"interchangeCents": {
+											"type": "int32",
+											"id": 2
+										}
+									}
+								},
+								"UserFees": {
+									"fields": {
+										"cardPresent": {
+											"type": "squareup.merchants.api.FeeStructure",
+											"id": 1
+										},
+										"cardNotPresent": {
+											"type": "squareup.merchants.api.FeeStructure",
+											"id": 2
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"waiter": {
+					"nested": {
+						"data": {
+							"nested": {
+								"VectorClock": {
+									"fields": {
+										"clockList": {
+											"rule": "repeated",
+											"type": "squareup.waiter.data.VectorClock.Clock",
+											"id": 1
+										}
+									},
+									"nested": {
+										"Clock": {
+											"fields": {
+												"name": {
+													"type": "string",
+													"id": 1
+												},
+												"version": {
+													"type": "int64",
+													"id": 2
+												}
+											}
+										}
+									}
+								},
+								"WaiterExtension": {
+									"fields": {
+										"deleted": {
+											"type": "bool",
+											"id": 1
+										}
+									}
+								},
+								"WaiterFeatureDetailsExtension": {
+									"fields": {
+										"otNameContext": {
+											"type": "squareup.waiter.data.WaiterFeatureDetailsExtension.MutableFieldContext",
+											"id": 1
+										},
+										"otNoteContext": {
+											"type": "squareup.waiter.data.WaiterFeatureDetailsExtension.MutableFieldContext",
+											"id": 2
+										},
+										"otTicketOwnerContext": {
+											"type": "squareup.waiter.data.WaiterFeatureDetailsExtension.MutableFieldContext",
+											"id": 3
+										},
+										"transientData": {
+											"type": "squareup.waiter.data.Transient",
+											"id": 4
+										},
+										"transientCouponContext": {
+											"type": "squareup.waiter.data.WaiterFeatureDetailsExtension.MutableFieldContext",
+											"id": 5
+										},
+										"otPredefinedTicketContext": {
+											"type": "squareup.waiter.data.WaiterFeatureDetailsExtension.MutableFieldContext",
+											"id": 6
+										},
+										"buyerInfoContext": {
+											"type": "squareup.waiter.data.WaiterFeatureDetailsExtension.MutableFieldContext",
+											"id": 7
+										}
+									},
+									"nested": {
+										"MutableFieldContext": {
+											"fields": {
+												"clientVectorClock": {
+													"type": "squareup.waiter.data.VectorClock",
+													"id": 1
+												},
+												"processorDatacenter": {
+													"type": "string",
+													"id": 2
+												}
+											}
+										}
+									}
+								},
+								"Transient": {
+									"fields": {
+										"coupon": {
+											"type": "squareup.coupons.v2.CouponV2",
+											"id": 1
+										}
+									}
+								}
+							}
+						},
+						"private": {
+							"nested": {
+								"extensions": {
+									"nested": {
+										"DeleteReason": {
+											"values": {
+												"UNKNOWN": 100,
+												"USER_ACTION": 200,
+												"DUPLICATION": 300
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"coupons": {
+					"nested": {
+						"v2": {
+							"nested": {
+								"CouponV2": {
+									"fields": {
+										"token": {
+											"type": "string",
+											"id": 1
+										},
+										"panFideliusToken": {
+											"type": "string",
+											"id": 2
+										},
+										"emailToken": {
+											"type": "string",
+											"id": 3
+										},
+										"phoneToken": {
+											"type": "string",
+											"id": 4
+										},
+										"couponDefinition": {
+											"type": "squareup.coupons.v2.CouponDefinitionV2",
+											"id": 5
+										},
+										"startsAt": {
+											"type": "squareup.common.time.DateTime",
+											"id": 6
+										},
+										"expiresAt": {
+											"type": "squareup.common.time.DateTime",
+											"id": 7
+										},
+										"createdAt": {
+											"type": "squareup.common.time.DateTime",
+											"id": 8
+										},
+										"code": {
+											"type": "string",
+											"id": 9
+										},
+										"redeemed": {
+											"type": "bool",
+											"id": 10
+										},
+										"reason": {
+											"type": "squareup.coupons.v2.CouponV2.Reason",
+											"id": 11
+										}
+									},
+									"nested": {
+										"Reason": {
+											"values": {
+												"UNKNOWN": 0,
+												"PUNCH_CARD_REWARD": 1,
+												"MARKETING": 2,
+												"FEEDBACK": 3
+											}
+										}
+									}
+								},
+								"ItemConstraintV2": {
+									"fields": {
+										"type": {
+											"type": "squareup.coupons.v2.ItemConstraintV2.Type",
+											"id": 1
+										},
+										"token": {
+											"rule": "repeated",
+											"type": "string",
+											"id": 2
+										},
+										"quantity": {
+											"type": "uint32",
+											"id": 3
+										}
+									},
+									"nested": {
+										"Type": {
+											"values": {
+												"UNKNOWN": 0,
+												"CATEGORY": 1,
+												"VARIATION": 2
+											}
+										}
+									}
+								},
+								"ScopeV2": {
+									"values": {
+										"UNKNOWN": 0,
+										"CART": 1,
+										"ITEM": 2
+									}
+								},
+								"CouponConditionV2": {
+									"fields": {
+										"itemConstraint": {
+											"rule": "repeated",
+											"type": "squareup.coupons.v2.ItemConstraintV2",
+											"id": 1
+										},
+										"minSpend": {
+											"type": "squareup.common.Money",
+											"id": 2
+										}
+									}
+								},
+								"CouponRewardV2": {
+									"fields": {
+										"scope": {
+											"type": "squareup.coupons.v2.ScopeV2",
+											"id": 1
+										},
+										"type": {
+											"type": "squareup.coupons.v2.CouponRewardV2.Type",
+											"id": 2
+										},
+										"fixedDiscount": {
+											"type": "squareup.common.Money",
+											"id": 3
+										},
+										"percentageDiscount": {
+											"type": "uint32",
+											"id": 4
+										},
+										"maxDiscount": {
+											"type": "squareup.common.Money",
+											"id": 5
+										},
+										"itemConstraint": {
+											"rule": "repeated",
+											"type": "squareup.coupons.v2.ItemConstraintV2",
+											"id": 6
+										}
+									},
+									"nested": {
+										"Type": {
+											"values": {
+												"UNKNOWN": 0,
+												"FIXED": 1,
+												"PERCENT": 2
+											}
+										}
+									}
+								},
+								"CouponDefinitionV2": {
+									"fields": {
+										"token": {
+											"type": "string",
+											"id": 1
+										},
+										"merchantToken": {
+											"type": "string",
+											"id": 2
+										},
+										"itemConstraintType": {
+											"type": "squareup.coupons.v2.ItemConstraintV2.Type",
+											"id": 3
+										},
+										"condition": {
+											"type": "squareup.coupons.v2.CouponConditionV2",
+											"id": 4
+										},
+										"reward": {
+											"type": "squareup.coupons.v2.CouponRewardV2",
+											"id": 5
+										},
+										"name": {
+											"type": "string",
+											"id": 6
+										},
+										"image": {
+											"type": "string",
+											"id": 7
+										},
+										"isMultiunit": {
+											"type": "bool",
+											"id": 8,
+											"options": {
+												"default": false
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"invoice": {
+					"nested": {
+						"data": {
+							"nested": {
+								"RRuleText": {
+									"fields": {
+										"repeatClause": {
+											"type": "string",
+											"id": 1
+										},
+										"endClause": {
+											"type": "string",
+											"id": 2
+										},
+										"startClause": {
+											"type": "string",
+											"id": 3
+										}
+									}
+								}
+							}
+						},
+						"frontend": {
+							"nested": {
+								"Unit": {
+									"fields": {
+										"locationName": {
+											"type": "string",
+											"id": 1
+										},
+										"iconUrl": {
+											"type": "string",
+											"id": 2
+										},
+										"receiptColorCode": {
+											"type": "string",
+											"id": 3
+										},
+										"country": {
+											"type": "squareup.common.countries.Country",
+											"id": 4
+										},
+										"address": {
+											"type": "squareup.common.location.GlobalAddress",
+											"id": 5
+										},
+										"email": {
+											"type": "string",
+											"id": 6
+										},
+										"phoneNumber": {
+											"type": "string",
+											"id": 7
+										},
+										"taxInformation": {
+											"rule": "repeated",
+											"type": "squareup.invoice.frontend.Unit.TaxNumber",
+											"id": 8
+										},
+										"settings": {
+											"type": "squareup.invoice.frontend.Unit.Settings",
+											"id": 10
+										},
+										"token": {
+											"type": "string",
+											"id": 11
+										}
+									},
+									"nested": {
+										"TaxNumber": {
+											"fields": {
+												"type": {
+													"type": "squareup.invoice.frontend.Unit.TaxNumber.Type",
+													"id": 1
+												},
+												"value": {
+													"type": "string",
+													"id": 2
+												}
+											},
+											"nested": {
+												"Type": {
+													"values": {
+														"TAX_TYPE_DO_NOT_USE": 0,
+														"AU_BUSINESS_NUMBER": 1,
+														"CA_HST_NUMBER": 2,
+														"CA_QST_NUMBER": 3,
+														"FR_SIREN_CODE": 4,
+														"GB_VAT_NUMBER": 5
+													}
+												}
+											}
+										},
+										"Settings": {
+											"fields": {
+												"canAcceptJpyJcbPaymentCards": {
+													"type": "bool",
+													"id": 1
+												},
+												"shouldShowReceiptItemDescription": {
+													"type": "bool",
+													"id": 2
+												},
+												"canAcceptPaymentCards": {
+													"type": "bool",
+													"id": 3
+												}
+											}
+										}
+									}
+								},
+								"Invoice": {
+									"fields": {
+										"token": {
+											"type": "string",
+											"id": 1
+										},
+										"lockVersion": {
+											"type": "string",
+											"id": 2
+										},
+										"displayState": {
+											"type": "squareup.invoice.v2.InvoiceDisplayDetails.DisplayState",
+											"id": 3
+										},
+										"name": {
+											"type": "string",
+											"id": 4
+										},
+										"number": {
+											"type": "string",
+											"id": 5
+										},
+										"description": {
+											"type": "string",
+											"id": 6
+										},
+										"paidAt": {
+											"type": "squareup.common.time.DateTime",
+											"id": 7
+										},
+										"cancelledAt": {
+											"type": "squareup.common.time.DateTime",
+											"id": 8
+										},
+										"refundedAt": {
+											"type": "squareup.common.time.DateTime",
+											"id": 9
+										},
+										"sentAt": {
+											"type": "squareup.common.time.DateTime",
+											"id": 10
+										},
+										"updatedAt": {
+											"type": "squareup.common.time.DateTime",
+											"id": 11
+										},
+										"scheduledAt": {
+											"type": "squareup.common.time.YearMonthDay",
+											"id": 12
+										},
+										"dueOn": {
+											"type": "squareup.common.time.YearMonthDay",
+											"id": 13
+										},
+										"cart": {
+											"type": "squareup.bills.Cart",
+											"id": 14
+										},
+										"customer": {
+											"type": "squareup.invoice.frontend.Invoice.Customer",
+											"id": 15
+										},
+										"additionalRecipientEmail": {
+											"rule": "repeated",
+											"type": "string",
+											"id": 16
+										},
+										"fileAttachmentCount": {
+											"type": "int64",
+											"id": 17
+										},
+										"hasCardOnFile": {
+											"type": "bool",
+											"id": 18
+										},
+										"successfulTenderDetails": {
+											"rule": "repeated",
+											"type": "squareup.invoice.v2.InvoiceTenderDetails",
+											"id": 19
+										},
+										"lastFailedTenderDetails": {
+											"type": "squareup.invoice.v2.InvoiceTenderDetails",
+											"id": 20
+										},
+										"recurrenceDetails": {
+											"type": "squareup.invoice.frontend.Invoice.RecurringSeriesDetails",
+											"id": 21
+										},
+										"settings": {
+											"type": "squareup.invoice.frontend.Invoice.Settings",
+											"id": 22
+										},
+										"paymentRequest": {
+											"rule": "repeated",
+											"type": "squareup.invoice.frontend.Invoice.PaymentRequest",
+											"id": 23
+										},
+										"attachment": {
+											"rule": "repeated",
+											"type": "squareup.invoice.frontend.FileAttachmentMetadata",
+											"id": 24
+										},
+										"timezone": {
+											"type": "string",
+											"id": 25
+										},
+										"refund": {
+											"rule": "repeated",
+											"type": "squareup.invoice.v2.InvoiceRefund",
+											"id": 26
+										},
+										"pdfDownloadToken": {
+											"type": "string",
+											"id": 27
+										},
+										"associatedContractToken": {
+											"type": "string",
+											"id": 28
+										},
+										"contractDisplayName": {
+											"type": "string",
+											"id": 29
+										}
+									},
+									"nested": {
+										"Customer": {
+											"fields": {
+												"name": {
+													"type": "string",
+													"id": 1
+												},
+												"email": {
+													"type": "string",
+													"id": 2
+												},
+												"phoneNumber": {
+													"type": "string",
+													"id": 3
+												},
+												"companyName": {
+													"type": "string",
+													"id": 4
+												},
+												"billingAddress": {
+													"type": "squareup.common.location.GlobalAddress",
+													"id": 5
+												}
+											}
+										},
+										"RecurringSeriesDetails": {
+											"fields": {
+												"schedule": {
+													"type": "squareup.invoice.frontend.Invoice.RecurringSeriesDetails.Schedule",
+													"id": 1
+												}
+											},
+											"nested": {
+												"Schedule": {
+													"fields": {
+														"startDate": {
+															"type": "squareup.common.time.YearMonthDay",
+															"id": 1
+														},
+														"recurrenceRule": {
+															"type": "string",
+															"id": 2
+														},
+														"rruleText": {
+															"type": "squareup.invoice.data.RRuleText",
+															"id": 3
+														}
+													}
+												}
+											}
+										},
+										"Settings": {
+											"fields": {
+												"canAddTip": {
+													"type": "bool",
+													"id": 1
+												},
+												"maxTip": {
+													"type": "squareup.common.Money",
+													"id": 2
+												},
+												"canLinkCard": {
+													"type": "bool",
+													"id": 3
+												},
+												"canSaveShippingAddress": {
+													"type": "bool",
+													"id": 4
+												},
+												"automaticChargeEnabled": {
+													"type": "bool",
+													"id": 5
+												}
+											}
+										},
+										"PaymentRequest": {
+											"fields": {
+												"dueOn": {
+													"type": "squareup.common.time.YearMonthDay",
+													"id": 1
+												},
+												"requestedAmount": {
+													"type": "squareup.common.Money",
+													"id": 2
+												},
+												"completedAmount": {
+													"type": "squareup.common.Money",
+													"id": 3
+												},
+												"requestType": {
+													"type": "squareup.invoice.frontend.Invoice.PaymentRequest.RequestType",
+													"id": 4
+												},
+												"tippingEnabled": {
+													"type": "bool",
+													"id": 5
+												},
+												"paymentMethod": {
+													"type": "squareup.invoice.v2.Invoice.PaymentMethod",
+													"id": 6
+												},
+												"instrumentDetails": {
+													"type": "squareup.invoice.frontend.model.InstrumentDetails",
+													"id": 7
+												}
+											},
+											"nested": {
+												"RequestType": {
+													"values": {
+														"DEPOSIT": 1,
+														"INSTALLMENT": 2,
+														"BALANCE": 3
+													}
+												}
+											}
+										}
+									}
+								},
+								"FileAttachmentMetadata": {
+									"fields": {
+										"name": {
+											"type": "string",
+											"id": 1
+										},
+										"extension": {
+											"type": "string",
+											"id": 2
+										},
+										"token": {
+											"type": "string",
+											"id": 3
+										},
+										"invoiceToken": {
+											"type": "string",
+											"id": 4
+										},
+										"sizeBytes": {
+											"type": "int32",
+											"id": 5
+										},
+										"downloadToken": {
+											"type": "string",
+											"id": 6
+										}
+									}
+								},
+								"InvoiceUnitSettings": {
+									"fields": {
+										"showReferrals": {
+											"type": "bool",
+											"id": 1
+										}
+									}
+								},
+								"GetInvoiceRequest": {
+									"fields": {
+										"invoiceToken": {
+											"type": "string",
+											"id": 1
+										},
+										"languageCode": {
+											"type": "string",
+											"id": 2
+										}
+									}
+								},
+								"GetSeriesNextInvoiceRequest": {
+									"fields": {
+										"seriesToken": {
+											"type": "string",
+											"id": 1
+										},
+										"languageCode": {
+											"type": "string",
+											"id": 2
+										}
+									}
+								},
+								"GetInvoiceResponse": {
+									"fields": {
+										"status": {
+											"type": "squareup.invoice.frontend.GetInvoiceResponse.Status",
+											"id": 1
+										},
+										"unit": {
+											"type": "squareup.invoice.frontend.Unit",
+											"id": 2
+										},
+										"invoice": {
+											"type": "squareup.invoice.frontend.Invoice",
+											"id": 3
+										},
+										"enabledFeatures": {
+											"rule": "repeated",
+											"type": "string",
+											"id": 4
+										},
+										"invoiceUnitSettings": {
+											"type": "squareup.invoice.frontend.InvoiceUnitSettings",
+											"id": 5
+										}
+									},
+									"nested": {
+										"Status": {
+											"fields": {
+												"statusCode": {
+													"type": "squareup.invoice.frontend.GetInvoiceResponse.Status.StatusCode",
+													"id": 1
+												},
+												"localizedError": {
+													"type": "string",
+													"id": 2
+												}
+											},
+											"nested": {
+												"StatusCode": {
+													"values": {
+														"GET_INVOICE_STATUS_CODE_DO_NOT_USE": 0,
+														"SUCCESS": 1,
+														"NOT_FOUND": 2,
+														"CART_INVALID": 3,
+														"ERROR": 4
+													}
+												}
+											}
+										}
+									}
+								},
+								"PayInvoiceRequest": {
+									"fields": {
+										"invoiceToken": {
+											"type": "string",
+											"id": 1
+										},
+										"invoiceLockVersion": {
+											"type": "string",
+											"id": 2
+										},
+										"cardholderName": {
+											"type": "string",
+											"id": 3
+										},
+										"cardNonce": {
+											"type": "string",
+											"id": 4
+										},
+										"shippingName": {
+											"type": "string",
+											"id": 5
+										},
+										"shippingAddress": {
+											"type": "squareup.common.location.GlobalAddress",
+											"id": 6
+										},
+										"tip": {
+											"type": "squareup.common.Money",
+											"id": 7
+										},
+										"shouldSaveCard": {
+											"type": "bool",
+											"id": 8
+										},
+										"languageCode": {
+											"type": "string",
+											"id": 9
+										},
+										"totalMoney": {
+											"type": "squareup.common.Money",
+											"id": 10
+										},
+										"verificationToken": {
+											"type": "string",
+											"id": 11
+										}
+									}
+								},
+								"PayInvoiceResponse": {
+									"fields": {
+										"status": {
+											"type": "squareup.invoice.frontend.PayInvoiceResponse.Status",
+											"id": 1
+										},
+										"invoice": {
+											"type": "squareup.invoice.frontend.Invoice",
+											"id": 2
+										},
+										"cardSaved": {
+											"type": "bool",
+											"id": 3
+										},
+										"referralCode": {
+											"type": "string",
+											"id": 4
+										}
+									},
+									"nested": {
+										"Status": {
+											"fields": {
+												"statusCode": {
+													"type": "squareup.invoice.frontend.PayInvoiceResponse.Status.StatusCode",
+													"id": 1
+												},
+												"localizedError": {
+													"type": "string",
+													"id": 2
+												}
+											},
+											"nested": {
+												"StatusCode": {
+													"values": {
+														"PAYMENT_STATUS_DO_NOT_USE": 0,
+														"SUCCESS": 1,
+														"DECLINED": 2,
+														"SUSPECTED": 3,
+														"TIMEOUT": 4,
+														"NOT_PAYABLE": 5,
+														"STALE": 6,
+														"NOT_FOUND": 7,
+														"VALIDATION_ERROR": 8,
+														"SERVER_ERROR": 9
+													}
+												}
+											}
+										}
+									}
+								},
+								"LogViewRequest": {
+									"fields": {
+										"viewType": {
+											"type": "squareup.invoice.frontend.LogViewRequest.ViewType",
+											"id": 1
+										},
+										"invoiceToken": {
+											"type": "string",
+											"id": 2
+										},
+										"seriesToken": {
+											"type": "string",
+											"id": 3
+										},
+										"estimateToken": {
+											"type": "string",
+											"id": 4
+										}
+									},
+									"nested": {
+										"ViewType": {
+											"values": {
+												"VIEW_TYPE_DO_NOT_USE": 0,
+												"PREVIEW": 1,
+												"PRINT": 2,
+												"PAY_PAGE": 3
+											}
+										}
+									}
+								},
+								"LogViewResponse": {
+									"fields": {
+										"success": {
+											"type": "bool",
+											"id": 1
+										}
+									}
+								},
+								"GetReferralCodeForUnitRequest": {
+									"fields": {
+										"unitToken": {
+											"type": "string",
+											"id": 1
+										}
+									}
+								},
+								"GetReferralCodeForUnitResponse": {
+									"fields": {
+										"referralCode": {
+											"type": "string",
+											"id": 1
+										}
+									}
+								},
+								"InvoiceFrontendService": {
+									"methods": {
+										"GetInvoice": {
+											"requestType": "squareup.invoice.frontend.GetInvoiceRequest",
+											"responseType": "squareup.invoice.frontend.GetInvoiceResponse"
+										},
+										"GetSeriesNextInvoice": {
+											"requestType": "squareup.invoice.frontend.GetSeriesNextInvoiceRequest",
+											"responseType": "squareup.invoice.frontend.GetInvoiceResponse"
+										},
+										"PayInvoice": {
+											"requestType": "squareup.invoice.frontend.PayInvoiceRequest",
+											"responseType": "squareup.invoice.frontend.PayInvoiceResponse"
+										},
+										"LogView": {
+											"requestType": "squareup.invoice.frontend.LogViewRequest",
+											"responseType": "squareup.invoice.frontend.LogViewResponse"
+										},
+										"GetReferralCodeForUnit": {
+											"requestType": "squareup.invoice.frontend.GetReferralCodeForUnitRequest",
+											"responseType": "squareup.invoice.frontend.GetReferralCodeForUnitResponse"
+										}
+									}
+								},
+								"model": {
+									"nested": {
+										"InstrumentDetails": {
+											"fields": {
+												"brand": {
+													"type": "string",
+													"id": 1
+												},
+												"lastFour": {
+													"type": "string",
+													"id": 2
+												}
+											}
+										}
+									}
+								}
+							}
+						},
+						"v2": {
+							"nested": {
+								"EstimateDisplayDetails": {
+									"nested": {
+										"DisplayState": {
+											"values": {
+												"UNKNOWN": 0,
+												"DRAFT": 1,
+												"DELIVERED": 2,
+												"EXPIRED": 3,
+												"ACCEPTED": 4,
+												"INVOICED": 5,
+												"UNDELIVERED": 6,
+												"CANCELED": 7,
+												"SCHEDULED": 8,
+												"UNPUBLISHED": 9
+											}
+										}
+									}
+								},
+								"Invoice": {
+									"nested": {
+										"PaymentMethod": {
+											"values": {
+												"UNKNOWN_METHOD": 0,
+												"UNSELECTED": 1,
+												"EMAIL": 2,
+												"SHARE_LINK": 3,
+												"CARD_ON_FILE": 4,
+												"SMS": 5
+											}
+										}
+									}
+								},
+								"InvoiceDisplayDetails": {
+									"nested": {
+										"DisplayState": {
+											"values": {
+												"UNKNOWN": 0,
+												"DRAFT": 1,
+												"UNPAID": 2,
+												"PAID": 3,
+												"OVERDUE": 4,
+												"UNDELIVERED": 5,
+												"CANCELLED": 6,
+												"SCHEDULED": 7,
+												"REFUNDED": 8,
+												"RECURRING": 9,
+												"FAILED": 10,
+												"PARTIALLY_PAID": 11,
+												"UNPUBLISHED": 12
+											}
+										}
+									}
+								},
+								"InvoiceRefund": {
+									"fields": {
+										"refundedMoney": {
+											"type": "squareup.common.Money",
+											"id": 1
+										},
+										"refundedAt": {
+											"type": "squareup.common.time.DateTime",
+											"id": 2
+										},
+										"reason": {
+											"type": "string",
+											"id": 3
+										},
+										"tenderType": {
+											"type": "squareup.invoice.v2.InvoiceTenderDetails.TenderType",
+											"id": 4
+										},
+										"brand": {
+											"type": "string",
+											"id": 5
+										},
+										"lastFour": {
+											"type": "string",
+											"id": 6
+										}
+									}
+								},
+								"InvoiceTenderDetails": {
+									"fields": {
+										"brand": {
+											"type": "string",
+											"id": 1
+										},
+										"lastFour": {
+											"type": "string",
+											"id": 2
+										},
+										"tenderType": {
+											"type": "squareup.invoice.v2.InvoiceTenderDetails.TenderType",
+											"id": 3
+										},
+										"tenderNote": {
+											"type": "string",
+											"id": 4
+										},
+										"tipAmount": {
+											"type": "squareup.common.Money",
+											"id": 5
+										},
+										"totalAmount": {
+											"type": "squareup.common.Money",
+											"id": 6
+										},
+										"tenderedAt": {
+											"type": "squareup.common.time.DateTime",
+											"id": 7
+										},
+										"paymentToken": {
+											"type": "string",
+											"id": 8
+										}
+									},
+									"nested": {
+										"TenderType": {
+											"values": {
+												"CASH": 0,
+												"CHECK": 1,
+												"OTHER": 2,
+												"CARD": 3,
+												"INSTRUMENT": 4,
+												"SQ_REGISTER": 5,
+												"CAPITAL": 6
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"common": {
+					"nested": {
+						"countries": {
+							"nested": {
+								"Country": {
+									"values": {
+										"US": 840,
+										"AD": 20,
+										"AE": 784,
+										"AF": 4,
+										"AG": 28,
+										"AI": 660,
+										"AL": 8,
+										"AM": 51,
+										"AO": 24,
+										"AQ": 10,
+										"AR": 32,
+										"AS": 16,
+										"AT": 40,
+										"AU": 36,
+										"AW": 533,
+										"AX": 248,
+										"AZ": 31,
+										"BA": 70,
+										"BB": 52,
+										"BD": 50,
+										"BE": 56,
+										"BF": 854,
+										"BG": 100,
+										"BH": 48,
+										"BI": 108,
+										"BJ": 204,
+										"BL": 652,
+										"BM": 60,
+										"BN": 96,
+										"BO": 68,
+										"BQ": 535,
+										"BR": 76,
+										"BS": 44,
+										"BT": 64,
+										"BV": 74,
+										"BW": 72,
+										"BY": 112,
+										"BZ": 84,
+										"CA": 124,
+										"CC": 166,
+										"CD": 180,
+										"CF": 140,
+										"CG": 178,
+										"CH": 756,
+										"CI": 384,
+										"CK": 184,
+										"CL": 152,
+										"CM": 120,
+										"CN": 156,
+										"CO": 170,
+										"CR": 188,
+										"CU": 192,
+										"CV": 132,
+										"CW": 531,
+										"CX": 162,
+										"CY": 196,
+										"CZ": 203,
+										"DE": 276,
+										"DJ": 262,
+										"DK": 208,
+										"DM": 212,
+										"DO": 214,
+										"DZ": 12,
+										"EC": 218,
+										"EE": 233,
+										"EG": 818,
+										"EH": 732,
+										"ER": 232,
+										"ES": 724,
+										"ET": 231,
+										"FI": 246,
+										"FJ": 242,
+										"FK": 238,
+										"FM": 583,
+										"FO": 234,
+										"FR": 250,
+										"GA": 266,
+										"GB": 826,
+										"GD": 308,
+										"GE": 268,
+										"GF": 254,
+										"GG": 831,
+										"GH": 288,
+										"GI": 292,
+										"GL": 304,
+										"GM": 270,
+										"GN": 324,
+										"GP": 312,
+										"GQ": 226,
+										"GR": 300,
+										"GS": 239,
+										"GT": 320,
+										"GU": 316,
+										"GW": 624,
+										"GY": 328,
+										"HK": 344,
+										"HM": 334,
+										"HN": 340,
+										"HR": 191,
+										"HT": 332,
+										"HU": 348,
+										"ID": 360,
+										"IE": 372,
+										"IL": 376,
+										"IM": 833,
+										"IN": 356,
+										"IO": 86,
+										"IQ": 368,
+										"IR": 364,
+										"IS": 352,
+										"IT": 380,
+										"JE": 832,
+										"JM": 388,
+										"JO": 400,
+										"JP": 392,
+										"KE": 404,
+										"KG": 417,
+										"KH": 116,
+										"KI": 296,
+										"KM": 174,
+										"KN": 659,
+										"KP": 408,
+										"KR": 410,
+										"KW": 414,
+										"KY": 136,
+										"KZ": 398,
+										"LA": 418,
+										"LB": 422,
+										"LC": 662,
+										"LI": 438,
+										"LK": 144,
+										"LR": 430,
+										"LS": 426,
+										"LT": 440,
+										"LU": 442,
+										"LV": 428,
+										"LY": 434,
+										"MA": 504,
+										"MC": 492,
+										"MD": 498,
+										"ME": 499,
+										"MF": 663,
+										"MG": 450,
+										"MH": 584,
+										"MK": 807,
+										"ML": 466,
+										"MM": 104,
+										"MN": 496,
+										"MO": 446,
+										"MP": 580,
+										"MQ": 474,
+										"MR": 478,
+										"MS": 500,
+										"MT": 470,
+										"MU": 480,
+										"MV": 462,
+										"MW": 454,
+										"MX": 484,
+										"MY": 458,
+										"MZ": 508,
+										"NA": 516,
+										"NC": 540,
+										"NE": 562,
+										"NF": 574,
+										"NG": 566,
+										"NI": 558,
+										"NL": 528,
+										"NO": 578,
+										"NP": 524,
+										"NR": 520,
+										"NU": 570,
+										"NZ": 554,
+										"OM": 512,
+										"PA": 591,
+										"PE": 604,
+										"PF": 258,
+										"PG": 598,
+										"PH": 608,
+										"PK": 586,
+										"PL": 616,
+										"PM": 666,
+										"PN": 612,
+										"PR": 630,
+										"PS": 275,
+										"PT": 620,
+										"PW": 585,
+										"PY": 600,
+										"QA": 634,
+										"RE": 638,
+										"RO": 642,
+										"RS": 688,
+										"RU": 643,
+										"RW": 646,
+										"SA": 682,
+										"SB": 90,
+										"SC": 690,
+										"SD": 729,
+										"SE": 752,
+										"SG": 702,
+										"SH": 654,
+										"SI": 705,
+										"SJ": 744,
+										"SK": 703,
+										"SL": 694,
+										"SM": 674,
+										"SN": 686,
+										"SO": 706,
+										"SR": 740,
+										"SS": 728,
+										"ST": 678,
+										"SV": 222,
+										"SX": 534,
+										"SY": 760,
+										"SZ": 748,
+										"TC": 796,
+										"TD": 148,
+										"TF": 260,
+										"TG": 768,
+										"TH": 764,
+										"TJ": 762,
+										"TK": 772,
+										"TL": 626,
+										"TM": 795,
+										"TN": 788,
+										"TO": 776,
+										"TR": 792,
+										"TT": 780,
+										"TV": 798,
+										"TW": 158,
+										"TZ": 834,
+										"UA": 804,
+										"UG": 800,
+										"UM": 581,
+										"UY": 858,
+										"UZ": 860,
+										"VA": 336,
+										"VC": 670,
+										"VE": 862,
+										"VG": 92,
+										"VI": 850,
+										"VN": 704,
+										"VU": 548,
+										"WF": 876,
+										"WS": 882,
+										"XT": 963,
+										"YE": 887,
+										"YT": 175,
+										"ZA": 710,
+										"ZM": 894,
+										"ZW": 716,
+										"ZZ": 999
+									}
+								}
+							}
+						},
+						"location": {
+							"nested": {
+								"Coordinates": {
+									"fields": {
+										"latitude": {
+											"type": "double",
+											"id": 1
+										},
+										"longitude": {
+											"type": "double",
+											"id": 2
+										},
+										"altitude": {
+											"type": "double",
+											"id": 3
+										},
+										"geographicAccuracy": {
+											"type": "double",
+											"id": 4
+										},
+										"altitudinalAccuracy": {
+											"type": "double",
+											"id": 5
+										},
+										"heading": {
+											"type": "double",
+											"id": 6
+										},
+										"speed": {
+											"type": "double",
+											"id": 7
+										}
+									}
+								},
+								"Address": {
+									"fields": {
+										"street1": {
+											"type": "string",
+											"id": 1
+										},
+										"street2": {
+											"type": "string",
+											"id": 2
+										},
+										"city": {
+											"type": "string",
+											"id": 3
+										},
+										"stateProvince": {
+											"type": "string",
+											"id": 4
+										},
+										"postalCode": {
+											"type": "string",
+											"id": 5
+										},
+										"countryCode": {
+											"type": "squareup.common.countries.Country",
+											"id": 6
+										}
+									}
+								},
+								"GlobalAddress": {
+									"fields": {
+										"addressLine1": {
+											"type": "string",
+											"id": 1
+										},
+										"addressLine2": {
+											"type": "string",
+											"id": 2
+										},
+										"addressLine3": {
+											"type": "string",
+											"id": 3
+										},
+										"addressLine4": {
+											"type": "string",
+											"id": 4
+										},
+										"addressLine5": {
+											"type": "string",
+											"id": 5
+										},
+										"locality": {
+											"type": "string",
+											"id": 6
+										},
+										"sublocality": {
+											"type": "string",
+											"id": 7
+										},
+										"sublocality1": {
+											"type": "string",
+											"id": 8
+										},
+										"sublocality2": {
+											"type": "string",
+											"id": 9
+										},
+										"sublocality3": {
+											"type": "string",
+											"id": 10
+										},
+										"sublocality4": {
+											"type": "string",
+											"id": 11
+										},
+										"sublocality5": {
+											"type": "string",
+											"id": 12
+										},
+										"administrativeDistrictLevel1": {
+											"type": "string",
+											"id": 13
+										},
+										"administrativeDistrictLevel2": {
+											"type": "string",
+											"id": 14
+										},
+										"administrativeDistrictLevel3": {
+											"type": "string",
+											"id": 15
+										},
+										"postalCode": {
+											"type": "string",
+											"id": 16
+										},
+										"countryCode": {
+											"type": "squareup.common.countries.Country",
+											"id": 17
+										},
+										"addressCoordinates": {
+											"type": "squareup.common.location.Coordinates",
+											"id": 18
+										}
+									}
+								},
+								"Phone": {
+									"fields": {
+										"callingCode": {
+											"type": "string",
+											"id": 1
+										},
+										"number": {
+											"type": "string",
+											"id": 2
+										}
+									}
+								}
+							}
+						},
+						"Denominations": {
+							"fields": {
+								"banknoteCents": {
+									"rule": "repeated",
+									"type": "int32",
+									"id": 1
+								},
+								"coinCents": {
+									"rule": "repeated",
+									"type": "int32",
+									"id": 2
+								}
+							}
+						},
+						"CurrencyCode": {
+							"values": {
+								"AED": 784,
+								"AFN": 971,
+								"ALL": 8,
+								"AMD": 51,
+								"ANG": 532,
+								"AOA": 973,
+								"ARS": 32,
+								"AUD": 36,
+								"AWG": 533,
+								"AZN": 944,
+								"BAM": 977,
+								"BBD": 52,
+								"BDT": 50,
+								"BGN": 975,
+								"BHD": 48,
+								"BIF": 108,
+								"BMD": 60,
+								"BND": 96,
+								"BOB": 68,
+								"BOV": 984,
+								"BRL": 986,
+								"BSD": 44,
+								"BTN": 64,
+								"BWP": 72,
+								"BYR": 974,
+								"BZD": 84,
+								"CAD": 124,
+								"CDF": 976,
+								"CHE": 947,
+								"CHF": 756,
+								"CHW": 948,
+								"CLF": 990,
+								"CLP": 152,
+								"CNY": 156,
+								"COP": 170,
+								"COU": 970,
+								"CRC": 188,
+								"CUC": 931,
+								"CUP": 192,
+								"CVE": 132,
+								"CZK": 203,
+								"DJF": 262,
+								"DKK": 208,
+								"DOP": 214,
+								"DZD": 12,
+								"EGP": 818,
+								"ERN": 232,
+								"ETB": 230,
+								"EUR": 978,
+								"FJD": 242,
+								"FKP": 238,
+								"GBP": 826,
+								"GEL": 981,
+								"GHS": 936,
+								"GIP": 292,
+								"GMD": 270,
+								"GNF": 324,
+								"GTQ": 320,
+								"GYD": 328,
+								"HKD": 344,
+								"HNL": 340,
+								"HRK": 191,
+								"HTG": 332,
+								"HUF": 348,
+								"IDR": 360,
+								"ILS": 376,
+								"INR": 356,
+								"IQD": 368,
+								"IRR": 364,
+								"ISK": 352,
+								"JMD": 388,
+								"JOD": 400,
+								"JPY": 392,
+								"KES": 404,
+								"KGS": 417,
+								"KHR": 116,
+								"KMF": 174,
+								"KPW": 408,
+								"KRW": 410,
+								"KWD": 414,
+								"KYD": 136,
+								"KZT": 398,
+								"LAK": 418,
+								"LBP": 422,
+								"LKR": 144,
+								"LRD": 430,
+								"LSL": 426,
+								"LTL": 440,
+								"LVL": 428,
+								"LYD": 434,
+								"MAD": 504,
+								"MDL": 498,
+								"MGA": 969,
+								"MKD": 807,
+								"MMK": 104,
+								"MNT": 496,
+								"MOP": 446,
+								"MRO": 478,
+								"MUR": 480,
+								"MVR": 462,
+								"MWK": 454,
+								"MXN": 484,
+								"MXV": 979,
+								"MYR": 458,
+								"MZN": 943,
+								"NAD": 516,
+								"NGN": 566,
+								"NIO": 558,
+								"NOK": 578,
+								"NPR": 524,
+								"NZD": 554,
+								"OMR": 512,
+								"PAB": 590,
+								"PEN": 604,
+								"PGK": 598,
+								"PHP": 608,
+								"PKR": 586,
+								"PLN": 985,
+								"PYG": 600,
+								"QAR": 634,
+								"RON": 946,
+								"RSD": 941,
+								"RUB": 643,
+								"RWF": 646,
+								"SAR": 682,
+								"SBD": 90,
+								"SCR": 690,
+								"SDG": 938,
+								"SEK": 752,
+								"SGD": 702,
+								"SHP": 654,
+								"SLL": 694,
+								"SOS": 706,
+								"SRD": 968,
+								"SSP": 728,
+								"STD": 678,
+								"SVC": 222,
+								"SYP": 760,
+								"SZL": 748,
+								"THB": 764,
+								"TJS": 972,
+								"TMT": 934,
+								"TND": 788,
+								"TOP": 776,
+								"TRY": 949,
+								"TTD": 780,
+								"TWD": 901,
+								"TZS": 834,
+								"UAH": 980,
+								"UGX": 800,
+								"USD": 840,
+								"USN": 997,
+								"USS": 998,
+								"UYI": 940,
+								"UYU": 858,
+								"UZS": 860,
+								"VEF": 937,
+								"VND": 704,
+								"VUV": 548,
+								"WST": 882,
+								"XAF": 950,
+								"XAG": 961,
+								"XAU": 959,
+								"XBA": 955,
+								"XBB": 956,
+								"XBC": 957,
+								"XBD": 958,
+								"XCD": 951,
+								"XDR": 960,
+								"XOF": 952,
+								"XPD": 964,
+								"XPF": 953,
+								"XPT": 962,
+								"XTS": 963,
+								"XXX": 999,
+								"YER": 886,
+								"ZAR": 710,
+								"ZMK": 894,
+								"ZMW": 967,
+								"BTC": 1001
+							}
+						},
+						"Money": {
+							"fields": {
+								"amount": {
+									"type": "int64",
+									"id": 2
+								},
+								"currencyCode": {
+									"type": "squareup.common.CurrencyCode",
+									"id": 3,
+									"options": {
+										"default": "USD"
+									}
+								}
+							}
+						},
+						"time": {
+							"nested": {
+								"DateTime": {
+									"fields": {
+										"instantUsec": {
+											"type": "int64",
+											"id": 1
+										},
+										"timezoneOffsetMin": {
+											"type": "sint32",
+											"id": 2
+										},
+										"posixTz": {
+											"type": "string",
+											"id": 3
+										},
+										"tzName": {
+											"rule": "repeated",
+											"type": "string",
+											"id": 4
+										},
+										"ordinal": {
+											"type": "int64",
+											"id": 5
+										}
+									}
+								},
+								"YearMonthDay": {
+									"fields": {
+										"year": {
+											"type": "int32",
+											"id": 1
+										},
+										"monthOfYear": {
+											"type": "int32",
+											"id": 2
+										},
+										"dayOfMonth": {
+											"type": "int32",
+											"id": 3
+										}
+									}
+								}
+							}
+						},
+						"token": {
+							"nested": {
+								"TokenPair": {
+									"fields": {
+										"serverToken": {
+											"type": "string",
+											"id": 1
+										},
+										"clientToken": {
+											"type": "string",
+											"id": 2
+										}
+									}
+								}
+							}
+						},
+						"gateways": {
+							"nested": {
+								"GatewayName": {
+									"values": {
+										"unknown": 0,
+										"chase_seller_v12": 1,
+										"chase_test_v12": 2,
+										"eero_payment_service_v1": 3,
+										"cad_stratus": 4,
+										"test_eero_payment_service_v1": 5,
+										"test_cad_stratus": 6,
+										"fake": 7,
+										"amex_payment_service": 8,
+										"amex_cad_payment_service": 9,
+										"amex_jpy_payment_service_1": 10,
+										"amex_jpy_payment_service_2": 11,
+										"test_amex_payment_service": 12,
+										"test_amex_cad_payment_service": 13,
+										"test_amex_jpy_payment_service": 14,
+										"certification": 15,
+										"cafis_1": 16,
+										"cafis_2": 17,
+										"cafis_3": 18,
+										"visa_payment_service_v1": 19,
+										"test_visa_payment_service_v1": 20,
+										"tivo": 21,
+										"simulator": 22,
+										"amex_aud_payment_service": 23,
+										"test_amex_aud_payment_service": 24,
+										"giftcard_service": 25,
+										"simulator_online": 30,
+										"stardebit_payment_service": 31,
+										"test_stardebit_payment_service": 32,
+										"cafis_jcb_1": 33,
+										"cafis_jcb_2": 34,
+										"cafis_jcb_3": 35,
+										"cuscal_payment_service": 36,
+										"test_cuscal_payment_service": 37,
+										"shazam_payment_service": 38,
+										"test_shazam_payment_service": 39,
+										"nyce_via_stardebit_payment_service": 40,
+										"test_nyce_via_stardebit_payment_service": 41,
+										"chase_seller": 42,
+										"ipc_salem_direct_v13": 43,
+										"authorize_net": 44,
+										"leap": 45,
+										"maestro_via_shazam_payment_service": 46,
+										"pulse_via_shazam_payment_service": 47,
+										"maestro_via_stardebit_payment_service": 48,
+										"cafis_sompo_1": 49,
+										"cafis_sompo_2": 50,
+										"cafis_sompo_3": 51,
+										"balance_service": 52,
+										"omnipay_payment_service": 53,
+										"everlink_payment_service": 54,
+										"acculynk_payment_service": 55,
+										"felica_payment_service": 56,
+										"sandbox_gateway": 57,
+										"alipay_payment_service": 58,
+										"nyce_payment_service": 59,
+										"capital_service": 60,
+										"mastercardsend_payment_service": 61,
+										"visa_dex_payment_service": 62
+									}
+								}
+							}
+						},
+						"MerchantType": {
+							"values": {
+								"MERCHANT_TYPE_DEFAULT": 0,
+								"MERCHANT_TYPE_COMMERCIAL_ENTITY": 1,
+								"MERCHANT_TYPE_POLITICAL_ENTITY": 2,
+								"MERCHANT_TYPE_COMMERCIAL_ENTITY_WELLS": 3
+							}
+						},
+						"dinero": {
+							"nested": {
+								"CurrencyCode": {
+									"values": {
+										"AED": 784,
+										"AFN": 971,
+										"ALL": 8,
+										"AMD": 51,
+										"ANG": 532,
+										"AOA": 973,
+										"ARS": 32,
+										"AUD": 36,
+										"AWG": 533,
+										"AZN": 944,
+										"BAM": 977,
+										"BBD": 52,
+										"BDT": 50,
+										"BGN": 975,
+										"BHD": 48,
+										"BIF": 108,
+										"BMD": 60,
+										"BND": 96,
+										"BOB": 68,
+										"BOV": 984,
+										"BRL": 986,
+										"BSD": 44,
+										"BTN": 64,
+										"BWP": 72,
+										"BYR": 974,
+										"BZD": 84,
+										"CAD": 124,
+										"CDF": 976,
+										"CHE": 947,
+										"CHF": 756,
+										"CHW": 948,
+										"CLF": 990,
+										"CLP": 152,
+										"CNY": 156,
+										"COP": 170,
+										"COU": 970,
+										"CRC": 188,
+										"CUC": 931,
+										"CUP": 192,
+										"CVE": 132,
+										"CZK": 203,
+										"DJF": 262,
+										"DKK": 208,
+										"DOP": 214,
+										"DZD": 12,
+										"EGP": 818,
+										"ERN": 232,
+										"ETB": 230,
+										"EUR": 978,
+										"FJD": 242,
+										"FKP": 238,
+										"GBP": 826,
+										"GEL": 981,
+										"GHS": 936,
+										"GIP": 292,
+										"GMD": 270,
+										"GNF": 324,
+										"GTQ": 320,
+										"GYD": 328,
+										"HKD": 344,
+										"HNL": 340,
+										"HRK": 191,
+										"HTG": 332,
+										"HUF": 348,
+										"IDR": 360,
+										"ILS": 376,
+										"INR": 356,
+										"IQD": 368,
+										"IRR": 364,
+										"ISK": 352,
+										"JMD": 388,
+										"JOD": 400,
+										"JPY": 392,
+										"KES": 404,
+										"KGS": 417,
+										"KHR": 116,
+										"KMF": 174,
+										"KPW": 408,
+										"KRW": 410,
+										"KWD": 414,
+										"KYD": 136,
+										"KZT": 398,
+										"LAK": 418,
+										"LBP": 422,
+										"LKR": 144,
+										"LRD": 430,
+										"LSL": 426,
+										"LTL": 440,
+										"LVL": 428,
+										"LYD": 434,
+										"MAD": 504,
+										"MDL": 498,
+										"MGA": 969,
+										"MKD": 807,
+										"MMK": 104,
+										"MNT": 496,
+										"MOP": 446,
+										"MRO": 478,
+										"MUR": 480,
+										"MVR": 462,
+										"MWK": 454,
+										"MXN": 484,
+										"MXV": 979,
+										"MYR": 458,
+										"MZN": 943,
+										"NAD": 516,
+										"NGN": 566,
+										"NIO": 558,
+										"NOK": 578,
+										"NPR": 524,
+										"NZD": 554,
+										"OMR": 512,
+										"PAB": 590,
+										"PEN": 604,
+										"PGK": 598,
+										"PHP": 608,
+										"PKR": 586,
+										"PLN": 985,
+										"PYG": 600,
+										"QAR": 634,
+										"RON": 946,
+										"RSD": 941,
+										"RUB": 643,
+										"RWF": 646,
+										"SAR": 682,
+										"SBD": 90,
+										"SCR": 690,
+										"SDG": 938,
+										"SEK": 752,
+										"SGD": 702,
+										"SHP": 654,
+										"SLL": 694,
+										"SOS": 706,
+										"SRD": 968,
+										"SSP": 728,
+										"STD": 678,
+										"SVC": 222,
+										"SYP": 760,
+										"SZL": 748,
+										"THB": 764,
+										"TJS": 972,
+										"TMT": 934,
+										"TND": 788,
+										"TOP": 776,
+										"TRY": 949,
+										"TTD": 780,
+										"TWD": 901,
+										"TZS": 834,
+										"UAH": 980,
+										"UGX": 800,
+										"USD": 840,
+										"USN": 997,
+										"USS": 998,
+										"UYI": 940,
+										"UYU": 858,
+										"UZS": 860,
+										"VEF": 937,
+										"VND": 704,
+										"VUV": 548,
+										"WST": 882,
+										"XAF": 950,
+										"XAG": 961,
+										"XAU": 959,
+										"XBA": 955,
+										"XBB": 956,
+										"XBC": 957,
+										"XBD": 958,
+										"XCD": 951,
+										"XDR": 960,
+										"XOF": 952,
+										"XPD": 964,
+										"XPF": 953,
+										"XPT": 962,
+										"XTS": 963,
+										"XXX": 999,
+										"YER": 886,
+										"ZAR": 710,
+										"ZMK": 894,
+										"ZMW": 967
+									}
+								},
+								"Money": {
+									"fields": {
+										"cents": {
+											"type": "int64",
+											"id": 2
+										},
+										"currencyCode": {
+											"type": "squareup.common.dinero.CurrencyCode",
+											"id": 3,
+											"options": {
+												"default": "USD"
+											}
+										},
+										"OBSOLETECurrencyCode": {
+											"type": "squareup.api.items.OBSOLETE_CurrencyCode",
+											"id": 1
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

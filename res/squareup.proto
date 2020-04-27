@@ -1,0 +1,3399 @@
+syntax = "proto2";
+
+package squareup;
+
+message sake {
+
+    message Error {
+
+        optional squareup.protobuf.rpc.ResponseCode code = 1 [default=REQUEST_COMPLETED];
+        optional int32 app_code = 3;
+        optional string debug_text = 2;
+    }
+}
+
+message protobuf {
+
+    message rpc {
+
+        enum ResponseCode {
+
+            REQUEST_TIMEOUT = -1;
+            REQUEST_COMPLETED = 0;
+            INVALID_REQUEST = 400;
+            UNAUTHORIZED = 401;
+            FORBIDDEN = 403;
+            NOT_FOUND = 404;
+            CONFLICT = 409;
+            UNPROCESSABLE_ENTITY = 422;
+            TOO_MANY_REQUESTS = 429;
+            CANCELED = 499;
+            INTERNAL_ERROR = 500;
+            NOT_IMPLEMENTED = 501;
+            BAD_GATEWAY = 502;
+            SERVICE_UNAVAILABLE = 503;
+            GATEWAY_TIMEOUT = 504;
+        }
+    }
+}
+
+message estimate {
+
+    message frontend {
+
+        message Estimate {
+
+            optional string token = 1;
+            optional int32 lock_version = 2;
+            optional squareup.invoice.v2.EstimateDisplayDetails.DisplayState display_state = 3;
+            optional string name = 4;
+            optional string number = 5;
+            optional string description = 6;
+            optional squareup.common.time.DateTime delivered_at = 7;
+            optional squareup.common.time.YearMonthDay expires_on = 8;
+            optional squareup.invoice.frontend.Invoice.Customer customer = 9;
+            repeated string additional_recipient_email = 10;
+            optional squareup.bills.Cart cart = 11;
+            optional squareup.common.time.DateTime accepted_at = 12;
+            repeated squareup.invoice.frontend.FileAttachmentMetadata attachment = 13;
+            optional squareup.common.time.DateTime invoiced_at = 14;
+            repeated squareup.estimate.frontend.EstimatePackage packages = 15;
+            optional string selected_package_token = 16;
+        }
+
+        message EstimatePackage {
+
+            optional string token = 1;
+            optional string title = 2;
+            optional string description = 3;
+            repeated squareup.invoice.frontend.FileAttachmentMetadata attachments = 4;
+            optional squareup.bills.Cart cart = 5;
+        }
+
+        message Status {
+
+            optional squareup.estimate.frontend.Status.StatusCode status_code = 1;
+            optional string localized_error = 2;
+
+            enum StatusCode {
+
+                STATUS_DO_NOT_USE = 0;
+                SUCCESS = 1;
+                STALE = 2;
+                NOT_FOUND = 3;
+                SERVER_ERROR = 4;
+            }
+        }
+
+        message GetEstimateRequest {
+
+            optional string estimate_token = 1;
+            optional string language_code = 2;
+        }
+
+        message GetEstimateResponse {
+
+            optional squareup.estimate.frontend.Status status = 1;
+            optional squareup.invoice.frontend.Unit unit = 2;
+            optional squareup.estimate.frontend.Estimate estimate = 3;
+            optional squareup.invoice.frontend.InvoiceUnitSettings invoice_unit_settings = 4;
+            repeated string enabled_features = 5;
+        }
+
+        message AcceptEstimateRequest {
+
+            optional string estimate_token = 1;
+            optional string unit_token = 2;
+            optional int32 version = 3;
+            optional string language_code = 4;
+            optional string package_token = 5;
+        }
+
+        message AcceptEstimateResponse {
+
+            optional squareup.estimate.frontend.Status status = 1;
+            optional squareup.estimate.frontend.Estimate estimate = 2;
+            optional string invoice_token = 3;
+        }
+
+    }
+}
+
+message items {
+
+    message merchant {
+
+        enum CatalogObjectType {
+            option allow_alias = true;
+            DO_NOT_USE = 0;
+            ITEM = 1;
+            ITEM_IMAGE = 2;
+            PAGE_TILE = 3;
+            CATEGORY = 4;
+            ITEM_VARIATION = 5;
+            FEE = 6;
+            PLACEHOLDER = 7;
+            DISCOUNT = 8;
+            ITEM_FEE_MEMBERSHIP = 9;
+            ITEM_MODIFIER_LIST = 10;
+            ITEM_ITEM_MODIFIER_LIST_MEMBERSHIP = 11;
+            ITEM_MODIFIER_OPTION = 12;
+            MARKET_ITEM_SETTINGS = 13;
+            ADDITIONAL_ITEM_IMAGE = 14;
+            PROMO = 15;
+            INVENTORY_INFO = 16;
+            OBSOLETE_TENDER_FEE = 17;
+            DINING_OPTION = 18;
+            TAX_RULE = 19;
+            CONFIGURATION = 20;
+            PAGE = 21;
+            TICKET_GROUP = 22;
+            TICKET_TEMPLATE = 23;
+            VOID_REASON = 24;
+            ITEM_VARIATION_VENDOR_INFO = 25;
+            MENU = 26;
+            TAG = 27;
+            FLOOR_PLAN = 28;
+            FLOOR_PLAN_TILE = 29;
+            FAVORITES_LIST_POSITION = 30;
+            MENU_GROUP_MEMBERSHIP = 31;
+            SURCHARGE = 32;
+            PRICING_RULE = 33;
+            PRODUCT_SET = 34;
+            TIME_PERIOD = 35;
+            SURCHARGE_FEE_MEMBERSHIP = 36;
+            MEASUREMENT_UNIT = 37;
+            SUBSCRIPTION_PLAN = 38;
+            ITEM_OPTION = 39;
+            ITEM_OPTION_VAL = 40;
+            CUSTOM_ATTRIBUTE_DEFINITION = 41;
+            CUSTOM_ATTRIBUTE_SELECTION = 42;
+            QUICK_AMOUNTS_SETTINGS = 45;
+            QUICK_AMOUNT = 46;
+            COMPONENT = 47;
+            COMPOSITION = 48;
+            RESOURCE = 49;
+            SUBSCRIPTION_PHASE = 50;
+            PRODUCT = 5;
+            PRODUCT_FAMILY = 1;
+            CATALOG = 100;
+            CONSTRAINT = 101;
+            ATTRIBUTE_DEFINITION_METADATA = 200;
+        }
+
+        message CatalogObject {
+
+            optional string token = 1;
+            optional squareup.items.merchant.CatalogObjectType type = 4;
+            repeated squareup.items.merchant.Attribute attribute = 3;
+            optional int64 version = 5;
+            optional string cogs_id = 6;
+            optional bool deleted = 7;
+        }
+
+        message Attribute {
+
+            optional string definition_token = 2;
+            optional string unit_token = 3;
+            optional int64 int_value = 4;
+            optional string string_value = 5;
+
+            message value {
+            }
+        }
+    }
+}
+
+message billing {
+
+    message data {
+
+        message ProductLabel {
+
+            optional string name = 1;
+            optional squareup.common.Money cost = 2;
+            optional squareup.common.Money discount_amount = 3;
+        }
+
+        message BillingItemizationData {
+
+            repeated squareup.billing.data.ProductLabel product_label = 1;
+        }
+    }
+}
+
+message omg {
+
+    message model {
+
+        message Order {
+
+            message QuantityUnit {
+
+                optional squareup.connect.v2.common.MeasurementUnit measurement_unit = 1;
+                optional int32 precision = 2;
+                optional string catalog_object_id = 3;
+                optional int64 catalog_object_version = 4;
+            }
+        }
+    }
+}
+
+message connect {
+
+    message v2 {
+
+        message common {
+
+            message MeasurementUnit {
+
+                optional squareup.connect.v2.common.MeasurementUnit.Custom custom_unit = 1;
+                optional squareup.connect.v2.common.MeasurementUnit.Area area_unit = 2;
+                optional squareup.connect.v2.common.MeasurementUnit.Length length_unit = 3;
+                optional squareup.connect.v2.common.MeasurementUnit.Volume volume_unit = 4;
+                optional squareup.connect.v2.common.MeasurementUnit.Weight weight_unit = 5;
+                optional squareup.connect.v2.common.MeasurementUnit.Generic generic_unit = 6;
+                optional squareup.connect.v2.common.MeasurementUnit.Time time_unit = 7;
+                optional squareup.connect.v2.common.MeasurementUnit.UnitType type = 8;
+
+                message Custom {
+
+                    optional string name = 1;
+                    optional string abbreviation = 2;
+                }
+
+                enum Area {
+
+                    INVALID_AREA = 0;
+                    IMPERIAL_ACRE = 4;
+                    IMPERIAL_SQUARE_INCH = 1;
+                    IMPERIAL_SQUARE_FOOT = 5;
+                    IMPERIAL_SQUARE_YARD = 6;
+                    IMPERIAL_SQUARE_MILE = 7;
+                    METRIC_SQUARE_CENTIMETER = 2;
+                    METRIC_SQUARE_METER = 3;
+                    METRIC_SQUARE_KILOMETER = 8;
+                }
+
+                enum Length {
+
+                    INVALID_LENGTH = 0;
+                    IMPERIAL_INCH = 1;
+                    IMPERIAL_FOOT = 4;
+                    IMPERIAL_YARD = 5;
+                    IMPERIAL_MILE = 6;
+                    METRIC_MILLIMETER = 2;
+                    METRIC_CENTIMETER = 7;
+                    METRIC_METER = 3;
+                    METRIC_KILOMETER = 8;
+                }
+
+                enum Volume {
+
+                    INVALID_VOLUME = 0;
+                    GENERIC_FLUID_OUNCE = 1;
+                    GENERIC_SHOT = 4;
+                    GENERIC_CUP = 5;
+                    GENERIC_PINT = 6;
+                    GENERIC_QUART = 7;
+                    GENERIC_GALLON = 8;
+                    IMPERIAL_CUBIC_INCH = 9;
+                    IMPERIAL_CUBIC_FOOT = 10;
+                    IMPERIAL_CUBIC_YARD = 11;
+                    METRIC_MILLILITER = 2;
+                    METRIC_LITER = 3;
+                }
+
+                enum Weight {
+
+                    INVALID_WEIGHT = 0;
+                    IMPERIAL_WEIGHT_OUNCE = 1;
+                    IMPERIAL_POUND = 5;
+                    IMPERIAL_STONE = 6;
+                    METRIC_MILLIGRAM = 2;
+                    METRIC_GRAM = 3;
+                    METRIC_KILOGRAM = 4;
+                }
+
+                enum Generic {
+
+                    INVALID_GENERIC_UNIT = 0;
+                    UNIT = 1;
+                }
+
+                enum Time {
+
+                    INVALID_TIME = 0;
+                    GENERIC_MILLISECOND = 1;
+                    GENERIC_SECOND = 2;
+                    GENERIC_MINUTE = 3;
+                    GENERIC_HOUR = 4;
+                    GENERIC_DAY = 5;
+                }
+
+                enum UnitType {
+
+                    INVALID_TYPE = 0;
+                    TYPE_CUSTOM = 1;
+                    TYPE_AREA = 2;
+                    TYPE_LENGTH = 3;
+                    TYPE_VOLUME = 4;
+                    TYPE_WEIGHT = 5;
+                    TYPE_TIME = 7;
+                    TYPE_GENERIC = 6;
+                }
+            }
+        }
+
+        message merchant_catalog {
+
+            message resources {
+
+                message CatalogCustomAttributeValue {
+
+                    optional string name = 1;
+                    optional string string_value = 2;
+                    optional int64 int_value = 3;
+                    optional string custom_attribute_definition_id = 4;
+                    optional squareup.connect.v2.merchant_catalog.resources.CatalogCustomAttributeDefinition.Type type = 5;
+                    optional string number_value = 6;
+                    optional bool boolean_value = 7;
+                    repeated string selection_uid_values = 8;
+                    optional string key = 9;
+                }
+
+                message CatalogCustomAttributeDefinition {
+
+                    enum Type {
+
+                        ATTRIBUTE_TYPE_DO_NOT_USE = 0;
+                        STRING = 1;
+                        INTEGER = 2;
+                        BOOLEAN = 3;
+                        NUMBER = 9;
+                        SELECTION = 10;
+                    }
+                }
+            }
+        }
+    }
+}
+
+message api {
+
+    message sync {
+
+        message ObjectType {
+
+            optional squareup.api.items.Type type = 101;
+        }
+
+        message ObjectId {
+
+            optional string id = 1;
+            optional squareup.api.sync.ObjectType type = 2;
+            optional string merchant_token = 3;
+            optional string customer_token = 4;
+            optional squareup.api.items.Type ref_type = 101;
+        }
+
+        message ObjectWrapper {
+
+            optional string id = 1;
+            optional squareup.api.sync.ObjectId object_id = 2;
+            optional int64 timestamp = 3;
+            optional bool deleted = 4;
+            optional squareup.api.items.Type object_type = 101;
+            optional squareup.api.items.Item item = 1001;
+            optional squareup.api.items.ItemImage item_image = 1002;
+            optional squareup.api.items.MenuCategory menu_category = 1005;
+            optional squareup.api.items.ItemVariation item_variation = 1007;
+            optional squareup.api.items.Fee fee = 1008;
+            optional squareup.api.items.Discount discount = 1010;
+            optional squareup.api.items.ItemModifierList item_modifier_list = 1012;
+            optional squareup.api.items.ItemModifierOption item_modifier_option = 1014;
+            optional squareup.api.items.DiningOption dining_option = 1020;
+            optional squareup.api.items.TicketGroup ticket_group = 1023;
+            optional squareup.api.items.TicketTemplate ticket_template = 1024;
+            optional squareup.api.items.Menu menu = 1026;
+            optional squareup.api.items.Surcharge surcharge = 1032;
+        }
+
+        message ReferenceDescriptor {
+
+            repeated squareup.api.sync.ObjectType type = 1;
+            optional squareup.api.sync.ReferenceDescriptor.OnDeleteType on_delete = 7 [default=BLOCK];
+            optional bool external = 8;
+
+            enum OnDeleteType {
+
+                CASCADE = 1;
+                SET_NULL = 2;
+                BLOCK = 3;
+                EXTERNAL = 4;
+            }
+        }
+    }
+
+    message items {
+
+        enum Type {
+
+            ITEM = 0;
+            PAGE = 1;
+            ITEM_IMAGE = 2;
+            ITEM_PAGE_MEMBERSHIP = 3;
+            MENU_CATEGORY = 4;
+            ITEM_VARIATION = 5;
+            FEE = 6;
+            PLACEHOLDER = 7;
+            DISCOUNT = 8;
+            ITEM_FEE_MEMBERSHIP = 9;
+            ITEM_MODIFIER_LIST = 10;
+            ITEM_ITEM_MODIFIER_LIST_MEMBERSHIP = 11;
+            ITEM_MODIFIER_OPTION = 12;
+            MARKET_ITEM_SETTINGS = 13;
+            ADDITIONAL_ITEM_IMAGE = 14;
+            PROMO = 15;
+            INVENTORY_INFO = 16;
+            OBSOLETE_TENDER_FEE = 17;
+            DINING_OPTION = 18;
+            TAX_RULE = 19;
+            CONFIGURATION = 20;
+            TICKET_GROUP = 21;
+            TICKET_TEMPLATE = 22;
+            VOID_REASON = 23;
+            MENU = 24;
+            TAG = 25;
+            FLOOR_PLAN = 26;
+            FLOOR_PLAN_TILE = 27;
+            FAVORITES_LIST_POSITION = 28;
+            MENU_GROUP_MEMBERSHIP = 29;
+            SURCHARGE = 30;
+            PRICING_RULE = 31;
+            PRODUCT_SET = 32;
+            TIME_PERIOD = 33;
+            SURCHARGE_FEE_MEMBERSHIP = 34;
+        }
+
+        enum CalculationPhase {
+
+            DISCOUNT_PERCENTAGE_PHASE = 0;
+            DISCOUNT_AMOUNT_PHASE = 1;
+            FEE_SUBTOTAL_PHASE = 2;
+            FEE_TOTAL_PHASE = 3;
+            TIP_PHASE = 4;
+            SWEDISH_ROUNDING_PHASE = 5;
+            SURCHARGE_PHASE = 6;
+            SURCHARGE_TOTAL_PHASE = 7;
+        }
+
+        enum OBSOLETE_CurrencyCode {
+
+            USD = 0;
+        }
+
+        enum Visibility {
+
+            PUBLIC = 0;
+            PUBLIC_ONLY = 2;
+            PRIVATE = 1;
+        }
+
+        enum PricingType {
+
+            FIXED_PRICING = 0;
+            VARIABLE_PRICING = 1;
+        }
+
+        enum StraightFireType {
+
+            UNKNOWN_STRAIGHT_FIRE = 0;
+            NEVER = 1;
+            ALWAYS = 2;
+        }
+
+        message MerchantCatalogObjectReference {
+
+            optional string catalog_object_token = 1;
+            optional int64 version = 2;
+        }
+
+        message ItemOptionForItem {
+
+            optional string item_option_id = 1;
+        }
+
+        message Item {
+
+            optional string id = 13;
+            optional string color = 1;
+            optional string description = 2;
+            optional string name = 3;
+            optional string buyer_facing_name = 17;
+            optional bool taxable = 4;
+            optional string abbreviation = 5;
+            optional squareup.api.items.Visibility visibility = 9 [default=PUBLIC];
+            optional squareup.api.sync.ObjectId menu_category = 7;
+            optional squareup.api.sync.ObjectId image = 8;
+            optional squareup.api.items.PricingType pricing_type = 10 [default=FIXED_PRICING];
+            optional squareup.api.sync.ObjectId archetype = 11;
+            optional bool available_online = 12;
+            optional bool available_for_pickup = 14;
+            optional bool available_electronically = 18;
+            optional int32 ordinal = 15;
+            optional squareup.api.items.Item.Type type = 16 [default=REGULAR];
+            optional squareup.api.items.OnlineStoreItemData online_store_item_data = 19;
+            optional bool skips_modifier_screen = 20;
+            optional squareup.api.items.MerchantCatalogObjectReference catalog_object_reference = 21;
+            repeated squareup.api.sync.ObjectId tag_membership = 22;
+            optional squareup.api.items.StraightFireType straight_fire_override = 23;
+            optional string v2_id = 24;
+            optional string ecom_uri = 25;
+            optional string ecom_image_uris = 26;
+            optional bool ecom_available = 27;
+            repeated squareup.api.items.ItemOptionForItem item_options = 28;
+            repeated squareup.connect.v2.merchant_catalog.resources.CatalogCustomAttributeValue custom_attribute_values = 30;
+            optional string ecom_buy_button_text = 31;
+            optional squareup.api.items.Item.EcomVisibility ecom_visibility = 32 [default=UNINDEXED];
+
+            enum Type {
+
+                REGULAR = 0;
+                GIFT_CARD = 1;
+                APPOINTMENTS_SERVICE = 2;
+            }
+
+            enum EcomVisibility {
+
+                UNINDEXED = 1;
+                UNAVAILABLE = 2;
+                HIDDEN = 3;
+                VISIBLE = 4;
+            }
+        }
+
+        message ItemModifierList {
+
+            optional string id = 4;
+            optional string name = 1;
+            optional int32 ordinal = 2;
+            optional squareup.api.items.ItemModifierList.SelectionType selection_type = 3 [default=SINGLE];
+            optional squareup.api.items.MerchantCatalogObjectReference catalog_object_reference = 5;
+            optional bool is_conversational = 6;
+            optional string v2_id = 7;
+
+            enum SelectionType {
+
+                SINGLE = 0;
+                MULTIPLE = 1;
+            }
+        }
+
+        message ItemModifierOption {
+
+            optional string id = 6;
+            optional squareup.common.dinero.Money price = 1;
+            optional bool on_by_default = 2;
+            optional string name = 3;
+            optional int32 ordinal = 4;
+            optional squareup.api.sync.ObjectId modifier_list = 5;
+            optional squareup.api.items.MerchantCatalogObjectReference catalog_object_reference = 7;
+            optional string v2_id = 8;
+        }
+
+        message ItemOptionValueForItemVariation {
+
+            optional string item_option_id = 1;
+            optional string item_option_value_id = 2;
+        }
+
+        message Intermission {
+
+            optional uint32 start_offset = 1;
+            optional uint32 end_offset = 2;
+        }
+
+        message ItemVariation {
+
+            optional string id = 11;
+            optional string name = 1;
+            optional string buyer_facing_name = 17;
+            optional string sku = 2;
+            optional string gtin = 7;
+            optional squareup.common.dinero.Money price = 3;
+            optional squareup.api.items.PricingType pricing_type = 10 [default=FIXED_PRICING];
+            optional int32 ordinal = 5;
+            optional squareup.api.sync.ObjectId item = 6;
+            optional squareup.api.items.ItemVariation.InventoryAlertType inventory_alert_type = 13 [default=NONE];
+            optional int64 inventory_alert_threshold = 14;
+            optional bool track_inventory = 15;
+            optional string user_data = 16;
+            optional int64 service_duration = 18;
+            optional string price_description = 20;
+            optional int64 transition_time = 21;
+            optional squareup.common.dinero.Money no_show_fee_money = 22;
+            optional bool available_on_online_booking_site = 23;
+            repeated string employee_tokens = 24;
+            optional squareup.api.items.MerchantCatalogObjectReference catalog_object_reference = 19;
+            optional string measurement_unit_token = 25;
+            optional string v2_id = 26;
+            repeated squareup.api.items.ItemOptionValueForItemVariation item_option_values = 27;
+            repeated squareup.api.items.Intermission intermissions = 28;
+            repeated squareup.connect.v2.merchant_catalog.resources.CatalogCustomAttributeValue custom_attribute_values = 30;
+            repeated string resource_tokens = 31;
+
+            enum InventoryAlertType {
+
+                NONE = 1;
+                LOW_QUANTITY = 2;
+            }
+        }
+
+        message ItemImage {
+
+            optional string id = 2;
+            optional string url = 1;
+            optional squareup.api.items.MerchantCatalogObjectReference catalog_object_reference = 3;
+        }
+
+        message MenuCategory {
+
+            optional string id = 2;
+            optional string name = 1;
+            optional int32 ordinal = 3;
+            optional squareup.api.items.MerchantCatalogObjectReference catalog_object_reference = 4;
+            optional squareup.api.items.StraightFireType straight_fire = 5;
+            optional string color = 6;
+            optional string abbreviation = 7;
+            optional string v2_id = 8;
+        }
+
+        message Fee {
+
+            optional string id = 15;
+            optional string name = 3;
+            optional string percentage = 4;
+            optional squareup.common.dinero.Money amount = 5;
+            optional squareup.api.items.CalculationPhase calculation_phase = 6 [default=FEE_SUBTOTAL_PHASE];
+            optional string fee_type_id = 9;
+            optional string fee_type_name = 10;
+            optional squareup.api.items.Fee.AdjustmentType adjustment_type = 11 [default=TAX];
+            optional bool applies_to_custom_amounts = 12 [default=true];
+            optional bool enabled = 13 [default=true];
+            optional squareup.api.items.Fee.InclusionType inclusion_type = 14 [default=ADDITIVE];
+            optional squareup.api.items.MerchantCatalogObjectReference catalog_object_reference = 16;
+            optional string v2_id = 17;
+            optional squareup.api.sync.ObjectId applies_to_product_set = 18;
+
+            enum AdjustmentType {
+
+                TAX = 0;
+                OBSOLETE_SURCHARGE = 1;
+            }
+
+            enum InclusionType {
+
+                ADDITIVE = 0;
+                INCLUSIVE = 1;
+            }
+        }
+
+        message Discount {
+
+            optional string id = 7;
+            optional string color = 1;
+            optional string name = 3;
+            optional string percentage = 4;
+            optional squareup.common.dinero.Money amount = 5;
+            optional bool pin_required = 6;
+            optional squareup.api.items.Discount.DiscountType discount_type = 8 [default=FIXED];
+            optional squareup.api.items.Discount.ApplicationMethod application_method = 9 [default=MANUALLY_APPLIED];
+            optional int32 comp_ordinal = 10;
+            optional squareup.api.items.MerchantCatalogObjectReference catalog_object_reference = 11;
+            optional string v2_id = 13;
+            optional squareup.api.items.Discount.ModifyTaxBasis modify_tax_basis = 14 [default=MODIFY_TAX_BASIS];
+            optional squareup.common.dinero.Money maximum_amount = 15;
+
+            enum DiscountType {
+
+                FIXED = 0;
+                VARIABLE_PERCENTAGE = 1;
+                VARIABLE_AMOUNT = 2;
+            }
+
+            enum ApplicationMethod {
+
+                MANUALLY_APPLIED = 0;
+                COMP = 1;
+            }
+
+            enum ModifyTaxBasis {
+
+                MODIFY_TAX_BASIS = 0;
+                DO_NOT_MODIFY_TAX_BASIS = 1;
+            }
+        }
+
+        message DiningOption {
+
+            optional string id = 1;
+            optional string name = 2;
+            optional int32 ordinal = 3;
+            optional squareup.api.items.MerchantCatalogObjectReference catalog_object_reference = 4;
+        }
+
+        message TicketTemplate {
+
+            optional string id = 1;
+            optional string name = 2;
+            optional int32 ordinal = 3;
+            optional squareup.api.sync.ObjectId ticket_group = 4;
+        }
+
+        message TicketGroup {
+
+            optional string id = 1;
+            optional string name = 2;
+            optional int32 ordinal = 3;
+            optional squareup.api.items.TicketGroup.NamingMethod naming_method = 4 [default=AUTOMATIC_NUMBERING];
+            optional string label = 5;
+
+            enum NamingMethod {
+
+                AUTOMATIC_NUMBERING = 0;
+                MANUAL = 1;
+            }
+        }
+
+        message Menu {
+
+            optional string id = 1;
+            optional string name = 2;
+            optional squareup.api.sync.ObjectId root_tag = 3;
+            optional squareup.api.items.MerchantCatalogObjectReference catalog_object_reference = 4;
+        }
+
+        message Surcharge {
+
+            optional string id = 1;
+            optional string name = 2;
+            optional string percentage = 3;
+            optional squareup.common.dinero.Money amount = 8;
+            optional squareup.api.items.Surcharge.Type type = 4;
+            optional bool taxable = 5 [default=true];
+            optional squareup.api.items.CalculationPhase calculation_phase = 6 [default=SURCHARGE_PHASE];
+            optional squareup.api.items.Surcharge.AutoGratuitySettings auto_gratuity = 7;
+            optional squareup.api.items.MerchantCatalogObjectReference catalog_object_reference = 9;
+
+            enum Type {
+
+                UNKNOWN = 0;
+                AUTO_GRATUITY = 1;
+                CUSTOM = 2;
+            }
+
+            message AutoGratuitySettings {
+
+                optional int32 minimum_seat_count = 1;
+                optional squareup.api.items.Surcharge.AutoGratuitySettings.AutoEnableType auto_enable_type = 2;
+
+                enum AutoEnableType {
+
+                    UNKNOWN = 0;
+                    MINIMUM_SEAT_COUNT = 1;
+                    ALWAYS = 2;
+                }
+            }
+        }
+
+        message OnlineStoreItemData {
+
+            optional int32 version = 1;
+            optional squareup.api.items.OnlineStoreItemData.OnlineStoreItemType type = 2;
+            optional squareup.api.items.OnlineStoreEventData event_data = 3;
+            optional squareup.api.items.OnlineStoreDonationData donation_data = 4;
+            optional squareup.api.items.OnlineStorePickupData pickup_data = 5;
+            optional bool opted_out_for_auto_sharing = 6;
+
+            enum OnlineStoreItemType {
+
+                UNKNOWN_DO_NOT_SET = 0;
+                GENERIC = 1;
+                EVENT = 2;
+                SERVICE = 3;
+                DONATION = 4;
+                GIFT_CARD = 5;
+            }
+        }
+
+        message OnlineStoreEventData {
+
+            optional squareup.common.time.DateTime start_time = 1;
+            optional squareup.common.time.DateTime end_time = 2;
+            optional string location = 3;
+            optional squareup.common.time.DateTime admission_time = 4;
+            optional string venue = 5;
+        }
+
+        message OnlineStoreDonationData {
+
+            optional int32 target_amount_cents = 1;
+        }
+
+        message OnlineStorePickupData {
+
+            optional string pickup_address = 1;
+        }
+    }
+}
+
+message bills {
+
+    message MobileStaff {
+
+        optional string user_token = 1;
+        optional squareup.roster.service.UserLookupResponse read_only_roster_user = 2;
+        optional string read_only_name = 3;
+        optional string read_only_profile_photo_url = 4;
+        optional string read_only_mobile_staff_id = 5;
+    }
+
+    message Employee {
+
+        optional string employee_token = 1;
+        optional squareup.roster.service.EmployeeLookupResponse read_only_roster_employee = 2;
+        optional string read_only_full_name = 3;
+        optional string read_only_profile_photo_url = 4;
+        optional string first_name = 5;
+        optional string last_name = 6;
+        optional string read_only_employee_number = 7;
+    }
+
+    message CreatorDetails {
+
+        optional squareup.bills.MobileStaff mobile_staff = 1;
+        optional squareup.bills.Employee employee = 2;
+        optional squareup.bills.DeviceCredential device_credential = 3;
+    }
+
+    message DeviceCredential {
+
+        optional string token = 1;
+        optional string name = 2;
+    }
+
+    message ISO8601Date {
+
+        optional string date_string = 1;
+    }
+
+    message DatePair {
+
+        optional squareup.bills.ISO8601Date client_date = 1;
+        optional squareup.bills.ISO8601Date server_date = 2;
+    }
+
+    message Tender {
+
+        enum Type {
+
+            UNKNOWN = 0;
+            CARD = 1;
+            CASH = 2;
+            NO_SALE = 3;
+            OTHER = 4;
+            WALLET = 5;
+            GENERIC = 6;
+            BANK_TRANSFER = 7;
+            ZERO_AMOUNT = 9;
+            SQUARE_CAPITAL = 12;
+            EXTERNAL = 13;
+        }
+    }
+
+    message CardTender {
+
+        message Card {
+
+            enum Brand {
+
+                UNKNOWN_BRAND = 1;
+                VISA = 2;
+                MASTERCARD = 3;
+                AMERICAN_EXPRESS = 4;
+                DISCOVER = 5;
+                DISCOVER_DINERS = 6;
+                JCB = 7;
+                CHINA_UNIONPAY = 8;
+                SQUARE_GIFT_CARD_V2 = 9;
+                INTERAC = 10;
+                SQUARE_CAPITAL_CARD = 11;
+                EFTPOS = 12;
+                FELICA = 13;
+                ALIPAY = 14;
+                CASH_APP = 15;
+                EBT = 16;
+            }
+        }
+    }
+
+    message CardData {
+
+        message KeyedCard {
+
+            message Expiry {
+
+                optional string month = 1;
+                optional string year = 2;
+            }
+        }
+    }
+
+    message TranslatedName {
+
+        optional string localized_name = 1;
+        optional squareup.bills.TranslatedName.TranslationType translation_type = 2 [default=UNKNOWN];
+
+        enum TranslationType {
+
+            UNKNOWN = 1;
+            CUSTOM_AMOUNT_ITEM = 2;
+            UNITEMIZED_TAX = 3;
+            DEFAULT_DISCOUNT = 4;
+            DEFAULT_ITEM = 5;
+            DEFAULT_SALES_TAX = 6;
+            DEFAULT_TIP = 7;
+            CHANGE = 8;
+            REFUND = 9;
+            CASH_REFUND = 10;
+            INCLUSIVE_TAX = 11;
+            DEFAULT_ITEM_MODIFIER = 12;
+            CREDIT = 13;
+        }
+    }
+
+    message Cart {
+
+        optional squareup.bills.Cart.CatalogVersion catalog_version = 6;
+        optional squareup.bills.Cart.LineItems line_items = 1;
+        optional squareup.bills.Cart.Amounts amounts = 2;
+        repeated squareup.bills.Cart.ReturnLineItems return_line_items = 7;
+        optional squareup.bills.Cart.AmountDetails amount_details = 8;
+        optional squareup.bills.Cart.FeatureDetails feature_details = 3;
+        optional string read_only_custom_note = 4;
+        optional string group_token = 9;
+        optional string created_by_unit_token = 10;
+
+        enum CatalogVersion {
+
+            UNKNOWN = 0;
+            COGS_CATALOG = 1;
+            MERCHANT_CATALOG = 2;
+        }
+
+        message LineItems {
+
+            repeated squareup.bills.Itemization itemization = 1;
+            repeated squareup.bills.FeeLineItem fee = 2;
+            repeated squareup.bills.DiscountLineItem discount = 3;
+            optional squareup.bills.RoundingAdjustmentLineItem rounding_adjustment = 4;
+            optional squareup.bills.DiningOptionLineItem default_dining_option = 5;
+            repeated squareup.bills.Itemization comp_itemization = 6;
+            repeated squareup.bills.Itemization void_itemization = 7;
+            repeated squareup.bills.SurchargeLineItem surcharge = 8;
+        }
+
+        message Amounts {
+
+            optional squareup.common.Money total_money = 1;
+            optional squareup.common.Money tax_money = 2;
+            optional squareup.common.Money discount_money = 4;
+            optional squareup.common.Money tip_money = 5;
+            optional squareup.common.Money surcharge_money = 6;
+        }
+
+        message ReturnLineItems {
+
+            optional squareup.common.token.TokenPair source_bill_token_pair = 1;
+            repeated squareup.bills.Cart.ReturnLineItems.ReturnItemization return_itemization = 2;
+            repeated squareup.bills.DiscountLineItem discount_line_item = 3;
+            repeated squareup.bills.FeeLineItem fee_line_item = 4;
+            optional squareup.bills.RoundingAdjustmentLineItem rounding_adjustment = 5;
+            repeated squareup.bills.ReturnTipLineItem return_tip_line_item = 6;
+            repeated squareup.bills.ReturnSurchargeLineItem return_surcharge_line_item = 7;
+
+            message ReturnItemization {
+
+                optional squareup.common.token.TokenPair source_itemization_token_pair = 1;
+                optional squareup.bills.Itemization itemization = 2;
+            }
+        }
+
+        message AmountDetails {
+
+            optional squareup.bills.Cart.Amounts return = 1;
+            optional squareup.bills.Cart.Amounts net = 2;
+        }
+
+        message FeatureDetails {
+
+            optional squareup.bills.Cart.FeatureDetails.PickupOrder pickup_order = 1;
+            optional squareup.bills.Cart.FeatureDetails.OpenTicket open_ticket = 2;
+            optional squareup.bills.Cart.FeatureDetails.Invoice invoice = 3;
+            optional squareup.bills.Cart.FeatureDetails.KitchenPrinting kitchen_printing = 4;
+            optional squareup.bills.Cart.FeatureDetails.BuyerInfo buyer_info = 5;
+            optional squareup.bills.Cart.FeatureDetails.AppointmentsDetails appointments_details = 6;
+            repeated squareup.bills.Cart.FeatureDetails.InstrumentDetails available_instrument_details = 7;
+            optional squareup.bills.Cart.FeatureDetails.Order order = 8;
+            optional squareup.bills.Cart.FeatureDetails.CoursingOptions coursing_options = 9;
+            optional squareup.bills.Cart.FeatureDetails.Seating seating = 10;
+            optional squareup.bills.Cart.FeatureDetails.BillPrintState bill_print_state = 11;
+            optional squareup.bills.Cart.FeatureDetails.ReopenDetails reopen_details = 12;
+            repeated squareup.bills.Cart.FeatureDetails.CoverCountEvent cover_count_change_log = 13;
+            optional squareup.bills.Cart.FeatureDetails.AuthAndDelayedCapture auth_and_delayed_capture = 14;
+            repeated squareup.bills.Cart.FeatureDetails.LifecycleEvent lifecycle_event = 15;
+            optional squareup.bills.Cart.FeatureDetails.PricingEngineState pricing_engine_state = 16;
+            optional squareup.waiter.data.WaiterFeatureDetailsExtension waiter_feature_details_extension = 28250;
+
+            message PickupOrder {
+
+                optional string note = 2;
+            }
+
+            message OpenTicket {
+
+                optional string name = 1;
+                optional string note = 2;
+                optional squareup.common.token.TokenPair ticket_token_pair = 3;
+                optional squareup.bills.CreatorDetails ticket_owner = 4;
+                optional squareup.bills.Cart.FeatureDetails.OpenTicket.PredefinedTicket predefined_ticket = 5;
+                optional string unit_token = 6;
+                optional squareup.bills.ISO8601Date created_at = 7;
+                repeated squareup.bills.Cart.FeatureDetails.OpenTicket.OpenTicketProductAssociation products_opened_on = 8;
+
+                message PredefinedTicket {
+
+                    optional squareup.api.items.TicketGroup ticket_group = 1;
+                    optional squareup.api.items.TicketTemplate ticket_template = 2;
+                }
+
+                enum OpenTicketProductAssociation {
+
+                    DO_NOT_SET = 0;
+                    RESTAURANT_POS = 1;
+                }
+            }
+
+            message Invoice {
+
+                optional squareup.common.token.TokenPair invoice_token_pair = 1;
+                optional string version = 2;
+                optional bool is_final_payment = 3 [default=true];
+            }
+
+            message KitchenPrinting {
+
+                optional string name = 1;
+            }
+
+            message InstrumentDetails {
+
+                optional string instrument_token = 1;
+                optional squareup.bills.Cart.FeatureDetails.InstrumentDetails.DisplayDetails display_details = 2;
+
+                message DisplayDetails {
+
+                    optional string cardholder_name = 1;
+                    optional string last_four = 2;
+                    optional squareup.bills.CardTender.Card.Brand brand = 3;
+                    optional squareup.bills.CardData.KeyedCard.Expiry expiry = 4;
+                }
+            }
+
+            message BuyerInfo {
+
+                optional string customer_token = 1;
+                optional squareup.bills.Cart.FeatureDetails.BuyerInfo.DisplayDetails display_details = 2;
+                repeated squareup.bills.Cart.FeatureDetails.InstrumentDetails available_instrument_details = 3;
+
+                message DisplayDetails {
+
+                    optional string display_name = 1;
+                    optional squareup.bills.ISO8601Date last_visit = 2;
+                    optional string email = 3;
+                    optional string phone_number = 4;
+                    optional string phone_token = 5;
+                    optional string loyalty_account_phone_token = 6;
+                }
+            }
+
+            message AppointmentsDetails {
+
+                optional string appointment_id = 1;
+                optional squareup.bills.CreatorDetails appointment_staff = 2;
+            }
+
+            message Order {
+
+                optional squareup.common.token.TokenPair order_token_pair = 1;
+                optional string reference_id = 2;
+            }
+
+            message SourceTicketInformation {
+
+                optional string client_id = 1;
+                optional string name = 2;
+            }
+
+            message CoursingOptions {
+
+                repeated squareup.bills.Cart.FeatureDetails.CoursingOptions.Course course = 1;
+
+                message Course {
+
+                    optional squareup.common.token.TokenPair course_token_pair = 1;
+                    optional uint32 ordinal = 2;
+                    optional bool straight_fire = 3;
+                    repeated squareup.bills.Cart.FeatureDetails.CoursingOptions.Course.Event event = 4;
+                    optional squareup.bills.Cart.FeatureDetails.SourceTicketInformation source_ticket_information = 5;
+
+                    message Event {
+
+                        optional squareup.common.token.TokenPair event_token_pair = 1;
+                        optional squareup.bills.Cart.FeatureDetails.CoursingOptions.Course.Event.EventType event_type = 2;
+                        optional squareup.bills.ISO8601Date created_at = 3;
+                        optional squareup.bills.CreatorDetails creator_details = 4;
+
+                        enum EventType {
+
+                            UNKNOWN = 0;
+                            CREATION = 1;
+                            SEND = 2;
+                            ADDITION = 3;
+                            FIRE = 4;
+                        }
+                    }
+                }
+            }
+
+            message Seating {
+
+                repeated squareup.bills.Cart.FeatureDetails.Seating.Seat seat = 1;
+                repeated squareup.bills.Cart.FeatureDetails.CoverCountEvent cover_count_change_log = 2;
+                optional uint32 read_only_cover_count = 3;
+
+                message Seat {
+
+                    optional squareup.common.token.TokenPair seat_token_pair = 1;
+                    optional uint32 ordinal = 2;
+                    optional bool enabled = 3 [default=true];
+                    optional squareup.bills.ISO8601Date created_at = 4;
+                    optional string source_open_ticket_client_token = 5;
+                    optional string source_open_ticket_name = 6;
+                    optional squareup.bills.Cart.FeatureDetails.SourceTicketInformation source_ticket_information = 7;
+                }
+            }
+
+            message BillPrintState {
+
+                optional squareup.bills.ISO8601Date bill_printed_at = 1;
+                optional bool latest_bill_printed = 2;
+            }
+
+            message ReopenDetails {
+
+                optional squareup.bills.ISO8601Date reopened_at = 1;
+                repeated squareup.bills.Cart.FeatureDetails.ReopenDetails.TenderDisplayDetails tender_display_details = 2;
+
+                message TenderDisplayDetails {
+
+                    optional squareup.bills.Tender.Type type = 1;
+                    optional squareup.common.Money total_money = 2;
+                    optional squareup.bills.Cart.FeatureDetails.InstrumentDetails.DisplayDetails instrument_details = 3;
+                    optional squareup.common.token.TokenPair tender_token_pair = 4;
+                }
+            }
+
+            message CoverCountEvent {
+
+                optional string event_id = 1;
+                optional squareup.bills.Cart.FeatureDetails.CoverCountEvent.EventType event_type = 2;
+                optional uint32 count = 3;
+                optional bool is_confirmed = 4;
+                optional squareup.bills.CreatorDetails creator_details = 5;
+                optional squareup.bills.ISO8601Date created_at = 6;
+                optional uint32 ordinal = 7;
+
+                enum EventType {
+
+                    DO_NOT_USE = 0;
+                    USER_SELECTED = 1;
+                    SPLIT = 2;
+                    MERGE = 3;
+                    VOID = 4;
+                }
+            }
+
+            message AuthAndDelayedCapture {
+
+                optional string bill_server_id = 1;
+            }
+
+            message LifecycleEvent {
+
+                optional squareup.common.token.TokenPair event_id_pair = 1;
+                optional squareup.bills.Cart.FeatureDetails.LifecycleEvent.EventType event_type = 2;
+                optional squareup.bills.ISO8601Date created_at = 3;
+                optional squareup.bills.CreatorDetails creator_details = 4;
+                optional squareup.bills.Cart.FeatureDetails.LifecycleEvent.OwnershipTransferDetails ownership_transfer_details = 5;
+
+                enum EventType {
+
+                    UNKNOWN = 0;
+                    CLOSE = 1;
+                    REOPEN = 2;
+                    OWNERSHIP_TRANSFER = 3;
+                    OPEN = 4;
+                }
+
+                message OwnershipTransferDetails {
+
+                    optional squareup.bills.Employee transfer_from_employee = 1;
+                    optional squareup.bills.Employee transfer_to_employee = 2;
+                }
+            }
+
+            message PricingEngineState {
+
+                repeated string blacklisted_discount_ids = 1;
+            }
+        }
+    }
+
+    message Itemization {
+
+        optional string quantity = 1;
+        optional squareup.omg.model.Order.QuantityUnit measurement_unit = 13;
+        optional squareup.bills.Itemization.QuantityEntryType quantity_entry_type = 12 [default=MANUALLY_ENTERED];
+        optional string custom_note = 2;
+        optional squareup.bills.Itemization.Configuration configuration = 4;
+        optional squareup.bills.Itemization.BackingDetails write_only_backing_details = 5;
+        optional squareup.bills.Itemization.DisplayDetails read_only_display_details = 6;
+        optional squareup.bills.Itemization.Amounts amounts = 7;
+        optional squareup.common.token.TokenPair itemization_token_pair = 8;
+        optional squareup.bills.DatePair created_at = 9;
+        repeated squareup.bills.Itemization.Event event = 10;
+        optional squareup.bills.Itemization.FeatureDetails feature_details = 11;
+        optional squareup.waiter.private.extensions.DeleteReason delete_reason = 101;
+        optional bool deleted = 100;
+        optional squareup.waiter.data.WaiterExtension waiter_extension = 28250;
+        optional squareup.billing.data.BillingItemizationData billing_data = 100141;
+
+        enum QuantityEntryType {
+
+            DO_NOT_USE = 0;
+            MANUALLY_ENTERED = 1;
+            READ_FROM_SCALE = 2;
+            MANUAL_WITH_CONNECTED_SCALE = 3;
+        }
+
+        message Configuration {
+
+            optional squareup.bills.Itemization.Configuration.SelectedOptions selected_options = 1;
+            optional squareup.bills.Itemization.Configuration.BackingType backing_type = 2;
+            optional squareup.common.Money item_variation_price_money = 3;
+            optional squareup.api.items.MenuCategory category = 4;
+
+            message SelectedOptions {
+
+                optional squareup.api.items.ItemVariation item_variation_deprecated = 1;
+                repeated squareup.bills.ModifierOptionLineItem modifier_option = 2;
+                repeated squareup.bills.DiscountLineItem discount = 3;
+                repeated squareup.bills.FeeLineItem fee = 4;
+                optional squareup.bills.Itemization.Configuration.SelectedOptions.ItemVariationDetails item_variation_details = 5;
+                optional squareup.bills.DiningOptionLineItem dining_option = 6;
+
+                message ItemVariationDetails {
+
+                    optional squareup.bills.Itemization.Configuration.SelectedOptions.ItemVariationDetails.DisplayDetails read_only_display_details = 1;
+                    optional squareup.bills.Itemization.Configuration.SelectedOptions.ItemVariationDetails.BackingDetails write_only_backing_details = 2;
+                    optional squareup.bills.Itemization.Configuration.SelectedOptions.ItemVariationDetails.GiftCardDetails gift_card_details = 3;
+                    optional bool display_variation_name = 4;
+
+                    message DisplayDetails {
+
+                        optional string name = 1;
+                        optional squareup.common.Money price_money = 2;
+                        optional string cogs_object_id = 3;
+                        optional string sku = 4;
+                    }
+
+                    message BackingDetails {
+
+                        optional squareup.api.items.ItemVariation item_variation = 1;
+                        optional squareup.bills.Itemization.Configuration.SelectedOptions.ItemVariationDetails.BackingDetails.MerchantCatalogObjects merchant_catalog_objects = 2;
+                        optional squareup.omg.model.Order.QuantityUnit measurement_unit = 3;
+
+                        message MerchantCatalogObjects {
+
+                            optional squareup.items.merchant.CatalogObject item_variation = 1;
+                        }
+                    }
+
+                    message GiftCardDetails {
+
+                        optional string gift_card_token = 1;
+                        optional squareup.bills.Itemization.Configuration.SelectedOptions.ItemVariationDetails.GiftCardDetails.ActivityType activity_type = 2;
+                        optional string write_only_fidelius_token = 3;
+                        optional string pan_suffix = 4;
+                        repeated string promotion_tokens = 5;
+
+                        enum ActivityType {
+
+                            UNKNOWN = 0;
+                            ACTIVATION = 1;
+                            RELOAD = 2;
+                        }
+                    }
+                }
+            }
+
+            enum BackingType {
+
+                UNKNOWN = 0;
+                CUSTOM_AMOUNT = 1;
+                ITEMS_SERVICE_ITEM_VARIATION = 2;
+                CUSTOM_ITEM_VARIATION = 3;
+            }
+        }
+
+        message BackingDetails {
+
+            optional squareup.api.items.Item item = 1;
+            optional squareup.api.items.ItemImage item_image = 2;
+            optional squareup.api.items.MenuCategory category = 3;
+            optional squareup.bills.Itemization.BackingDetails.MerchantCatalogObjects merchant_catalog_objects = 5;
+            optional squareup.bills.Itemization.BackingDetails.AvailableOptions available_options = 4;
+            optional squareup.api.items.Menu menu = 6;
+
+            message MerchantCatalogObjects {
+
+                optional squareup.items.merchant.CatalogObject item = 1;
+                optional squareup.items.merchant.CatalogObject item_image = 2;
+                optional squareup.items.merchant.CatalogObject category = 3;
+            }
+
+            message AvailableOptions {
+
+                repeated squareup.api.items.ItemVariation item_variation = 1;
+                repeated squareup.bills.Itemization.BackingDetails.AvailableOptions.ModifierList modifier_list = 2;
+
+                message ModifierList {
+
+                    optional squareup.api.items.ItemModifierList modifier_list = 1;
+                    repeated squareup.api.items.ItemModifierOption modifier_option = 2;
+                }
+            }
+        }
+
+        message DisplayDetails {
+
+            optional squareup.bills.Itemization.DisplayDetails.Item item = 2;
+
+            message Item {
+
+                optional string color = 1;
+                optional string description = 2;
+                optional string name = 3;
+                optional string abbreviation = 4;
+                optional string image_url = 5;
+                optional string cogs_object_id = 6;
+                optional string image_id = 7;
+                optional squareup.bills.Itemization.DisplayDetails.Item.MenuCategory menu_category = 8;
+                optional squareup.bills.Itemization.DisplayDetails.Item.Menu menu = 9;
+
+                message MenuCategory {
+
+                    optional string cogs_object_id = 1;
+                    optional string name = 2;
+                }
+
+                message Menu {
+
+                    optional string cogs_object_id = 1;
+                    optional string name = 2;
+                }
+            }
+        }
+
+        message Amounts {
+
+            optional squareup.common.Money item_variation_price_money = 1;
+            optional squareup.common.Money item_variation_price_times_quantity_money = 2;
+            optional squareup.common.Money discount_money = 3;
+            optional squareup.common.Money tax_money = 4;
+            optional squareup.common.Money total_money = 5;
+            optional squareup.common.Money gross_sales_money = 6;
+            optional squareup.bills.Itemization.Amounts.ReportingAmounts read_only_reporting_amounts = 7;
+            optional squareup.common.Money taxable_amount = 8;
+
+            message ReportingAmounts {
+
+                optional squareup.bills.Itemization.Amounts.ReportingAmounts.CostOfGoodsAmounts fifo_cost_of_goods_sold_amounts = 1;
+                optional squareup.bills.Itemization.Amounts.ReportingAmounts.CostOfGoodsAmounts lifo_cost_of_goods_sold_amounts = 2;
+                optional squareup.bills.Itemization.Amounts.ReportingAmounts.CostOfGoodsAmounts average_cost_of_goods_sold_amounts = 3;
+                repeated squareup.bills.Itemization.Amounts.ReportingAmounts.VendorCostOfGoodsAmounts fifo_vendor_cost_of_goods_sold_amounts = 5;
+                repeated squareup.bills.Itemization.Amounts.ReportingAmounts.VendorCostOfGoodsAmounts lifo_vendor_cost_of_goods_sold_amounts = 6;
+
+                message CostOfGoodsAmounts {
+
+                    optional squareup.common.Money item_variation_total_cost_money = 1;
+                    optional string item_variation_cogs_quantity = 2;
+                }
+
+                message VendorCostOfGoodsAmounts {
+
+                    optional string vendor_token = 1;
+                    optional string vendor_quantity = 2;
+                    optional squareup.bills.Itemization.Amounts.ReportingAmounts.CostOfGoodsAmounts cost_of_goods_sold_amounts = 3;
+                }
+            }
+        }
+
+        message Event {
+
+            optional squareup.common.token.TokenPair event_token_pair = 1;
+            optional squareup.bills.Itemization.Event.EventType event_type = 2;
+            optional squareup.bills.ISO8601Date created_at = 3;
+            optional squareup.bills.CreatorDetails creator_details = 4;
+            optional string reason = 5;
+            optional squareup.bills.Itemization.Event.SplitEventDetails split_event_details = 6;
+
+            enum EventType {
+
+                UNKNOWN = 0;
+                CREATION = 1;
+                COMP = 2;
+                VOID = 3;
+                UNCOMP = 4;
+                DELETE = 5;
+                SPLIT = 6;
+                FIRE = 7;
+                SEND = 8;
+                DISCOUNT = 9;
+                REMOVE_DISCOUNT = 10;
+            }
+
+            message SplitEventDetails {
+
+                repeated squareup.bills.Itemization.Event.SplitEventDetails.ChildItemization child_itemization = 1;
+
+                message ChildItemization {
+
+                    optional squareup.common.token.TokenPair ticket_token_pair = 1;
+                    optional squareup.common.token.TokenPair child_itemization_token_pair = 2;
+                }
+            }
+        }
+
+        message FeatureDetails {
+
+            optional squareup.common.token.TokenPair course_token_pair = 1;
+            optional squareup.bills.Itemization.FeatureDetails.Seating seating = 2;
+            optional squareup.bills.Itemization.FeatureDetails.AppointmentsServiceDetails appointments_service_details = 3;
+            optional squareup.bills.Itemization.FeatureDetails.InheritedItemizationDetails inherited_itemization_details = 4;
+            optional squareup.bills.Itemization.FeatureDetails.PricingEngineState pricing_engine_state = 5;
+
+            message Seating {
+
+                optional squareup.bills.Itemization.FeatureDetails.Seating.Destination destination = 1;
+
+                message Destination {
+
+                    optional squareup.bills.Itemization.FeatureDetails.Seating.Destination.Type type = 1;
+                    repeated squareup.common.token.TokenPair seat_token_pair = 2;
+                    optional squareup.bills.ISO8601Date created_at = 3;
+
+                    enum Type {
+
+                        UNKNOWN = 0;
+                        TABLE_SHARE = 1;
+                        SEAT = 2;
+                    }
+                }
+            }
+
+            message AppointmentsServiceDetails {
+
+                optional string service_id = 1;
+                optional int64 service_duration = 2;
+                optional int32 ordinal = 3;
+                optional int64 transition_time_duration = 4;
+                optional squareup.api.items.PricingType pricing_type = 5;
+                optional squareup.common.Money no_show_fee_money = 6;
+                repeated squareup.api.items.Intermission intermissions = 7;
+                repeated string resource_tokens = 8;
+            }
+
+            message InheritedItemizationDetails {
+
+                repeated squareup.common.token.TokenPair inherited_event_token_pairs = 1;
+                optional squareup.bills.Itemization.FeatureDetails.InheritedItemizationDetails.CreateReason create_reason = 2;
+
+                enum CreateReason {
+
+                    DO_NOT_USE = 0;
+                    REOPEN = 1;
+                }
+            }
+
+            message PricingEngineState {
+
+                repeated string blacklisted_discount_ids = 1;
+            }
+        }
+    }
+
+    message DiscountLineItem {
+
+        optional squareup.bills.DiscountLineItem.Configuration configuration = 5;
+        optional squareup.bills.DiscountLineItem.BackingDetails write_only_backing_details = 1;
+        optional squareup.bills.DiscountLineItem.DisplayDetails read_only_display_details = 2;
+        optional squareup.bills.DiscountLineItem.Amounts amounts = 3;
+        optional squareup.common.token.TokenPair discount_line_item_token_pair = 4;
+        optional squareup.bills.DatePair created_at = 6;
+        optional squareup.bills.ApplicationScope application_scope = 7;
+        optional squareup.bills.DiscountLineItem.ApplicationMethod application_method = 8;
+        optional string discount_quantity = 9;
+        optional squareup.waiter.private.extensions.DeleteReason delete_reason = 101;
+        optional bool deleted = 100;
+        optional squareup.waiter.data.WaiterExtension waiter_extension = 28250;
+
+        message Configuration {
+
+            optional string variable_percentage = 1;
+            optional squareup.common.Money variable_amount_money = 2;
+        }
+
+        message BackingDetails {
+
+            optional squareup.api.items.Discount discount = 1;
+            optional squareup.bills.DiscountLineItem.BackingDetails.MerchantCatalogObjects merchant_catalog_objects = 4;
+            optional string coupon_token = 2;
+            optional squareup.bills.DiscountLineItem.BackingDetails.BackingType backing_type = 3;
+            repeated string coupon_tokens = 5;
+
+            message MerchantCatalogObjects {
+
+                optional squareup.items.merchant.CatalogObject discount = 1;
+            }
+
+            enum BackingType {
+
+                ITEMS_SERVICE_DISCOUNT = 0;
+                CUSTOM_DISCOUNT = 1;
+            }
+        }
+
+        message DisplayDetails {
+
+            optional string name = 1;
+            optional string percentage = 2;
+            optional string cogs_object_id = 3;
+            optional string coupon_token = 4;
+            optional squareup.api.items.Discount.ApplicationMethod application_method = 5;
+            repeated string coupon_tokens = 6;
+        }
+
+        message Amounts {
+
+            optional squareup.common.Money applied_money = 1;
+        }
+
+        enum ApplicationMethod {
+
+            UNKNOWN = 0;
+            MANUAL = 1;
+            PRICING_RULE = 2;
+        }
+    }
+
+    enum ApplicationScope {
+
+        UNKNOWN = 0;
+        ITEMIZATION_LEVEL = 1;
+        CART_LEVEL = 2;
+        CART_LEVEL_FIXED = 3;
+        ITEMIZATION_LEVEL_PER_QUANTITY = 4;
+    }
+
+    message FeeLineItem {
+
+        optional squareup.bills.FeeLineItem.BackingDetails write_only_backing_details = 1;
+        optional squareup.bills.FeeLineItem.DisplayDetails read_only_display_details = 2;
+        optional squareup.bills.FeeLineItem.Amounts amounts = 3;
+        optional squareup.bills.TranslatedName read_only_translated_name = 4;
+        optional squareup.common.token.TokenPair fee_line_item_token_pair = 5;
+        optional squareup.bills.DatePair created_at = 6;
+        optional squareup.bills.ApplicationScope application_scope = 7;
+        optional squareup.waiter.private.extensions.DeleteReason delete_reason = 101;
+        optional bool deleted = 100;
+        optional squareup.waiter.data.WaiterExtension waiter_extension = 28250;
+
+        message BackingDetails {
+
+            optional squareup.api.items.Fee fee = 1;
+            optional squareup.bills.FeeLineItem.BackingDetails.MerchantCatalogObjects merchant_catalog_objects = 3;
+            optional squareup.bills.FeeLineItem.BackingDetails.BackingType backing_type = 2;
+
+            message MerchantCatalogObjects {
+
+                optional squareup.items.merchant.CatalogObject fee = 1;
+            }
+
+            enum BackingType {
+
+                ITEMS_SERVICE_FEE = 0;
+                CUSTOM_FEE = 1;
+            }
+        }
+
+        message DisplayDetails {
+
+            optional string name = 1;
+            optional string percentage = 2;
+            optional squareup.api.items.CalculationPhase calculation_phase = 3;
+            optional squareup.api.items.Fee.InclusionType inclusion_type = 4;
+            optional string tax_type_name = 5;
+            optional string tax_type_number = 6;
+            optional string tax_type_id = 7;
+            optional string cogs_object_id = 8;
+            optional int32 tax_label_order = 9;
+        }
+
+        message Amounts {
+
+            optional squareup.common.Money applied_money = 2;
+            optional squareup.common.Money applied_to_money = 3;
+            optional squareup.common.Money after_application_total_money = 4;
+        }
+    }
+
+    message ModifierOptionLineItem {
+
+        optional squareup.bills.ModifierOptionLineItem.Amounts amounts = 1;
+        optional squareup.bills.ModifierOptionLineItem.DisplayDetails read_only_display_details = 2;
+        optional squareup.bills.ModifierOptionLineItem.BackingDetails write_only_backing_details = 3;
+        optional squareup.common.token.TokenPair modifier_option_line_item_token_pair = 4;
+        optional bool hide_from_customer = 5;
+        optional squareup.bills.ModifierOptionLineItem.FeatureDetails feature_details = 6;
+
+        message Amounts {
+
+            optional squareup.common.Money modifier_option_money = 1;
+            optional squareup.common.Money modifier_option_times_quantity_money = 2;
+        }
+
+        message DisplayDetails {
+
+            optional string name = 2;
+            optional uint32 sort_order = 3;
+            optional string cogs_object_id = 4;
+            optional squareup.bills.ModifierOptionLineItem.DisplayDetails.ModifierList modifier_list = 5;
+
+            message ModifierList {
+
+                optional string cogs_object_id = 1;
+                optional string name = 2;
+                optional squareup.api.items.ItemModifierList.SelectionType selection_type = 3;
+            }
+        }
+
+        message BackingDetails {
+
+            optional squareup.api.items.ItemModifierOption backing_modifier_option = 1;
+            optional squareup.api.items.ItemModifierList modifier_list = 2;
+            optional squareup.bills.ModifierOptionLineItem.BackingDetails.MerchantCatalogObjects merchant_catalog_objects = 4;
+            optional squareup.bills.ModifierOptionLineItem.BackingDetails.BackingType backing_type = 3;
+
+            message MerchantCatalogObjects {
+
+                optional squareup.items.merchant.CatalogObject modifier_option = 1;
+                optional squareup.items.merchant.CatalogObject modifier_list = 2;
+            }
+
+            enum BackingType {
+
+                UNKNOWN = 0;
+                ITEMS_SERVICE_MODIFIER_OPTION = 1;
+                CUSTOM_MODIFIER_OPTION = 2;
+            }
+        }
+
+        message FeatureDetails {
+
+            repeated squareup.bills.ModifierOptionLineItem.FeatureDetails.ConversationalMode conversational_mode = 1;
+            optional squareup.bills.ModifierOptionLineItem.FeatureDetails.Quantities quantities = 2;
+
+            message ConversationalMode {
+
+                optional squareup.bills.ModifierOptionLineItem.FeatureDetails.ConversationalMode.Type type = 1;
+
+                enum Type {
+
+                    UNKNOWN = 0;
+                    ADD = 1;
+                    EXTRA = 2;
+                    SIDE = 3;
+                    SUB = 4;
+                    NO = 5;
+                    ALLERGY = 6;
+                }
+            }
+
+            message Quantities {
+
+                optional string modifier_quantity = 1;
+                optional string modifier_quantity_times_itemization_quantity = 2;
+            }
+        }
+    }
+
+    message RoundingAdjustmentLineItem {
+
+        optional squareup.api.items.CalculationPhase calculation_phase = 1;
+        optional squareup.bills.RoundingAdjustmentLineItem.Amounts amounts = 2;
+        optional squareup.common.token.TokenPair rounding_adjustment_line_item_token_pair = 3;
+        optional string localized_name = 4;
+
+        message Amounts {
+
+            optional squareup.common.Money applied_money = 1;
+        }
+    }
+
+    message DiningOptionLineItem {
+
+        optional squareup.common.token.TokenPair dining_option_line_item_token_pair = 1;
+        optional squareup.bills.DiningOptionLineItem.BackingDetails backing_details = 2;
+        optional squareup.bills.ApplicationScope application_scope = 3;
+
+        message BackingDetails {
+
+            optional squareup.api.items.DiningOption dining_option = 1;
+            optional squareup.bills.DiningOptionLineItem.BackingDetails.MerchantCatalogObjects merchant_catalog_objects = 2;
+
+            message MerchantCatalogObjects {
+
+                optional squareup.items.merchant.CatalogObject dining_option = 1;
+            }
+        }
+    }
+
+    message TipLineItem {
+
+        optional squareup.common.token.TokenPair tip_line_item_token_pair = 1;
+        optional squareup.bills.TipLineItem.Amounts amounts = 2;
+        optional string tender_server_token = 3;
+
+        message Amounts {
+
+            optional squareup.common.Money applied_money = 1;
+        }
+    }
+
+    message SurchargeLineItem {
+
+        optional squareup.common.token.TokenPair surcharge_line_item_id_pair = 1;
+        optional squareup.bills.SurchargeLineItem.BackingDetails backing_details = 2;
+        optional squareup.bills.SurchargeLineItem.Amounts amounts = 3;
+        optional bool write_only_deleted = 4;
+        repeated squareup.bills.FeeLineItem fee = 5;
+
+        message BackingDetails {
+
+            optional squareup.api.items.Surcharge surcharge = 1;
+            optional squareup.bills.SurchargeLineItem.BackingDetails.BackingType backing_type = 2;
+
+            enum BackingType {
+
+                ITEMS_SERVICE_SURCHARGE = 0;
+                CUSTOM_SURCHARGE = 1;
+            }
+        }
+
+        message Amounts {
+
+            optional squareup.common.Money applied_money = 1;
+        }
+    }
+
+    message ReturnTipLineItem {
+
+        optional squareup.common.token.TokenPair source_tip_line_item_token_pair = 1;
+        optional squareup.bills.TipLineItem tip_line_item = 2;
+    }
+
+    message ReturnSurchargeLineItem {
+
+        optional squareup.common.token.TokenPair source_surcharge_line_item_id_pair = 1;
+        optional squareup.bills.SurchargeLineItem surcharge_line_item = 2;
+    }
+}
+
+message roster {
+
+    message common {
+
+        message SubscriptionFeatureStatus {
+
+            optional string feature = 1;
+            optional squareup.sub2.common.SubscriptionStatus status = 2;
+            optional string subscription_token = 3;
+        }
+
+        message TippingPreference {
+
+            optional bool enabled = 1;
+            optional bool use_custom_percentages = 2;
+            repeated double custom_percentages = 3;
+            optional bool use_manual_tip_entry = 4;
+            optional squareup.roster.common.TippingPreference.CalculationPhase calculation_phase = 5;
+
+            enum CalculationPhase {
+
+                POST_TAX_TIP_CALCULATION = 0;
+                PRE_TAX_TIP_CALCULATION = 1;
+            }
+        }
+    }
+
+    message service {
+
+        message Subscription {
+
+            optional string product_key = 1;
+            optional squareup.roster.service.Subscription.Status status = 2;
+
+            enum Status {
+
+                PENDING = 0;
+                FREE_TRIAL = 1;
+                ACTIVE = 2;
+                CANCELED = 3;
+                IN_GRACE = 4;
+                DELINQUENT = 5;
+                TERMINATED = 6;
+            }
+        }
+
+        message MerchantProfileLookupResponse {
+
+            message CanadianMerchantProfile {
+
+                optional string gst_hst_number = 1;
+                optional string qst_number = 2;
+            }
+        }
+
+        message PrivateInformation {
+
+            optional string type = 1;
+            optional string tin_fidelius_token = 2;
+            optional int64 created_at = 3;
+        }
+
+        message UnderwritingDecision {
+
+            optional string state = 1;
+        }
+
+        enum UserLookupStatus {
+
+            INVALID = 0;
+            SUCCESS = 1;
+            FAILURE = 2;
+            ERROR = 3;
+        }
+
+        message UserLookupResponse {
+
+            optional squareup.roster.service.UserLookupStatus status = 1;
+            optional string message = 2;
+            optional string legacy_user_id = 3;
+            optional string token = 4;
+            optional string user_token = 5;
+            optional string name = 6;
+            optional string secondary_name = 7;
+            optional string tertiary_name = 8;
+            optional squareup.common.location.Address address = 9;
+            optional squareup.merchants.api.UserLocale user_locale = 10;
+            optional squareup.common.location.Phone phone = 11;
+            optional string category_code = 12;
+            repeated string permissions = 13;
+            repeated string user_tokens_can_take_payments_to = 14;
+            optional squareup.merchants.api.TransactionFund transaction_fund = 15;
+            repeated squareup.roster.service.UserLookupResponse.GatewayMerchantToken gateway_merchant_tokens = 16;
+            optional squareup.merchants.api.UserFees fees = 17;
+            optional bool supports_tabs = 18;
+            optional string business_type = 19;
+            optional squareup.roster.common.TippingPreference tipping_preference = 20;
+            optional string email = 21;
+            optional string delegate_custom_id = 22;
+            optional string profile_image_url = 23;
+            repeated squareup.common.gateways.GatewayName gateway_hints = 24;
+            optional squareup.common.location.Phone shipping_phone = 25;
+            optional string business_name = 26;
+            optional string secondary_business_name = 27;
+            optional string tertiary_business_name = 28;
+            optional string user_name = 29;
+            optional squareup.common.CurrencyCode currency_code = 30;
+            optional squareup.common.MerchantType merchant_type = 31;
+            optional string tz_name = 32;
+            optional bool shipping_enabled = 33;
+            optional bool pickup_enabled = 34;
+            optional string business_subtype = 35;
+            optional bool frozen = 36;
+            repeated squareup.roster.service.Subscription subscription = 37;
+            repeated squareup.roster.common.SubscriptionFeatureStatus subscription_feature_status = 49;
+            optional squareup.common.location.GlobalAddress shipping_address = 38;
+            optional bool is_multiunit = 39;
+            optional string business_category = 40;
+            optional string business_sub_category = 41;
+            optional string personal_first_name = 42;
+            optional string personal_last_name = 43;
+            optional string parent_merchant_token = 44;
+            repeated squareup.roster.service.PrivateInformation private_information = 45;
+            optional squareup.roster.service.UnderwritingDecision underwriting_decision = 46;
+            optional squareup.roster.service.MerchantProfileLookupResponse.CanadianMerchantProfile canadian_merchant_profile = 47;
+            optional squareup.roster.service.UserLookupResponse.UkMerchantProfile uk_merchant_profile = 48;
+            optional squareup.roster.service.UserLookupResponse.FrMerchantProfile fr_merchant_profile = 50;
+
+            message GatewayMerchantToken {
+
+                optional string gateway = 1;
+                optional string merchant_token = 2;
+                optional int64 disabled_timestamp = 3;
+            }
+
+            message UkMerchantProfile {
+
+                optional string vat_number = 1;
+                optional squareup.roster.service.UserLookupResponse.UkMerchantProfile.VatCustomerClass vat_customer_class = 2;
+
+                enum VatCustomerClass {
+
+                    b2b_null = 1;
+                    b2b = 2;
+                }
+            }
+
+            message FrMerchantProfile {
+
+                optional string siren = 1;
+                optional string tva = 2;
+                optional string nic = 3;
+            }
+
+            message country_specific_merchant_profile {
+            }
+        }
+
+        message EmployeeLookupResponse {
+
+            optional squareup.roster.service.UserLookupStatus status = 1;
+            optional string merchant_token = 2;
+            optional string first_name = 3;
+            optional string last_name = 4;
+            optional string employee_number = 5;
+            optional bool active = 6;
+            optional string token = 7;
+            optional string person_token = 8;
+            optional string merchant_supplied_email = 9;
+            optional squareup.common.location.Phone phone = 10;
+            optional string credential_email = 11;
+            optional bool has_passcode = 12;
+            optional bool can_access_payroll = 13;
+            optional bool is_account_owner = 14;
+            optional bool is_owner = 15;
+            optional squareup.common.Money hourly_wage_rate = 16;
+            optional squareup.common.Money annual_wage_rate = 17;
+            optional squareup.roster.service.EmployeeLookupResponse.WageType wage_type = 18;
+            optional uint32 hours_worked_per_week = 19;
+            optional bool flsa_exempt = 20;
+
+            enum WageType {
+
+                HOURLY = 0;
+                ANNUAL = 1;
+            }
+        }
+    }
+}
+
+message sub2 {
+
+    message common {
+
+        enum SubscriptionStatus {
+
+            INVALID = 0;
+            PENDING = 1;
+            FREE_TRIAL = 2;
+            FREE_TRIAL_PENDING_CANCELLATION = 3;
+            FREE_TRIAL_NO_OBLIGATION = 9;
+            NO_OBLIGATION_FREE_TRIAL_EXPIRED = 10;
+            ACTIVE = 4;
+            ACTIVE_PENDING_CANCELLATION = 5;
+            ACTIVE_PENDING_PAUSE = 11;
+            PAUSED = 12;
+            CANCELED = 6;
+            IN_GRACE = 8;
+            DELINQUENT = 7;
+        }
+    }
+}
+
+message merchants {
+
+    message api {
+
+        message UserLocale {
+
+            optional squareup.common.countries.Country country_code = 1;
+            optional string language_code = 2;
+            optional squareup.common.CurrencyCode currency_code = 3;
+        }
+
+        message TransactionFund {
+
+            optional string name = 1;
+            optional string merchant_id = 2;
+            optional string division = 3;
+        }
+
+        message FeeStructure {
+
+            optional int32 discount_basis_points = 1;
+            optional int32 interchange_cents = 2;
+        }
+
+        message UserFees {
+
+            optional squareup.merchants.api.FeeStructure card_present = 1;
+            optional squareup.merchants.api.FeeStructure card_not_present = 2;
+        }
+    }
+}
+
+message waiter {
+
+    message data {
+
+        message VectorClock {
+
+            repeated squareup.waiter.data.VectorClock.Clock clock_list = 1;
+
+            message Clock {
+
+                optional string name = 1;
+                optional int64 version = 2;
+            }
+        }
+
+        message WaiterExtension {
+
+            optional bool deleted = 1;
+        }
+
+        message WaiterFeatureDetailsExtension {
+
+            optional squareup.waiter.data.WaiterFeatureDetailsExtension.MutableFieldContext ot_name_context = 1;
+            optional squareup.waiter.data.WaiterFeatureDetailsExtension.MutableFieldContext ot_note_context = 2;
+            optional squareup.waiter.data.WaiterFeatureDetailsExtension.MutableFieldContext ot_ticket_owner_context = 3;
+            optional squareup.waiter.data.Transient transient_data = 4;
+            optional squareup.waiter.data.WaiterFeatureDetailsExtension.MutableFieldContext transient_coupon_context = 5;
+            optional squareup.waiter.data.WaiterFeatureDetailsExtension.MutableFieldContext ot_predefined_ticket_context = 6;
+            optional squareup.waiter.data.WaiterFeatureDetailsExtension.MutableFieldContext buyer_info_context = 7;
+
+            message MutableFieldContext {
+
+                optional squareup.waiter.data.VectorClock client_vector_clock = 1;
+                optional string processor_datacenter = 2;
+            }
+        }
+
+        message Transient {
+
+            optional squareup.coupons.v2.CouponV2 coupon = 1;
+        }
+    }
+
+    message private {
+
+        message extensions {
+
+            enum DeleteReason {
+
+                UNKNOWN = 100;
+                USER_ACTION = 200;
+                DUPLICATION = 300;
+            }
+        }
+    }
+}
+
+message coupons {
+
+    message v2 {
+
+        message CouponV2 {
+
+            optional string token = 1;
+            optional string pan_fidelius_token = 2;
+            optional string email_token = 3;
+            optional string phone_token = 4;
+            optional squareup.coupons.v2.CouponDefinitionV2 coupon_definition = 5;
+            optional squareup.common.time.DateTime starts_at = 6;
+            optional squareup.common.time.DateTime expires_at = 7;
+            optional squareup.common.time.DateTime created_at = 8;
+            optional string code = 9;
+            optional bool redeemed = 10;
+            optional squareup.coupons.v2.CouponV2.Reason reason = 11;
+
+            enum Reason {
+
+                UNKNOWN = 0;
+                PUNCH_CARD_REWARD = 1;
+                MARKETING = 2;
+                FEEDBACK = 3;
+            }
+        }
+
+        message ItemConstraintV2 {
+
+            optional squareup.coupons.v2.ItemConstraintV2.Type type = 1;
+            repeated string token = 2;
+            optional uint32 quantity = 3;
+
+            enum Type {
+
+                UNKNOWN = 0;
+                CATEGORY = 1;
+                VARIATION = 2;
+            }
+        }
+
+        enum ScopeV2 {
+
+            UNKNOWN = 0;
+            CART = 1;
+            ITEM = 2;
+        }
+
+        message CouponConditionV2 {
+
+            repeated squareup.coupons.v2.ItemConstraintV2 item_constraint = 1;
+            optional squareup.common.Money min_spend = 2;
+        }
+
+        message CouponRewardV2 {
+
+            optional squareup.coupons.v2.ScopeV2 scope = 1;
+            optional squareup.coupons.v2.CouponRewardV2.Type type = 2;
+            optional squareup.common.Money fixed_discount = 3;
+            optional uint32 percentage_discount = 4;
+            optional squareup.common.Money max_discount = 5;
+            repeated squareup.coupons.v2.ItemConstraintV2 item_constraint = 6;
+
+            enum Type {
+
+                UNKNOWN = 0;
+                FIXED = 1;
+                PERCENT = 2;
+            }
+        }
+
+        message CouponDefinitionV2 {
+
+            optional string token = 1;
+            optional string merchant_token = 2;
+            optional squareup.coupons.v2.ItemConstraintV2.Type item_constraint_type = 3;
+            optional squareup.coupons.v2.CouponConditionV2 condition = 4;
+            optional squareup.coupons.v2.CouponRewardV2 reward = 5;
+            optional string name = 6;
+            optional string image = 7;
+            optional bool is_multiunit = 8;
+        }
+    }
+}
+
+message invoice {
+
+    message data {
+
+        message RRuleText {
+
+            optional string repeat_clause = 1;
+            optional string end_clause = 2;
+            optional string start_clause = 3;
+        }
+    }
+
+    message frontend {
+
+        message Unit {
+
+            optional string location_name = 1;
+            optional string icon_url = 2;
+            optional string receipt_color_code = 3;
+            optional squareup.common.countries.Country country = 4;
+            optional squareup.common.location.GlobalAddress address = 5;
+            optional string email = 6;
+            optional string phone_number = 7;
+            repeated squareup.invoice.frontend.Unit.TaxNumber tax_information = 8;
+            optional squareup.invoice.frontend.Unit.Settings settings = 10;
+            optional string token = 11;
+
+            message TaxNumber {
+
+                optional squareup.invoice.frontend.Unit.TaxNumber.Type type = 1;
+                optional string value = 2;
+
+                enum Type {
+
+                    TAX_TYPE_DO_NOT_USE = 0;
+                    AU_BUSINESS_NUMBER = 1;
+                    CA_HST_NUMBER = 2;
+                    CA_QST_NUMBER = 3;
+                    FR_SIREN_CODE = 4;
+                    GB_VAT_NUMBER = 5;
+                }
+            }
+
+            message Settings {
+
+                optional bool can_accept_jpy_jcb_payment_cards = 1;
+                optional bool should_show_receipt_item_description = 2;
+                optional bool can_accept_payment_cards = 3;
+            }
+        }
+
+        message Invoice {
+
+            optional string token = 1;
+            optional string lock_version = 2;
+            optional squareup.invoice.v2.InvoiceDisplayDetails.DisplayState display_state = 3;
+            optional string name = 4;
+            optional string number = 5;
+            optional string description = 6;
+            optional squareup.common.time.DateTime paid_at = 7;
+            optional squareup.common.time.DateTime cancelled_at = 8;
+            optional squareup.common.time.DateTime refunded_at = 9;
+            optional squareup.common.time.DateTime sent_at = 10;
+            optional squareup.common.time.DateTime updated_at = 11;
+            optional squareup.common.time.YearMonthDay scheduled_at = 12;
+            optional squareup.common.time.YearMonthDay due_on = 13;
+            optional squareup.bills.Cart cart = 14;
+            optional squareup.invoice.frontend.Invoice.Customer customer = 15;
+            repeated string additional_recipient_email = 16;
+            optional int64 file_attachment_count = 17;
+            optional bool has_card_on_file = 18;
+            repeated squareup.invoice.v2.InvoiceTenderDetails successful_tender_details = 19;
+            optional squareup.invoice.v2.InvoiceTenderDetails last_failed_tender_details = 20;
+            optional squareup.invoice.frontend.Invoice.RecurringSeriesDetails recurrence_details = 21;
+            optional squareup.invoice.frontend.Invoice.Settings settings = 22;
+            repeated squareup.invoice.frontend.Invoice.PaymentRequest payment_request = 23;
+            repeated squareup.invoice.frontend.FileAttachmentMetadata attachment = 24;
+            optional string timezone = 25;
+            repeated squareup.invoice.v2.InvoiceRefund refund = 26;
+            optional string pdf_download_token = 27;
+            optional string associated_contract_token = 28;
+            optional string contract_display_name = 29;
+
+            message Customer {
+
+                optional string name = 1;
+                optional string email = 2;
+                optional string phone_number = 3;
+                optional string company_name = 4;
+                optional squareup.common.location.GlobalAddress billing_address = 5;
+            }
+
+            message RecurringSeriesDetails {
+
+                optional squareup.invoice.frontend.Invoice.RecurringSeriesDetails.Schedule schedule = 1;
+
+                message Schedule {
+
+                    optional squareup.common.time.YearMonthDay start_date = 1;
+                    optional string recurrence_rule = 2;
+                    optional squareup.invoice.data.RRuleText rrule_text = 3;
+                }
+            }
+
+            message Settings {
+
+                optional bool can_add_tip = 1;
+                optional squareup.common.Money max_tip = 2;
+                optional bool can_link_card = 3;
+                optional bool can_save_shipping_address = 4;
+                optional bool automatic_charge_enabled = 5;
+            }
+
+            message PaymentRequest {
+
+                optional squareup.common.time.YearMonthDay due_on = 1;
+                optional squareup.common.Money requested_amount = 2;
+                optional squareup.common.Money completed_amount = 3;
+                optional squareup.invoice.frontend.Invoice.PaymentRequest.RequestType request_type = 4;
+                optional bool tipping_enabled = 5;
+                optional squareup.invoice.v2.Invoice.PaymentMethod payment_method = 6;
+                optional squareup.invoice.frontend.model.InstrumentDetails instrument_details = 7;
+
+                enum RequestType {
+
+                    DEPOSIT = 1;
+                    INSTALLMENT = 2;
+                    BALANCE = 3;
+                }
+            }
+        }
+
+        message FileAttachmentMetadata {
+
+            optional string name = 1;
+            optional string extension = 2;
+            optional string token = 3;
+            optional string invoice_token = 4;
+            optional int32 size_bytes = 5;
+            optional string download_token = 6;
+        }
+
+        message InvoiceUnitSettings {
+
+            optional bool show_referrals = 1;
+        }
+
+        message GetInvoiceRequest {
+
+            optional string invoice_token = 1;
+            optional string language_code = 2;
+        }
+
+        message GetSeriesNextInvoiceRequest {
+
+            optional string series_token = 1;
+            optional string language_code = 2;
+        }
+
+        message GetInvoiceResponse {
+
+            optional squareup.invoice.frontend.GetInvoiceResponse.Status status = 1;
+            optional squareup.invoice.frontend.Unit unit = 2;
+            optional squareup.invoice.frontend.Invoice invoice = 3;
+            repeated string enabled_features = 4;
+            optional squareup.invoice.frontend.InvoiceUnitSettings invoice_unit_settings = 5;
+
+            message Status {
+
+                optional squareup.invoice.frontend.GetInvoiceResponse.Status.StatusCode status_code = 1;
+                optional string localized_error = 2;
+
+                enum StatusCode {
+
+                    GET_INVOICE_STATUS_CODE_DO_NOT_USE = 0;
+                    SUCCESS = 1;
+                    NOT_FOUND = 2;
+                    CART_INVALID = 3;
+                    ERROR = 4;
+                }
+            }
+        }
+
+        message PayInvoiceRequest {
+
+            optional string invoice_token = 1;
+            optional string invoice_lock_version = 2;
+            optional string cardholder_name = 3;
+            optional string card_nonce = 4;
+            optional string shipping_name = 5;
+            optional squareup.common.location.GlobalAddress shipping_address = 6;
+            optional squareup.common.Money tip = 7;
+            optional bool should_save_card = 8;
+            optional string language_code = 9;
+            optional squareup.common.Money total_money = 10;
+            optional string verification_token = 11;
+        }
+
+        message PayInvoiceResponse {
+
+            optional squareup.invoice.frontend.PayInvoiceResponse.Status status = 1;
+            optional squareup.invoice.frontend.Invoice invoice = 2;
+            optional bool card_saved = 3;
+            optional string referral_code = 4;
+
+            message Status {
+
+                optional squareup.invoice.frontend.PayInvoiceResponse.Status.StatusCode status_code = 1;
+                optional string localized_error = 2;
+
+                enum StatusCode {
+
+                    PAYMENT_STATUS_DO_NOT_USE = 0;
+                    SUCCESS = 1;
+                    DECLINED = 2;
+                    SUSPECTED = 3;
+                    TIMEOUT = 4;
+                    NOT_PAYABLE = 5;
+                    STALE = 6;
+                    NOT_FOUND = 7;
+                    VALIDATION_ERROR = 8;
+                    SERVER_ERROR = 9;
+                }
+            }
+        }
+
+        message LogViewRequest {
+
+            optional squareup.invoice.frontend.LogViewRequest.ViewType view_type = 1;
+            optional string invoice_token = 2;
+            optional string series_token = 3;
+            optional string estimate_token = 4;
+
+            enum ViewType {
+
+                VIEW_TYPE_DO_NOT_USE = 0;
+                PREVIEW = 1;
+                PRINT = 2;
+                PAY_PAGE = 3;
+            }
+        }
+
+        message LogViewResponse {
+
+            optional bool success = 1;
+        }
+
+        message GetReferralCodeForUnitRequest {
+
+            optional string unit_token = 1;
+        }
+
+        message GetReferralCodeForUnitResponse {
+
+            optional string referral_code = 1;
+        }
+
+        message model {
+
+            message InstrumentDetails {
+
+                optional string brand = 1;
+                optional string last_four = 2;
+            }
+        }
+    }
+
+    message v2 {
+
+        message EstimateDisplayDetails {
+
+            enum DisplayState {
+
+                UNKNOWN = 0;
+                DRAFT = 1;
+                DELIVERED = 2;
+                EXPIRED = 3;
+                ACCEPTED = 4;
+                INVOICED = 5;
+                UNDELIVERED = 6;
+                CANCELED = 7;
+                SCHEDULED = 8;
+                UNPUBLISHED = 9;
+            }
+        }
+
+        message Invoice {
+
+            enum PaymentMethod {
+
+                UNKNOWN_METHOD = 0;
+                UNSELECTED = 1;
+                EMAIL = 2;
+                SHARE_LINK = 3;
+                CARD_ON_FILE = 4;
+                SMS = 5;
+            }
+        }
+
+        message InvoiceDisplayDetails {
+
+            enum DisplayState {
+
+                UNKNOWN = 0;
+                DRAFT = 1;
+                UNPAID = 2;
+                PAID = 3;
+                OVERDUE = 4;
+                UNDELIVERED = 5;
+                CANCELLED = 6;
+                SCHEDULED = 7;
+                REFUNDED = 8;
+                RECURRING = 9;
+                FAILED = 10;
+                PARTIALLY_PAID = 11;
+                UNPUBLISHED = 12;
+            }
+        }
+
+        message InvoiceRefund {
+
+            optional squareup.common.Money refunded_money = 1;
+            optional squareup.common.time.DateTime refunded_at = 2;
+            optional string reason = 3;
+            optional squareup.invoice.v2.InvoiceTenderDetails.TenderType tender_type = 4;
+            optional string brand = 5;
+            optional string last_four = 6;
+        }
+
+        message InvoiceTenderDetails {
+
+            optional string brand = 1;
+            optional string last_four = 2;
+            optional squareup.invoice.v2.InvoiceTenderDetails.TenderType tender_type = 3;
+            optional string tender_note = 4;
+            optional squareup.common.Money tip_amount = 5;
+            optional squareup.common.Money total_amount = 6;
+            optional squareup.common.time.DateTime tendered_at = 7;
+            optional string payment_token = 8;
+
+            enum TenderType {
+
+                CASH = 0;
+                CHECK = 1;
+                OTHER = 2;
+                CARD = 3;
+                INSTRUMENT = 4;
+                SQ_REGISTER = 5;
+                CAPITAL = 6;
+            }
+        }
+    }
+}
+
+message common {
+
+    message countries {
+
+        enum Country {
+
+            US = 840;
+            AD = 20;
+            AE = 784;
+            AF = 4;
+            AG = 28;
+            AI = 660;
+            AL = 8;
+            AM = 51;
+            AO = 24;
+            AQ = 10;
+            AR = 32;
+            AS = 16;
+            AT = 40;
+            AU = 36;
+            AW = 533;
+            AX = 248;
+            AZ = 31;
+            BA = 70;
+            BB = 52;
+            BD = 50;
+            BE = 56;
+            BF = 854;
+            BG = 100;
+            BH = 48;
+            BI = 108;
+            BJ = 204;
+            BL = 652;
+            BM = 60;
+            BN = 96;
+            BO = 68;
+            BQ = 535;
+            BR = 76;
+            BS = 44;
+            BT = 64;
+            BV = 74;
+            BW = 72;
+            BY = 112;
+            BZ = 84;
+            CA = 124;
+            CC = 166;
+            CD = 180;
+            CF = 140;
+            CG = 178;
+            CH = 756;
+            CI = 384;
+            CK = 184;
+            CL = 152;
+            CM = 120;
+            CN = 156;
+            CO = 170;
+            CR = 188;
+            CU = 192;
+            CV = 132;
+            CW = 531;
+            CX = 162;
+            CY = 196;
+            CZ = 203;
+            DE = 276;
+            DJ = 262;
+            DK = 208;
+            DM = 212;
+            DO = 214;
+            DZ = 12;
+            EC = 218;
+            EE = 233;
+            EG = 818;
+            EH = 732;
+            ER = 232;
+            ES = 724;
+            ET = 231;
+            FI = 246;
+            FJ = 242;
+            FK = 238;
+            FM = 583;
+            FO = 234;
+            FR = 250;
+            GA = 266;
+            GB = 826;
+            GD = 308;
+            GE = 268;
+            GF = 254;
+            GG = 831;
+            GH = 288;
+            GI = 292;
+            GL = 304;
+            GM = 270;
+            GN = 324;
+            GP = 312;
+            GQ = 226;
+            GR = 300;
+            GS = 239;
+            GT = 320;
+            GU = 316;
+            GW = 624;
+            GY = 328;
+            HK = 344;
+            HM = 334;
+            HN = 340;
+            HR = 191;
+            HT = 332;
+            HU = 348;
+            ID = 360;
+            IE = 372;
+            IL = 376;
+            IM = 833;
+            IN = 356;
+            IO = 86;
+            IQ = 368;
+            IR = 364;
+            IS = 352;
+            IT = 380;
+            JE = 832;
+            JM = 388;
+            JO = 400;
+            JP = 392;
+            KE = 404;
+            KG = 417;
+            KH = 116;
+            KI = 296;
+            KM = 174;
+            KN = 659;
+            KP = 408;
+            KR = 410;
+            KW = 414;
+            KY = 136;
+            KZ = 398;
+            LA = 418;
+            LB = 422;
+            LC = 662;
+            LI = 438;
+            LK = 144;
+            LR = 430;
+            LS = 426;
+            LT = 440;
+            LU = 442;
+            LV = 428;
+            LY = 434;
+            MA = 504;
+            MC = 492;
+            MD = 498;
+            ME = 499;
+            MF = 663;
+            MG = 450;
+            MH = 584;
+            MK = 807;
+            ML = 466;
+            MM = 104;
+            MN = 496;
+            MO = 446;
+            MP = 580;
+            MQ = 474;
+            MR = 478;
+            MS = 500;
+            MT = 470;
+            MU = 480;
+            MV = 462;
+            MW = 454;
+            MX = 484;
+            MY = 458;
+            MZ = 508;
+            NA = 516;
+            NC = 540;
+            NE = 562;
+            NF = 574;
+            NG = 566;
+            NI = 558;
+            NL = 528;
+            NO = 578;
+            NP = 524;
+            NR = 520;
+            NU = 570;
+            NZ = 554;
+            OM = 512;
+            PA = 591;
+            PE = 604;
+            PF = 258;
+            PG = 598;
+            PH = 608;
+            PK = 586;
+            PL = 616;
+            PM = 666;
+            PN = 612;
+            PR = 630;
+            PS = 275;
+            PT = 620;
+            PW = 585;
+            PY = 600;
+            QA = 634;
+            RE = 638;
+            RO = 642;
+            RS = 688;
+            RU = 643;
+            RW = 646;
+            SA = 682;
+            SB = 90;
+            SC = 690;
+            SD = 729;
+            SE = 752;
+            SG = 702;
+            SH = 654;
+            SI = 705;
+            SJ = 744;
+            SK = 703;
+            SL = 694;
+            SM = 674;
+            SN = 686;
+            SO = 706;
+            SR = 740;
+            SS = 728;
+            ST = 678;
+            SV = 222;
+            SX = 534;
+            SY = 760;
+            SZ = 748;
+            TC = 796;
+            TD = 148;
+            TF = 260;
+            TG = 768;
+            TH = 764;
+            TJ = 762;
+            TK = 772;
+            TL = 626;
+            TM = 795;
+            TN = 788;
+            TO = 776;
+            TR = 792;
+            TT = 780;
+            TV = 798;
+            TW = 158;
+            TZ = 834;
+            UA = 804;
+            UG = 800;
+            UM = 581;
+            UY = 858;
+            UZ = 860;
+            VA = 336;
+            VC = 670;
+            VE = 862;
+            VG = 92;
+            VI = 850;
+            VN = 704;
+            VU = 548;
+            WF = 876;
+            WS = 882;
+            XT = 963;
+            YE = 887;
+            YT = 175;
+            ZA = 710;
+            ZM = 894;
+            ZW = 716;
+            ZZ = 999;
+        }
+    }
+
+    message location {
+
+        message Coordinates {
+
+            optional double latitude = 1;
+            optional double longitude = 2;
+            optional double altitude = 3;
+            optional double geographic_accuracy = 4;
+            optional double altitudinal_accuracy = 5;
+            optional double heading = 6;
+            optional double speed = 7;
+        }
+
+        message Address {
+
+            optional string street1 = 1;
+            optional string street2 = 2;
+            optional string city = 3;
+            optional string state_province = 4;
+            optional string postal_code = 5;
+            optional squareup.common.countries.Country country_code = 6;
+        }
+
+        message GlobalAddress {
+
+            optional string address_line1 = 1;
+            optional string address_line2 = 2;
+            optional string address_line3 = 3;
+            optional string address_line4 = 4;
+            optional string address_line5 = 5;
+            optional string locality = 6;
+            optional string sublocality = 7;
+            optional string sublocality1 = 8;
+            optional string sublocality2 = 9;
+            optional string sublocality3 = 10;
+            optional string sublocality4 = 11;
+            optional string sublocality5 = 12;
+            optional string administrative_district_level1 = 13;
+            optional string administrative_district_level2 = 14;
+            optional string administrative_district_level3 = 15;
+            optional string postal_code = 16;
+            optional squareup.common.countries.Country country_code = 17;
+            optional squareup.common.location.Coordinates address_coordinates = 18;
+        }
+
+        message Phone {
+
+            optional string calling_code = 1;
+            optional string number = 2;
+        }
+    }
+
+    message Denominations {
+
+        repeated int32 banknote_cents = 1;
+        repeated int32 coin_cents = 2;
+    }
+
+    enum CurrencyCode {
+
+        AED = 784;
+        AFN = 971;
+        ALL = 8;
+        AMD = 51;
+        ANG = 532;
+        AOA = 973;
+        ARS = 32;
+        AUD = 36;
+        AWG = 533;
+        AZN = 944;
+        BAM = 977;
+        BBD = 52;
+        BDT = 50;
+        BGN = 975;
+        BHD = 48;
+        BIF = 108;
+        BMD = 60;
+        BND = 96;
+        BOB = 68;
+        BOV = 984;
+        BRL = 986;
+        BSD = 44;
+        BTN = 64;
+        BWP = 72;
+        BYR = 974;
+        BZD = 84;
+        CAD = 124;
+        CDF = 976;
+        CHE = 947;
+        CHF = 756;
+        CHW = 948;
+        CLF = 990;
+        CLP = 152;
+        CNY = 156;
+        COP = 170;
+        COU = 970;
+        CRC = 188;
+        CUC = 931;
+        CUP = 192;
+        CVE = 132;
+        CZK = 203;
+        DJF = 262;
+        DKK = 208;
+        DOP = 214;
+        DZD = 12;
+        EGP = 818;
+        ERN = 232;
+        ETB = 230;
+        EUR = 978;
+        FJD = 242;
+        FKP = 238;
+        GBP = 826;
+        GEL = 981;
+        GHS = 936;
+        GIP = 292;
+        GMD = 270;
+        GNF = 324;
+        GTQ = 320;
+        GYD = 328;
+        HKD = 344;
+        HNL = 340;
+        HRK = 191;
+        HTG = 332;
+        HUF = 348;
+        IDR = 360;
+        ILS = 376;
+        INR = 356;
+        IQD = 368;
+        IRR = 364;
+        ISK = 352;
+        JMD = 388;
+        JOD = 400;
+        JPY = 392;
+        KES = 404;
+        KGS = 417;
+        KHR = 116;
+        KMF = 174;
+        KPW = 408;
+        KRW = 410;
+        KWD = 414;
+        KYD = 136;
+        KZT = 398;
+        LAK = 418;
+        LBP = 422;
+        LKR = 144;
+        LRD = 430;
+        LSL = 426;
+        LTL = 440;
+        LVL = 428;
+        LYD = 434;
+        MAD = 504;
+        MDL = 498;
+        MGA = 969;
+        MKD = 807;
+        MMK = 104;
+        MNT = 496;
+        MOP = 446;
+        MRO = 478;
+        MUR = 480;
+        MVR = 462;
+        MWK = 454;
+        MXN = 484;
+        MXV = 979;
+        MYR = 458;
+        MZN = 943;
+        NAD = 516;
+        NGN = 566;
+        NIO = 558;
+        NOK = 578;
+        NPR = 524;
+        NZD = 554;
+        OMR = 512;
+        PAB = 590;
+        PEN = 604;
+        PGK = 598;
+        PHP = 608;
+        PKR = 586;
+        PLN = 985;
+        PYG = 600;
+        QAR = 634;
+        RON = 946;
+        RSD = 941;
+        RUB = 643;
+        RWF = 646;
+        SAR = 682;
+        SBD = 90;
+        SCR = 690;
+        SDG = 938;
+        SEK = 752;
+        SGD = 702;
+        SHP = 654;
+        SLL = 694;
+        SOS = 706;
+        SRD = 968;
+        SSP = 728;
+        STD = 678;
+        SVC = 222;
+        SYP = 760;
+        SZL = 748;
+        THB = 764;
+        TJS = 972;
+        TMT = 934;
+        TND = 788;
+        TOP = 776;
+        TRY = 949;
+        TTD = 780;
+        TWD = 901;
+        TZS = 834;
+        UAH = 980;
+        UGX = 800;
+        USD = 840;
+        USN = 997;
+        USS = 998;
+        UYI = 940;
+        UYU = 858;
+        UZS = 860;
+        VEF = 937;
+        VND = 704;
+        VUV = 548;
+        WST = 882;
+        XAF = 950;
+        XAG = 961;
+        XAU = 959;
+        XBA = 955;
+        XBB = 956;
+        XBC = 957;
+        XBD = 958;
+        XCD = 951;
+        XDR = 960;
+        XOF = 952;
+        XPD = 964;
+        XPF = 953;
+        XPT = 962;
+        XTS = 963;
+        XXX = 999;
+        YER = 886;
+        ZAR = 710;
+        ZMK = 894;
+        ZMW = 967;
+        BTC = 1001;
+    }
+
+    message Money {
+
+        optional int64 amount = 2;
+        optional squareup.common.CurrencyCode currency_code = 3 [default=USD];
+    }
+
+    message time {
+
+        message DateTime {
+
+            optional int64 instant_usec = 1;
+            optional sint32 timezone_offset_min = 2;
+            optional string posix_tz = 3;
+            repeated string tz_name = 4;
+            optional int64 ordinal = 5;
+        }
+
+        message YearMonthDay {
+
+            optional int32 year = 1;
+            optional int32 month_of_year = 2;
+            optional int32 day_of_month = 3;
+        }
+    }
+
+    message token {
+
+        message TokenPair {
+
+            optional string server_token = 1;
+            optional string client_token = 2;
+        }
+    }
+
+    message gateways {
+
+        enum GatewayName {
+
+            unknown = 0;
+            chase_seller_v12 = 1;
+            chase_test_v12 = 2;
+            eero_payment_service_v1 = 3;
+            cad_stratus = 4;
+            test_eero_payment_service_v1 = 5;
+            test_cad_stratus = 6;
+            fake = 7;
+            amex_payment_service = 8;
+            amex_cad_payment_service = 9;
+            amex_jpy_payment_service_1 = 10;
+            amex_jpy_payment_service_2 = 11;
+            test_amex_payment_service = 12;
+            test_amex_cad_payment_service = 13;
+            test_amex_jpy_payment_service = 14;
+            certification = 15;
+            cafis_1 = 16;
+            cafis_2 = 17;
+            cafis_3 = 18;
+            visa_payment_service_v1 = 19;
+            test_visa_payment_service_v1 = 20;
+            tivo = 21;
+            simulator = 22;
+            amex_aud_payment_service = 23;
+            test_amex_aud_payment_service = 24;
+            giftcard_service = 25;
+            simulator_online = 30;
+            stardebit_payment_service = 31;
+            test_stardebit_payment_service = 32;
+            cafis_jcb_1 = 33;
+            cafis_jcb_2 = 34;
+            cafis_jcb_3 = 35;
+            cuscal_payment_service = 36;
+            test_cuscal_payment_service = 37;
+            shazam_payment_service = 38;
+            test_shazam_payment_service = 39;
+            nyce_via_stardebit_payment_service = 40;
+            test_nyce_via_stardebit_payment_service = 41;
+            chase_seller = 42;
+            ipc_salem_direct_v13 = 43;
+            authorize_net = 44;
+            leap = 45;
+            maestro_via_shazam_payment_service = 46;
+            pulse_via_shazam_payment_service = 47;
+            maestro_via_stardebit_payment_service = 48;
+            cafis_sompo_1 = 49;
+            cafis_sompo_2 = 50;
+            cafis_sompo_3 = 51;
+            balance_service = 52;
+            omnipay_payment_service = 53;
+            everlink_payment_service = 54;
+            acculynk_payment_service = 55;
+            felica_payment_service = 56;
+            sandbox_gateway = 57;
+            alipay_payment_service = 58;
+            nyce_payment_service = 59;
+            capital_service = 60;
+            mastercardsend_payment_service = 61;
+            visa_dex_payment_service = 62;
+        }
+    }
+
+    enum MerchantType {
+
+        MERCHANT_TYPE_DEFAULT = 0;
+        MERCHANT_TYPE_COMMERCIAL_ENTITY = 1;
+        MERCHANT_TYPE_POLITICAL_ENTITY = 2;
+        MERCHANT_TYPE_COMMERCIAL_ENTITY_WELLS = 3;
+    }
+
+    message dinero {
+
+        enum CurrencyCode {
+
+            AED = 784;
+            AFN = 971;
+            ALL = 8;
+            AMD = 51;
+            ANG = 532;
+            AOA = 973;
+            ARS = 32;
+            AUD = 36;
+            AWG = 533;
+            AZN = 944;
+            BAM = 977;
+            BBD = 52;
+            BDT = 50;
+            BGN = 975;
+            BHD = 48;
+            BIF = 108;
+            BMD = 60;
+            BND = 96;
+            BOB = 68;
+            BOV = 984;
+            BRL = 986;
+            BSD = 44;
+            BTN = 64;
+            BWP = 72;
+            BYR = 974;
+            BZD = 84;
+            CAD = 124;
+            CDF = 976;
+            CHE = 947;
+            CHF = 756;
+            CHW = 948;
+            CLF = 990;
+            CLP = 152;
+            CNY = 156;
+            COP = 170;
+            COU = 970;
+            CRC = 188;
+            CUC = 931;
+            CUP = 192;
+            CVE = 132;
+            CZK = 203;
+            DJF = 262;
+            DKK = 208;
+            DOP = 214;
+            DZD = 12;
+            EGP = 818;
+            ERN = 232;
+            ETB = 230;
+            EUR = 978;
+            FJD = 242;
+            FKP = 238;
+            GBP = 826;
+            GEL = 981;
+            GHS = 936;
+            GIP = 292;
+            GMD = 270;
+            GNF = 324;
+            GTQ = 320;
+            GYD = 328;
+            HKD = 344;
+            HNL = 340;
+            HRK = 191;
+            HTG = 332;
+            HUF = 348;
+            IDR = 360;
+            ILS = 376;
+            INR = 356;
+            IQD = 368;
+            IRR = 364;
+            ISK = 352;
+            JMD = 388;
+            JOD = 400;
+            JPY = 392;
+            KES = 404;
+            KGS = 417;
+            KHR = 116;
+            KMF = 174;
+            KPW = 408;
+            KRW = 410;
+            KWD = 414;
+            KYD = 136;
+            KZT = 398;
+            LAK = 418;
+            LBP = 422;
+            LKR = 144;
+            LRD = 430;
+            LSL = 426;
+            LTL = 440;
+            LVL = 428;
+            LYD = 434;
+            MAD = 504;
+            MDL = 498;
+            MGA = 969;
+            MKD = 807;
+            MMK = 104;
+            MNT = 496;
+            MOP = 446;
+            MRO = 478;
+            MUR = 480;
+            MVR = 462;
+            MWK = 454;
+            MXN = 484;
+            MXV = 979;
+            MYR = 458;
+            MZN = 943;
+            NAD = 516;
+            NGN = 566;
+            NIO = 558;
+            NOK = 578;
+            NPR = 524;
+            NZD = 554;
+            OMR = 512;
+            PAB = 590;
+            PEN = 604;
+            PGK = 598;
+            PHP = 608;
+            PKR = 586;
+            PLN = 985;
+            PYG = 600;
+            QAR = 634;
+            RON = 946;
+            RSD = 941;
+            RUB = 643;
+            RWF = 646;
+            SAR = 682;
+            SBD = 90;
+            SCR = 690;
+            SDG = 938;
+            SEK = 752;
+            SGD = 702;
+            SHP = 654;
+            SLL = 694;
+            SOS = 706;
+            SRD = 968;
+            SSP = 728;
+            STD = 678;
+            SVC = 222;
+            SYP = 760;
+            SZL = 748;
+            THB = 764;
+            TJS = 972;
+            TMT = 934;
+            TND = 788;
+            TOP = 776;
+            TRY = 949;
+            TTD = 780;
+            TWD = 901;
+            TZS = 834;
+            UAH = 980;
+            UGX = 800;
+            USD = 840;
+            USN = 997;
+            USS = 998;
+            UYI = 940;
+            UYU = 858;
+            UZS = 860;
+            VEF = 937;
+            VND = 704;
+            VUV = 548;
+            WST = 882;
+            XAF = 950;
+            XAG = 961;
+            XAU = 959;
+            XBA = 955;
+            XBB = 956;
+            XBC = 957;
+            XBD = 958;
+            XCD = 951;
+            XDR = 960;
+            XOF = 952;
+            XPD = 964;
+            XPF = 953;
+            XPT = 962;
+            XTS = 963;
+            XXX = 999;
+            YER = 886;
+            ZAR = 710;
+            ZMK = 894;
+            ZMW = 967;
+        }
+
+        message Money {
+
+            optional int64 cents = 2;
+            optional squareup.common.dinero.CurrencyCode currency_code = 3 [default=USD];
+            optional squareup.api.items.OBSOLETE_CurrencyCode OBSOLETE_currency_code = 1;
+        }
+    }
+}
+service EstimateFrontendService {
+	rpc GetEstimate (squareup.estimate.frontend.GetEstimateRequest) returns (squareup.estimate.frontend.GetEstimateResponse);
+	rpc AcceptEstimate (squareup.estimate.frontend.AcceptEstimateRequest) returns (squareup.estimate.frontend.AcceptEstimateResponse);
+}
+service InvoiceFrontendService {
+	rpc GetInvoice (squareup.invoice.frontend.GetInvoiceRequest) returns (squareup.invoice.frontend.GetInvoiceResponse);
+	rpc GetSeriesNextInvoice (squareup.invoice.frontend.GetSeriesNextInvoiceRequest) returns (squareup.invoice.frontend.GetInvoiceResponse);
+	rpc PayInvoice (squareup.invoice.frontend.PayInvoiceRequest) returns (squareup.invoice.frontend.PayInvoiceResponse);
+	rpc LogView (squareup.invoice.frontend.LogViewRequest) returns (squareup.invoice.frontend.LogViewResponse);
+	rpc GetReferralCodeForUnit (squareup.invoice.frontend.GetReferralCodeForUnitRequest) returns (squareup.invoice.frontend.GetReferralCodeForUnitResponse);
+}
